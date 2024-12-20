@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import IconButton from "./components/DeaugTaButton";
+import { FaRedo } from "react-icons/fa";
 
 function TypingInput() {
   const [codeToType] = useState(
@@ -18,6 +20,19 @@ function TypingInput() {
     if (!startTime) {
       setStartTime(new Date().getTime());
     }
+  };
+
+  const handleResetClick = () => {
+    console.log("리셋 버튼 클릭됨");
+    setAccuracy("");
+    setIsFinish("");
+    setUserInput("");
+    setCurrentTime("");
+    setSpeed("");
+    setStartTime("");
+
+    // 입력 필드에 포커스 설정
+    document.getElementById("userInput").focus();
   };
 
   useEffect(() => {
@@ -72,7 +87,7 @@ function TypingInput() {
   };
 
   return (
-    <div className="background">
+    <>
       <div>
         <p className="hint-text">경과시간 : {currentTime}초</p>
         <p className="hint-text">정확도 : {accuracy}%</p>
@@ -81,6 +96,7 @@ function TypingInput() {
       <div className="stroke-box">
         <p className="hint-text">{renderCode()}</p>
         <input
+          id="userInput"
           type="text"
           className="typing-text"
           value={userInput}
@@ -89,7 +105,9 @@ function TypingInput() {
           spellCheck="false"
         />
       </div>
-    </div>
+
+      <IconButton icon={<FaRedo />} onClick={handleResetClick} />
+    </>
   );
 }
 

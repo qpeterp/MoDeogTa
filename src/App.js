@@ -6,7 +6,9 @@ function App() {
   return (
     <>
       <Header />
-      <TypingInput />
+      <div className="background">
+        <TypingInput />
+      </div>
     </>
   );
 }

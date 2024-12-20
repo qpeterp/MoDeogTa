@@ -75,3 +75,13 @@ input:focus {
   object-fit: cover; /* 비율 유지하면서 로고 표시 */
   margin-right: 10px; /* 텍스트와의 간격 */
 }
+
+.reset-button {
+  color: #747474;
+  border-color: transparent;
+  border-radius: 12px;
+  margin-top: 24px;
+  padding: 18px 42px;
+  font-size: 18px;
+  background-color: transparent;
+}
