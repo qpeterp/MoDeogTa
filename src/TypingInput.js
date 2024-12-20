@@ -101,6 +101,7 @@ function TypingInput() {
           className="typing-text"
           value={userInput}
           onChange={handleInputChange}
+          onPaste={(e) => e.preventDefault()} // 붙여넣기 금지
           autoComplete="off"
           spellCheck="false"
         />
