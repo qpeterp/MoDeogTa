@@ -2,11 +2,11 @@ import React from "react";
 
 function Header() {
   return (
-    <header className="header">
-      <div className="logo">
-        <h1>모득타</h1>
+    <div className="header-background">
+      <div className="header">
+        <img src="logo.svg" alt="Logo" class="header-logo" />
       </div>
-    </header>
+    </div>
   );
 }
 
