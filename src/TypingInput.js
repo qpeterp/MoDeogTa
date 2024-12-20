@@ -8,6 +8,8 @@ function TypingInput() {
   const [startTime, setStartTime] = useState("");
   const [isFinish, setIsFinish] = useState("");
   const [currentTime, setCurrentTime] = useState("");
+  const [accuracy, setAccuracy] = useState("");
+  const [speed, setSpeed] = useState("");
 
   const timerRef = useRef(null); // useRef로 타이머 변수 선언
 
@@ -16,19 +18,30 @@ function TypingInput() {
     if (!startTime) {
       setStartTime(new Date().getTime());
     }
-    if (userInput.length === codeToType.length - 1) {
-      setIsFinish(true);
-    }
   };
+
+  useEffect(() => {
+    if (userInput.length === codeToType.length) {
+      setIsFinish(true);
+
+      const endTime = new Date().getTime();
+      const takenTime = (endTime - startTime) / 1000;
+      const correctChars = userInput
+        .split("")
+        .filter((char, index) => char === codeToType[index]).length;
+      setAccuracy(((correctChars / codeToType.length) * 100).toFixed(1));
+      setSpeed((userInput.length * (100 / takenTime)).toFixed(0));
+    }
+  }, [userInput, codeToType, startTime]);
 
   useEffect(() => {
     if (startTime && !isFinish) {
       timerRef.current = setInterval(() => {
         setCurrentTime((prevTime) => {
-          const updateTime = (parseFloat(prevTime) || 0) + 0.1;
-          return updateTime.toFixed(1);
+          const updateTime = (parseFloat(prevTime) || 0) + 0.01;
+          return updateTime.toFixed(2);
         });
-      }, 100);
+      }, 10);
     }
 
     return () => clearInterval(timerRef.current);
@@ -62,6 +75,8 @@ function TypingInput() {
     <div className="background">
       <div>
         <p className="hint-text">경과시간 : {currentTime}초</p>
+        <p className="hint-text">정확도 : {accuracy}%</p>
+        <p className="hint-text">타수 : {speed}</p>
       </div>
       <div className="stroke-box">
         <p className="hint-text">{renderCode()}</p>
@@ -70,6 +85,8 @@ function TypingInput() {
           className="typing-text"
           value={userInput}
           onChange={handleInputChange}
+          autoComplete="off"
+          spellCheck="false"
         />
       </div>
     </div>
