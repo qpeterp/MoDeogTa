@@ -1,38 +1,55 @@
-.App {
-  text-align: center;
+body,
+html {
+  height: 100%;
+  overflow: hidden; /* 스크롤 방지 */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input {
+  all: unset; /* 모든 기본 스타일 제거 */
+  background-color: transparent;
+  width: 100%;
+  position: absolute;
+  border-radius: 15px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+input:focus {
+  outline: none; /* 포커스 시 기본 아웃라인 제거 */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.background {
+  background-color: black;
+  padding: 25vw;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-direction: column; /* 세로로 배치 */
+  justify-content: flex-start; /* 세로 방향으로 위쪽에 배치 */
+  align-items: center; /* 가운데 정렬 */
+  height: 100vh; /* 화면 전체 높이 */
+  z-index: -100;
+}
+
+.hint-text {
+  text-align: start;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  color: #747474;
+}
+
+.typing-text {
+  text-align: start;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.stroke-box {
+  width: 80vw; /* 박스 너비 */
+  background-color: transparent; /* 박스 내부 색상 */
+  border: 1px solid yellow; /* 테두리 두께와 색상 */
+  border-radius: 15px; /* 모서리를 둥글게 */
+  display: flex; /* 플렉스박스로 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: start; /* 가로 중앙 정렬 */
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 선택사항: 박스 그림자 */
+  padding: 0 20px; /* 좌우 패딩 */
 }
