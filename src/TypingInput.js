@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import IconButton from "./components/DeaugTaButton";
 import { FaRedo } from "react-icons/fa";
+import ResultDialog from "./components/ResultDialog";
 
 function TypingInput() {
   const [codeToType] = useState(
@@ -8,12 +9,13 @@ function TypingInput() {
   );
   const [userInput, setUserInput] = useState("");
   const [startTime, setStartTime] = useState("");
-  const [isFinish, setIsFinish] = useState("");
+  const [isFinish, setIsFinish] = useState(false);
   const [currentTime, setCurrentTime] = useState("");
   const [accuracy, setAccuracy] = useState("");
   const [speed, setSpeed] = useState("");
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // dialog 상태 관리
 
-  const timerRef = useRef(null); // useRef로 타이머 변수 선언
+  const timerRef = useRef(null);
 
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
@@ -23,22 +25,18 @@ function TypingInput() {
   };
 
   const handleResetClick = () => {
-    console.log("리셋 버튼 클릭됨");
     setAccuracy("");
-    setIsFinish("");
+    setIsFinish(false);
     setUserInput("");
     setCurrentTime("");
     setSpeed("");
     setStartTime("");
-
-    // 입력 필드에 포커스 설정
+    setIsDialogOpen(false); // dialog 닫기
     document.getElementById("userInput").focus();
   };
 
   useEffect(() => {
     if (userInput.length === codeToType.length) {
-      setIsFinish(true);
-
       const endTime = new Date().getTime();
       const takenTime = (endTime - startTime) / 1000;
       const correctChars = userInput
@@ -46,6 +44,9 @@ function TypingInput() {
         .filter((char, index) => char === codeToType[index]).length;
       setAccuracy(((correctChars / codeToType.length) * 100).toFixed(1));
       setSpeed((userInput.length * (100 / takenTime)).toFixed(0));
+
+      setIsFinish(true);
+      setIsDialogOpen(true); // 타자 종료 시 dialog 열기
     }
   }, [userInput, codeToType, startTime]);
 
@@ -68,7 +69,7 @@ function TypingInput() {
       let bgColor;
       if (index < userInput.length) {
         if (userInput[index] !== char) {
-          bgColor = "red"; // 틀린 글자 배경 빨간색
+          bgColor = "red";
           color = "red";
         }
       }
@@ -90,8 +91,6 @@ function TypingInput() {
     <>
       <div>
         <p className="hint-text">경과시간 : {currentTime}초</p>
-        <p className="hint-text">정확도 : {accuracy}%</p>
-        <p className="hint-text">타수 : {speed}</p>
       </div>
       <div className="stroke-box">
         <p className="hint-text">{renderCode()}</p>
@@ -106,8 +105,16 @@ function TypingInput() {
           spellCheck="false"
         />
       </div>
-
       <IconButton icon={<FaRedo />} onClick={handleResetClick} />
+
+      {/* 결과 Dialog */}
+      {isDialogOpen && (
+        <ResultDialog
+          accuracy={accuracy}
+          speed={speed}
+          onClose={() => setIsDialogOpen(false)}
+        />
+      )}
     </>
   );
 }
