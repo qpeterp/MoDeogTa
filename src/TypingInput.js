@@ -111,12 +111,12 @@ function TypingInput() {
   return (
     <>
       <div>
-        <p className="hint-text">경과시간 : {currentTime}초</p>
-        <p className="hint-text">타수 : {speed}</p>
+        <p className="text">경과시간 : {currentTime}초</p>
+        <p className="text">타수 : {speed}</p>
       </div>
       <div className="stroke-box">
-        <p className="hint-text">{renderCode()}</p>
-        <input
+        <p className="text hint-text">{renderCode()}</p>
+        <textarea
           id="userInput"
           type="text"
           className="typing-text"
@@ -129,7 +129,6 @@ function TypingInput() {
       </div>
       <IconButton icon={<FaRedo />} onClick={handleResetClick} />
 
-      {/* 결과 Dialog */}
       {isDialogOpen && (
         <ResultDialog
           accuracy={accuracy}
