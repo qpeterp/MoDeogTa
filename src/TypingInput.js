@@ -19,6 +19,7 @@ function TypingInput() {
 
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
+
     if (!startTime) {
       setStartTime(new Date().getTime());
     }
@@ -53,7 +54,6 @@ function TypingInput() {
         }, 0);
 
       const totalJamo = countJamo(codeToType);
-      console.log(totalJamo);
       const inputJamo = countJamo(userInput);
 
       setAccuracy(((correctJamoCount / totalJamo) * 100).toFixed(1));
@@ -76,6 +76,13 @@ function TypingInput() {
 
     return () => clearInterval(timerRef.current);
   }, [startTime, isFinish]);
+
+  useEffect(() => {
+    if (startTime && !isFinish) {
+      const inputJamo = countJamo(userInput);
+      setSpeed(((inputJamo * 60) / currentTime).toFixed(1)); // 실시간 타자 속도 계산
+    }
+  }, [userInput, currentTime]); // userInput, currentTime 변경 시 실시간으로 speed 업데이
 
   const renderCode = () => {
     return codeToType.split("").map((char, index) => {
@@ -105,6 +112,7 @@ function TypingInput() {
     <>
       <div>
         <p className="hint-text">경과시간 : {currentTime}초</p>
+        <p className="hint-text">타수 : {speed}</p>
       </div>
       <div className="stroke-box">
         <p className="hint-text">{renderCode()}</p>
