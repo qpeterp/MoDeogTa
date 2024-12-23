@@ -26,7 +26,6 @@ input:focus {
   flex-direction: column; /* 세로로 배치 */
   align-items: center; /* 가운데 정렬 */
   height: 100vh; /* 화면 전체 높이 */
-  z-index: -100;
 }
 
 .hint-text {
@@ -34,6 +33,15 @@ input:focus {
   font-family: Arial, sans-serif;
   font-size: 16px;
   color: #747474;
+}
+
+.keyboard-text {
+  background-color: #747474;
+  border-radius: 2px;
+  padding: 0px 4px;
+  margin: 0px 4px;
+  font-size: small;
+  color: #202020;
 }
 
 .typing-text {

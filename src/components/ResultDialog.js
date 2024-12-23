@@ -27,7 +27,6 @@ function ResultDialog({ accuracy, speed, onClose }) {
         zIndex: 1000,
       }}
     >
-      <h1 className="hint-text">결과</h1>
       <p className="hint-text">
         정확도: <strong>{accuracy}%</strong>
       </p>
@@ -39,9 +38,9 @@ function ResultDialog({ accuracy, speed, onClose }) {
         style={{
           marginTop: "10px",
           padding: "10px 20px",
-          backgroundColor: "#4CAF50",
           color: "white",
-          border: "none",
+          backgroundColor: "transparent",
+          border: "1px yellow solid",
           borderRadius: "5px",
           cursor: "pointer",
         }}

@@ -8,6 +8,10 @@ function App() {
       <Header />
       <div className="background">
         <TypingInput />
+        <p className="hint-text">
+          <span className="keyboard-text"> Tab </span> +
+          <span className="keyboard-text"> Enter </span> - 재시작
+        </p>
       </div>
     </>
   );

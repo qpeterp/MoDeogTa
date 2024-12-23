@@ -112,7 +112,10 @@ function TypingInput() {
         <ResultDialog
           accuracy={accuracy}
           speed={speed}
-          onClose={() => setIsDialogOpen(false)}
+          onClose={() => {
+            setIsDialogOpen(false);
+            handleResetClick();
+          }}
         />
       )}
     </>
