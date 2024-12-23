@@ -27,10 +27,10 @@ function ResultDialog({ accuracy, speed, onClose }) {
         zIndex: 1000,
       }}
     >
-      <p className="hint-text">
+      <p className="text">
         정확도: <strong>{accuracy}%</strong>
       </p>
-      <p className="hint-text">
+      <p className="text">
         타수: <strong>{speed}</strong>
       </p>
       <button
