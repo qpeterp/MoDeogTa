@@ -5,7 +5,7 @@ import ResultDialog from "./components/ResultDialog";
 
 function TypingInput() {
   const [codeToType] = useState(
-    "애국가 1. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세."
+    "애국가 1. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세. 애국가 1. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세."
   );
   const [userInput, setUserInput] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -18,7 +18,11 @@ function TypingInput() {
   const timerRef = useRef(null);
 
   const handleInputChange = (e) => {
-    setUserInput(e.target.value);
+    if (e.nativeEvent.inputType === "insertLineBreak" || e.key === "Enter") {
+      setUserInput((prev) => prev + " ");
+    } else {
+      setUserInput(e.target.value);
+    }
 
     if (!startTime) {
       setStartTime(new Date().getTime());
@@ -46,7 +50,6 @@ function TypingInput() {
         .split("")
         .reduce((count, char, index) => {
           const targetJamo = splitHangulToJamo(codeToType[index]);
-          console.log(targetJamo);
           const inputJamo = splitHangulToJamo(char);
           return (
             count + targetJamo.filter((jamo, i) => jamo === inputJamo[i]).length
@@ -108,6 +111,19 @@ function TypingInput() {
     });
   };
 
+  // ================================================================================
+  // ================================================================================
+
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      console.log(`textareaHeight : ${textareaRef.current.scrollHeight}`);
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [userInput]); // userInput이 변경될 때마다 높이 조정
+
   return (
     <>
       <div>
@@ -117,6 +133,7 @@ function TypingInput() {
       <div className="stroke-box">
         <p className="text hint-text">{renderCode()}</p>
         <textarea
+          ref={textareaRef} // ref를 제대로 연결
           id="userInput"
           type="text"
           className="typing-text"
@@ -142,7 +159,6 @@ function TypingInput() {
     </>
   );
 }
-
 function splitHangulToJamo(char) {
   const HANGUL_START = 0xac00;
   const HANGUL_END = 0xd7a3;

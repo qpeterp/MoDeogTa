@@ -39,48 +39,50 @@ input:focus {
 
 .text {
   font-family: Arial, sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   color: #747474;
-}
-
-.typing-text {
-  width: 100%;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  color: white;
-  resize: none; /* 크기 조정 비활성화 */
-  overflow: hidden; /* 스크롤바 비활성화 */
-  overflow-wrap: break-word; /* 단어 줄바꿈 */
-  padding: 0; /* 텍스트와의 여백 제거 */
-  margin: 0; /* 외부 여백 제거 */
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  box-sizing: border-box; /* 패딩 포함 */
-  position: relative; /* 부모 요소를 기준으로 위치 */
-}
-
-.hint-text {
-  width: 100%; /* 부모 요소와 동일한 너비 */
-  text-align: start;
-  color: #747474;
-  margin: 0; /* 외부 여백 제거 */
-  padding: 0px 40px 0px 0px; /* 내부 여백 제거 */
-  box-sizing: border-box; /* 패딩 포함 */
-  position: absolute;
 }
 
 .stroke-box {
-  width: 80vw; /* 박스 너비 */
-  height: auto; /* 내용에 따라 높이 자동 조절 */
-  background-color: transparent; /* 박스 내부 색상 */
-  border: 2px solid yellow; /* 테두리 두께와 색상 */
-  border-radius: 15px; /* 모서리를 둥글게 */
-  display: flex; /* 유연한 정렬을 위해 flex 사용 */
-  flex-direction: column; /* 위아래로 정렬 */
+  width: 80vw;
+  height: auto;
+  background-color: transparent;
+  border: 2px solid yellow;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
   position: relative;
-  padding: 20px 20px 0px 20px;
-  box-sizing: border-box; /* 패딩 포함 */
+  padding: 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  .typing-text {
+    width: calc(100% - 80px); /* 80px은 좌우 padding 값(40px * 2)을 빼는 값 */
+    height: auto;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    resize: none;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: absolute; /* absolute 사용 */
+    z-index: 1; /* 텍스트가 hint-text 위에 오도록 설정 */
+  }
+
+  .hint-text {
+    width: 100%;
+    text-align: start;
+    color: #747474;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative; /* 상대 위치 */
+    z-index: 0; /* typing-text 아래에 위치하도록 설정 */
+  }
 }
 
 .header {
