@@ -2,10 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import IconButton from "./components/DeaugTaButton";
 import { FaRedo } from "react-icons/fa";
 import ResultDialog from "./components/ResultDialog";
+import gsap from "gsap"; // 애니메이션 적용
+
+// TODO : 타자 기록, 최대 타수,
 
 function TypingInput() {
   const [codeToType] = useState(
-    "애국가 1. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세. 애국가 1. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세."
+    "애국가 1. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세."
   );
   const [userInput, setUserInput] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -26,6 +29,18 @@ function TypingInput() {
 
     if (!startTime) {
       setStartTime(new Date().getTime());
+    }
+
+    // 커서 위치에서 효과 생성
+    if (textareaRef.current) {
+      const textarea = textareaRef.current;
+      const { selectionStart } = textarea;
+
+      // 커서 위치 계산
+      const { x, y } = calculateCursorPosition(textarea, selectionStart);
+
+      // Dust Effect 생성
+      createDustEffect(x, y);
     }
   };
 
@@ -124,6 +139,57 @@ function TypingInput() {
     }
   }, [userInput]); // userInput이 변경될 때마다 높이 조정
 
+  const createDustEffect = (x, y) => {
+    const particles = [];
+
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement("div");
+      particle.className = "particle";
+      particle.style.position = "absolute";
+      particle.style.width = "5px";
+      particle.style.height = "5px";
+      particle.style.backgroundColor = "yellow";
+      particle.style.borderRadius = "50%";
+      particle.style.pointerEvents = "none";
+      particle.style.left = `${x}px`;
+      particle.style.top = `${y}px`;
+      document.body.appendChild(particle);
+      particles.push(particle);
+
+      gsap.to(particle, {
+        duration: 1,
+        x: Math.random() * 120 - 25, // 좌우로 퍼짐
+        y: Math.random() * 120, // 아래로 떨어짐
+        opacity: 0,
+        scale: 0.5, // 파티클 크기 감소
+        ease: "bounce.out", // 바운스 효과 적용
+        stagger: 0.5, // 파티클들이 조금씩 튀어나가게 설정
+        onComplete: () => particle.remove(), // 애니메이션 종료 후 제거
+      });
+    }
+  };
+
+  const calculateCursorPosition = (textarea, selectionStart) => {
+    const rect = textarea.getBoundingClientRect();
+
+    const computedStyle = window.getComputedStyle(textarea);
+    const charWidth = parseFloat(computedStyle.fontSize) * 0.7;
+    const lineHeight =
+      parseFloat(computedStyle.lineHeight) ||
+      parseFloat(computedStyle.fontSize) * 1.2;
+
+    const textareaWidth = rect.width;
+    const charsPerLine = Math.floor(textareaWidth / charWidth);
+
+    const col = selectionStart % charsPerLine;
+    const row = Math.floor(selectionStart / charsPerLine);
+
+    const x = rect.left + window.scrollX + col * charWidth;
+    const y = rect.top + window.scrollY + row * lineHeight;
+
+    return { x, y };
+  };
+
   return (
     <>
       <div>
@@ -142,6 +208,7 @@ function TypingInput() {
           onPaste={(e) => e.preventDefault()} // 붙여넣기 금지
           autoComplete="off"
           spellCheck="false"
+          readOnly={isFinish}
         />
       </div>
       <IconButton icon={<FaRedo />} onClick={handleResetClick} />
@@ -159,6 +226,7 @@ function TypingInput() {
     </>
   );
 }
+
 function splitHangulToJamo(char) {
   const HANGUL_START = 0xac00;
   const HANGUL_END = 0xd7a3;
