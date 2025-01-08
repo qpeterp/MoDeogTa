@@ -100,7 +100,7 @@ function TypingInput() {
       const inputJamo = countJamo(userInput);
       setSpeed(((inputJamo * 60) / currentTime).toFixed(1)); // 실시간 타자 속도 계산
     }
-  }, [userInput, currentTime]); // userInput, currentTime 변경 시 실시간으로 speed 업데이
+  }, [userInput, currentTime, startTime, isFinish]); // userInput, currentTime 변경 시 실시간으로 speed 업데이
 
   const renderCode = () => {
     return codeToType.split("").map((char, index) => {
