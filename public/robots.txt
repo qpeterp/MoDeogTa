@@ -1,3 +1,2 @@
-# https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Disallow:
+User-agent: *Allow:/
+Sitemap: https://modeogta-b54db.web.app/sitemap.xml
