@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import IconButton from "./components/DeaugTaButton";
-import { FaRedo } from "react-icons/fa";
+import { FaRedo, FaRandom } from "react-icons/fa";
 import ResultDialog from "./components/ResultDialog";
 import gsap from "gsap"; // 애니메이션 적용
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
 // TODO : 타자 기록, 최대 타수,
 
 function TypingInput() {
-  const [codeToType] = useState(
+  const [codeToType, setCodeToType] = useState(
     "애국가 1. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세."
   );
   const [userInput, setUserInput] = useState("");
@@ -54,7 +54,15 @@ function TypingInput() {
     setSpeed("");
     setStartTime("");
     setIsDialogOpen(false); // dialog 닫기
+
     document.getElementById("userInput").focus();
+  };
+
+  const handleGetScriptClick = async () => {
+    const randomDoc = await getRandomDocument(); // 비동기 호출
+    if (randomDoc && randomDoc.script) {
+      setCodeToType(randomDoc.script); // script 필드를 codeToType에 할당
+    }
   };
 
   useEffect(() => {
@@ -213,8 +221,10 @@ function TypingInput() {
           readOnly={isFinish}
         />
       </div>
-      <IconButton icon={<FaRedo />} onClick={handleResetClick} />
-
+      <div style={{ display: "flex", gap: "10px" }}>
+        <IconButton icon={<FaRedo />} onClick={handleResetClick} />
+        <IconButton icon={<FaRandom />} onClick={handleGetScriptClick} />
+      </div>
       {isDialogOpen && (
         <ResultDialog
           accuracy={accuracy}
@@ -334,13 +344,35 @@ function countJamo(text) {
 async function addData() {
   try {
     const docRef = await addDoc(collection(db, "typingScript"), {
-      name: "Jane Doe",
-      email: "jane.doe@example.com",
-      age: 25,
+      script:
+        "타자연습하다 보니 문득 롤 초창기부터 지금까지 현역으로 달려온 페이커가 새삼 대단하다고 느껴지네",
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
+  }
+}
+
+async function getRandomDocument() {
+  try {
+    const querySnapshot = await getDocs(collection(db, "typingScript"));
+    const docs = [];
+
+    querySnapshot.forEach((doc) => {
+      docs.push({ id: doc.id, ...doc.data() });
+    });
+
+    if (docs.length === 0) {
+      console.log("No documents found in the collection.");
+      return null;
+    }
+
+    // 랜덤으로 하나의 문서 선택
+    const randomDoc = docs[Math.floor(Math.random() * docs.length)];
+    console.log(`Random Document: ${JSON.stringify(randomDoc)}`);
+    return randomDoc;
+  } catch (error) {
+    console.error("Error fetching documents: ", error);
   }
 }
 

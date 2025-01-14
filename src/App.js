@@ -12,6 +12,11 @@ function App() {
           <span className="keyboard-text"> Tab </span> +
           <span className="keyboard-text"> Enter </span> - 재시작
         </p>
+        <p className="text">
+          <span className="keyboard-text"> Tab </span> +
+          <span className="keyboard-text"> Tab </span> +
+          <span className="keyboard-text"> Enter </span> - 재시작
+        </p>
       </div>
     </>
   );
