@@ -341,17 +341,18 @@ function countJamo(text) {
     .reduce((count, char) => count + splitHangulToJamo(char).length, 0);
 }
 
-async function addData() {
-  try {
-    const docRef = await addDoc(collection(db, "typingScript"), {
-      script:
-        "타자연습하다 보니 문득 롤 초창기부터 지금까지 현역으로 달려온 페이커가 새삼 대단하다고 느껴지네",
-    });
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
-}
+// TODO :: User - Create typingScript
+// async function addData() {
+//   try {
+//     const docRef = await addDoc(collection(db, "typingScript"), {
+//       script:
+//         "타자연습하다 보니 문득 롤 초창기부터 지금까지 현역으로 달려온 페이커가 새삼 대단하다고 느껴지네",
+//     });
+//     console.log("Document written with ID: ", docRef.id);
+//   } catch (e) {
+//     console.error("Error adding document: ", e);
+//   }
+// }
 
 async function getRandomDocument() {
   try {
