@@ -66,7 +66,7 @@ function TypingInput() {
   };
 
   useEffect(() => {
-    if (userInput.length === codeToType.length) {
+    if (userInput.length > codeToType.length) {
       const endTime = new Date().getTime();
       const takenTime = (endTime - startTime) / 1000;
 
@@ -84,7 +84,7 @@ function TypingInput() {
       const totalJamo = countJamo(codeToType);
       const inputJamo = countJamo(userInput);
 
-      setAccuracy(((correctJamoCount / totalJamo) * 90).toFixed(1));
+      setAccuracy(((correctJamoCount / totalJamo) * 100).toFixed(1));
       setSpeed(((inputJamo * 60) / takenTime).toFixed(1));
 
       setIsFinish(true);
