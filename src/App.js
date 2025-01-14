@@ -8,12 +8,12 @@ function App() {
   const [showTutorial, setShowTutorial] = useState(false);
 
   useEffect(() => {
-    // 로컬 스토리지에서 튜토리얼 표시 여부 확인
-    const isTutorialShown = localStorage.getItem("isTutorialShown");
+    // 세션 스토리지에서 튜토리얼 표시 여부 확인
+    const isTutorialShown = sessionStorage.getItem("isTutorialShown");
 
     if (!isTutorialShown) {
       setShowTutorial(true); // 튜토리얼 표시
-      localStorage.setItem("isTutorialShown", "true"); // 튜토리얼 표시 기록
+      sessionStorage.setItem("isTutorialShown", "true"); // 튜토리얼 표시 기록
     }
   }, []);
 
