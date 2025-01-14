@@ -3,7 +3,7 @@ import IconButton from "./components/DeaugTaButton";
 import { FaRedo, FaRandom } from "react-icons/fa";
 import ResultDialog from "./components/ResultDialog";
 import gsap from "gsap"; // 애니메이션 적용
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
 // TODO : 타자 기록, 최대 타수,
