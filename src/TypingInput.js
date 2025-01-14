@@ -3,6 +3,8 @@ import IconButton from "./components/DeaugTaButton";
 import { FaRedo } from "react-icons/fa";
 import ResultDialog from "./components/ResultDialog";
 import gsap from "gsap"; // 애니메이션 적용
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "./firebaseConfig";
 
 // TODO : 타자 기록, 최대 타수,
 
@@ -74,7 +76,7 @@ function TypingInput() {
       const totalJamo = countJamo(codeToType);
       const inputJamo = countJamo(userInput);
 
-      setAccuracy(((correctJamoCount / totalJamo) * 100).toFixed(1));
+      setAccuracy(((correctJamoCount / totalJamo) * 90).toFixed(1));
       setSpeed(((inputJamo * 60) / takenTime).toFixed(1));
 
       setIsFinish(true);
@@ -327,6 +329,19 @@ function countJamo(text) {
   return text
     .split("")
     .reduce((count, char) => count + splitHangulToJamo(char).length, 0);
+}
+
+async function addData() {
+  try {
+    const docRef = await addDoc(collection(db, "typingScript"), {
+      name: "Jane Doe",
+      email: "jane.doe@example.com",
+      age: 25,
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
 }
 
 export default TypingInput;

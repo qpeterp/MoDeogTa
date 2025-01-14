@@ -1,6 +1,7 @@
 // src/firebase.js
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore"; // Firestore 추가
 
 const firebaseConfig = {
   apiKey: "AIzaSyDSUbpAhxK2GwvH6SyroRHlw8EOhTTEH8s",
@@ -14,5 +15,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const db = getFirestore(app); // Firestore 초기화
 
-export { app, analytics };
+export { app, analytics, db };
