@@ -116,7 +116,7 @@ function TypingInput() {
     return codeToType.split("").map((char, index) => {
       let color;
       let bgColor;
-      if (index < userInput.length) {
+      if (index < userInput.length - 1) {
         if (userInput[index] !== char) {
           bgColor = "red";
           color = "red";
