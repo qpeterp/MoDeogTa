@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Drawer, List, ListItem, ListItemText } from "@mui/material";
 import { FaBook, FaArrowRight } from "react-icons/fa"; // 글쓰기, 필기 느낌
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 
 function SideDrawer() {
   const [open, setOpen] = useState(false);
+  const [documents, setDocuments] = useState([]);
 
   const toggleDrawer = (state) => () => {
     setOpen(state);
   };
+
+  // 첫 렌더링 시에만 데이터를 가져오는 useEffect
+  useEffect(() => {
+    const fetchDocuments = async () => {
+      const typingList = await getAllDocument();
+      if (typingList) {
+        setDocuments(typingList); // 가져온 문서를 상태에 저장
+      }
+    };
+
+    fetchDocuments(); // 컴포넌트가 처음 마운트될 때만 호출
+  }, []); // 빈 배열을 두 번째 인자로 넣어 첫 렌더링 시에만 실행되도록 설정
 
   return (
     <div className="list">
@@ -48,26 +63,10 @@ function SideDrawer() {
         }}
       >
         <List className="list-container">
-          {[
-            "죽어라 이 거머리야.",
-            "하 인생. ",
-            "애국가 1. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세.",
-            "음 아잇",
-            "하 인생. ",
-            "하 인생. ",
-            "하 인생. ",
-            "하 인생. ",
-            "하 인생. ",
-            "하 인생. ",
-            "하 인생. ",
-            "하 인생. ",
-            "하 인생. ",
-            "하 인생. ",
-            "하 인생. ",
-          ].map((text, index) => (
+          {documents.map((doc, index) => (
             <ListItem button key={index}>
               <ListItemText
-                primary={text}
+                primary={doc.script}
                 sx={{
                   color: "white",
                   "&:hover": { color: "yellow", backgroundColor: "#434343" },
@@ -80,6 +79,26 @@ function SideDrawer() {
       </Drawer>
     </div>
   );
+}
+
+async function getAllDocument() {
+  try {
+    const querySnapshot = await getDocs(collection(db, "typingScript"));
+    const docs = [];
+
+    querySnapshot.forEach((doc) => {
+      docs.push({ id: doc.id, ...doc.data() });
+    });
+
+    if (docs.length === 0) {
+      console.log("No documents found in the collection.");
+      return null;
+    }
+
+    return docs;
+  } catch (error) {
+    console.error("Error fetching documents: ", error);
+  }
 }
 
 export default SideDrawer;
