@@ -3,6 +3,7 @@ import Header from "./Header";
 import TypingInput from "./TypingInput";
 import React, { useState, useEffect } from "react";
 import { FaRedo, FaRandom } from "react-icons/fa";
+import SideDrawer from "./components/SideDrawer";
 
 function App() {
   const [showTutorial, setShowTutorial] = useState(false);
@@ -59,17 +60,22 @@ function App() {
       {!showTutorial && (
         <>
           <Header />
-          <div className="background">
+          <div className="list">
+            <SideDrawer />
+          </div>
+          <div className="main">
             <TypingInput />
-            <p className="text">
-              <span className="keyboard-text"> Tab </span> +
-              <span className="keyboard-text"> Enter </span> - 재시작
-            </p>
-            <p className="text">
-              <span className="keyboard-text"> Tab </span> +
-              <span className="keyboard-text"> Tab </span> +
-              <span className="keyboard-text"> Enter </span> - 글 변경
-            </p>
+            <div>
+              <p className="text">
+                <span className="keyboard-text"> Tab </span> +
+                <span className="keyboard-text"> Enter </span> - 재시작
+              </p>
+              <p className="text">
+                <span className="keyboard-text"> Tab </span> +
+                <span className="keyboard-text"> Tab </span> +
+                <span className="keyboard-text"> Enter </span> - 글 변경
+              </p>
+            </div>
           </div>
         </>
       )}

@@ -24,7 +24,18 @@ input:focus {
   outline: none; /* 포커스 시 기본 아웃라인 제거 */
 }
 
-.background {
+.list {
+  background-color: black;
+}
+
+.iconBundle {
+  display: flex; // flexbox 사용
+  align-items: center; // 세로 중앙 정렬
+  gap: 10px; // 아이콘 간 간격
+  padding-left: 20px;
+}
+
+.main {
   background-color: black;
   padding: 0px 25vw;
   display: flex;
