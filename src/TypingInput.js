@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import IconButton from "./components/DeaugTaButton";
 import { FaRedo, FaRandom } from "react-icons/fa";
 import ResultDialog from "./components/ResultDialog";
-import gsap from "gsap"; // 애니메이션 적용
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
@@ -31,18 +30,6 @@ function TypingInput({ selectedText }) {
 
     if (!startTime) {
       setStartTime(new Date().getTime());
-    }
-
-    // 커서 위치에서 효과 생성
-    if (textareaRef.current) {
-      const textarea = textareaRef.current;
-      const { selectionStart } = textarea;
-
-      // 커서 위치 계산
-      const { x, y } = calculateCursorPosition(textarea, selectionStart);
-
-      // Dust Effect 생성
-      createDustEffect(x, y);
     }
   };
 
@@ -85,7 +72,7 @@ function TypingInput({ selectedText }) {
       const inputJamo = countJamo(userInput);
 
       setAccuracy(((correctJamoCount / totalJamo) * 100).toFixed(1));
-      setSpeed(((inputJamo * 60) / takenTime).toFixed(1));
+      setSpeed(((inputJamo * 50) / takenTime).toFixed(1));
 
       setIsFinish(true);
       setIsDialogOpen(true);
@@ -116,7 +103,7 @@ function TypingInput({ selectedText }) {
   useEffect(() => {
     if (startTime && !isFinish) {
       const inputJamo = countJamo(userInput);
-      setSpeed(((inputJamo * 60) / currentTime).toFixed(1)); // 실시간 타자 속도 계산
+      setSpeed(((inputJamo * 50) / currentTime).toFixed(1)); // 실시간 타자 속도 계산
     }
   }, [userInput, currentTime, startTime, isFinish]); // userInput, currentTime 변경 시 실시간으로 speed 업데이
 
@@ -163,57 +150,6 @@ function TypingInput({ selectedText }) {
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   }, [userInput]); // userInput이 변경될 때마다 높이 조정
-
-  const createDustEffect = (x, y) => {
-    const particles = [];
-
-    for (let i = 0; i < 20; i++) {
-      const particle = document.createElement("div");
-      particle.className = "particle";
-      particle.style.position = "absolute";
-      particle.style.width = "5px";
-      particle.style.height = "5px";
-      particle.style.backgroundColor = "yellow";
-      particle.style.borderRadius = "50%";
-      particle.style.pointerEvents = "none";
-      particle.style.left = `${x}px`;
-      particle.style.top = `${y}px`;
-      document.body.appendChild(particle);
-      particles.push(particle);
-
-      gsap.to(particle, {
-        duration: 1,
-        x: Math.random() * 120 - 25, // 좌우로 퍼짐
-        y: Math.random() * 120, // 아래로 떨어짐
-        opacity: 0,
-        scale: 0.5, // 파티클 크기 감소
-        ease: "bounce.out", // 바운스 효과 적용
-        stagger: 0.5, // 파티클들이 조금씩 튀어나가게 설정
-        onComplete: () => particle.remove(), // 애니메이션 종료 후 제거
-      });
-    }
-  };
-
-  const calculateCursorPosition = (textarea, selectionStart) => {
-    const rect = textarea.getBoundingClientRect();
-
-    const computedStyle = window.getComputedStyle(textarea);
-    const charWidth = parseFloat(computedStyle.fontSize) * 0.7;
-    const lineHeight =
-      parseFloat(computedStyle.lineHeight) ||
-      parseFloat(computedStyle.fontSize) * 1.2;
-
-    const textareaWidth = rect.width;
-    const charsPerLine = Math.floor(textareaWidth / charWidth);
-
-    const col = selectionStart % charsPerLine;
-    const row = Math.floor(selectionStart / charsPerLine);
-
-    const x = rect.left + window.scrollX + col * charWidth;
-    const y = rect.top + window.scrollY + row * lineHeight;
-
-    return { x, y };
-  };
 
   return (
     <>
