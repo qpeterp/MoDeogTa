@@ -68,9 +68,6 @@ function App() {
       {!showTutorial && (
         <>
           <Header />
-          <div className="list">
-            <SideDrawer onTextSelect={handleCodeToTypeChange} />
-          </div>
           <div className="main">
             <TypingInput selectedText={codeToType} />
             <div>
@@ -84,6 +81,7 @@ function App() {
                 <span className="keyboard-text"> Enter </span> - 글 변경
               </p>
             </div>
+            <SideDrawer onTextSelect={handleCodeToTypeChange} />
           </div>
         </>
       )}
