@@ -105,6 +105,14 @@ function TypingInput({ selectedText }) {
     return () => clearInterval(timerRef.current);
   }, [startTime, isFinish]);
 
+  // textarea에 자동으로 포커스를 주기
+  useEffect(() => {
+    if (!isFinish && textareaRef.current) {
+      textareaRef.current.focus(); // 코드가 업데이트된 후에 포커스를 줌
+      setUserInput("");
+    }
+  }, [codeToType, isFinish]); // codeToType 또는 isFinish가 변경될 때마다 포커스
+
   useEffect(() => {
     if (startTime && !isFinish) {
       const inputJamo = countJamo(userInput);
