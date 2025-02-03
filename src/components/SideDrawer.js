@@ -19,6 +19,13 @@ function SideDrawer({ onTextSelect }) {
     );
   };
 
+  const sortWithAlphabetically = () => {
+    console.log("가나다 순 정렬 클릭");
+    setDocuments(
+      documents.toSorted((a, b) => a.script.localeCompare(b.script))
+    );
+  };
+
   const handleChoice = async (id) => {
     try {
       // 특정 문서를 불러오기 위해 'doc'을 사용하고 'getDoc'으로 문서 데이터를 가져옴
@@ -93,7 +100,7 @@ function SideDrawer({ onTextSelect }) {
             <FaSortAmountDown style={{ width: "24px", height: "24px" }} />
             <div className="dropdown-content">
               <p onClick={sortWithLength}>길이 순 정렬</p>
-              <p>가나다 순 정렬</p>
+              <p onClick={sortWithAlphabetically}>가나다 순 정렬</p>
             </div>
           </div>
         </div>
