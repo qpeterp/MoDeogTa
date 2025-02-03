@@ -137,12 +137,16 @@ input:focus {
 .header {
   background-color: #202020;
   border-radius: 15px;
-  padding: 0px 24px;
 }
 
 .header-background {
   background-color: black;
   padding: 24px;
+}
+
+.allScriptHeader {
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* 로고 이미지 스타일 */
@@ -203,7 +207,7 @@ input:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 10;
   color: yellow; /* 기본 텍스트 색상 */
 }
 
@@ -259,4 +263,41 @@ input:focus {
 
 .tutorial-content button:hover {
   background: #ffd700;
+}
+
+.sortIcon {
+  position: relative; /* 드롭다운 위치를 위한 기준 */
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  padding: 8px 20px;
+  transition: color 0.3s ease; /* 부드러운 색 변경 */
+}
+
+.sortIcon:hover {
+  color: yellow; /* hover 시 아이콘 색 변경 */
+}
+
+.dropdown-content {
+  display: none; /* 기본적으로 숨김 */
+  position: absolute;
+  right: 0;
+  z-index: 2; /* 다른 요소들보다 앞에 배치 */
+  background-color: #333; /* 배경 색 */
+  border-radius: 5px; /* 경계선 둥글게 */
+  padding: 10px;
+  margin-right: 1vw;
+  width: 100px; /* 원하는 너비 */
+}
+
+.dropdown-content p {
+  color: white; /* 텍스트 색상 */
+  margin: 5px 0;
+  padding: 5px;
+  cursor: pointer;
+}
+
+/* .sortIcon이 아닌 .allScriptHeader 전체를 hover했을 때 dropdown 표시 */
+.sortIcon:hover .dropdown-content {
+  display: block;
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Drawer, List, ListItem, ListItemText } from "@mui/material";
-import { FaBook, FaArrowRight } from "react-icons/fa"; // 글쓰기, 필기 느낌
+import { FaBook, FaArrowRight, FaSortAmountDown } from "react-icons/fa"; // 글쓰기, 필기 느낌
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
@@ -81,6 +81,16 @@ function SideDrawer({ onTextSelect }) {
           }, // 전체 Drawer 크기 조절
         }}
       >
+        <div className="allScriptHeader">
+          <div className="sortIcon">
+            <FaSortAmountDown style={{ width: "24px", height: "24px" }} />
+            <div className="dropdown-content">
+              <p>길이 순 정렬</p>
+              <p>가나다 순 정렬</p>
+            </div>
+          </div>
+        </div>
+
         <List className="list-container">
           {documents.map((doc, index) => (
             <ListItem button key={index} onClick={() => handleChoice(doc.id)}>

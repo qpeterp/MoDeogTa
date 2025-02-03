@@ -81,9 +81,7 @@ function App() {
                 <span className="keyboard-text"> Enter </span> - 글 변경
               </p>
             </div>
-            <div className="list">
-              <SideDrawer onTextSelect={handleCodeToTypeChange} />
-            </div>
+            <SideDrawer onTextSelect={handleCodeToTypeChange} />
           </div>
         </>
       )}
