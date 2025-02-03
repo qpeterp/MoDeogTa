@@ -2,7 +2,7 @@ import "./App.scss";
 import Header from "./Header";
 import TypingInput from "./TypingInput";
 import React, { useState, useEffect } from "react";
-import { FaRedo, FaRandom } from "react-icons/fa";
+import { FaRedo, FaRandom, FaBook } from "react-icons/fa";
 import SideDrawer from "./components/SideDrawer";
 
 function App() {
@@ -46,13 +46,16 @@ function App() {
             </div>
 
             <div>
-              <h3>기본 기능 사항</h3>
+              <h3>기능 설명</h3>
               <ol>
                 <li>
                   <FaRedo /> 현재 글 다시 시도하기
                 </li>
                 <li>
                   <FaRandom /> 랜덤한 다른 글 호출하기
+                </li>
+                <li>
+                  <FaBook /> 전체 글 중 선택하기
                 </li>
               </ol>
             </div>
