@@ -7,6 +7,7 @@ import SideDrawer from "./components/SideDrawer";
 
 function App() {
   const [showTutorial, setShowTutorial] = useState(false);
+  const [codeToType, setCodeToType] = useState(""); // SideDrawer에서 받아올 텍스트 상태
 
   useEffect(() => {
     // 세션 스토리지에서 튜토리얼 표시 여부 확인
@@ -20,6 +21,10 @@ function App() {
 
   const handleCloseTutorial = () => {
     setShowTutorial(false); // 튜토리얼 닫기
+  };
+
+  const handleCodeToTypeChange = (selectedText) => {
+    setCodeToType(selectedText); // SideDrawer에서 전달받은 코드 텍스트 설정
   };
 
   return (
@@ -61,10 +66,10 @@ function App() {
         <>
           <Header />
           <div className="list">
-            <SideDrawer />
+            <SideDrawer onTextSelect={handleCodeToTypeChange} />
           </div>
           <div className="main">
-            <TypingInput />
+            <TypingInput selectedText={codeToType} />
             <div>
               <p className="text">
                 <span className="keyboard-text"> Tab </span> +
