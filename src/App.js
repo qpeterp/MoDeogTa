@@ -2,10 +2,12 @@ import "./App.scss";
 import Header from "./Header";
 import TypingInput from "./TypingInput";
 import React, { useState, useEffect } from "react";
-import { FaRedo, FaRandom } from "react-icons/fa";
+import { FaRedo, FaRandom, FaBook } from "react-icons/fa";
+import SideDrawer from "./components/SideDrawer";
 
 function App() {
   const [showTutorial, setShowTutorial] = useState(false);
+  const [codeToType, setCodeToType] = useState(""); // SideDrawer에서 받아올 텍스트 상태
 
   useEffect(() => {
     // 세션 스토리지에서 튜토리얼 표시 여부 확인
@@ -19,6 +21,10 @@ function App() {
 
   const handleCloseTutorial = () => {
     setShowTutorial(false); // 튜토리얼 닫기
+  };
+
+  const handleCodeToTypeChange = (selectedText) => {
+    setCodeToType(selectedText); // SideDrawer에서 전달받은 코드 텍스트 설정
   };
 
   return (
@@ -40,13 +46,16 @@ function App() {
             </div>
 
             <div>
-              <h3>기본 기능 사항</h3>
+              <h3>기능 설명</h3>
               <ol>
                 <li>
                   <FaRedo /> 현재 글 다시 시도하기
                 </li>
                 <li>
                   <FaRandom /> 랜덤한 다른 글 호출하기
+                </li>
+                <li>
+                  <FaBook /> 전체 글 중 선택하기
                 </li>
               </ol>
             </div>
@@ -59,17 +68,22 @@ function App() {
       {!showTutorial && (
         <>
           <Header />
-          <div className="background">
-            <TypingInput />
-            <p className="text">
-              <span className="keyboard-text"> Tab </span> +
-              <span className="keyboard-text"> Enter </span> - 재시작
-            </p>
-            <p className="text">
-              <span className="keyboard-text"> Tab </span> +
-              <span className="keyboard-text"> Tab </span> +
-              <span className="keyboard-text"> Enter </span> - 글 변경
-            </p>
+          <div className="list">
+            <SideDrawer onTextSelect={handleCodeToTypeChange} />
+          </div>
+          <div className="main">
+            <TypingInput selectedText={codeToType} />
+            <div>
+              <p className="text">
+                <span className="keyboard-text"> Tab </span> +
+                <span className="keyboard-text"> Enter </span> - 재시작
+              </p>
+              <p className="text">
+                <span className="keyboard-text"> Tab </span> +
+                <span className="keyboard-text"> Tab </span> +
+                <span className="keyboard-text"> Enter </span> - 글 변경
+              </p>
+            </div>
           </div>
         </>
       )}

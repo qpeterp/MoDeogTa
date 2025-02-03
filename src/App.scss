@@ -24,7 +24,47 @@ input:focus {
   outline: none; /* 포커스 시 기본 아웃라인 제거 */
 }
 
-.background {
+.list {
+  background-color: black;
+}
+
+.list-container {
+  max-height: 100vh; /* 최대 높이를 지정하여 스크롤 가능하게 만듦 */
+  overflow-y: auto; /* 스크롤을 자동으로 활성화 */
+  padding-right: 10px; /* 스크롤바가 겹치는 경우 방지 */
+}
+
+/* 스크롤바 디자인 */
+.list-container::-webkit-scrollbar {
+  width: 8px; /* 스크롤바 너비 */
+}
+
+.list-container::-webkit-scrollbar-thumb {
+  background-color: #444; /* 스크롤바 손잡이 색상 */
+  border-radius: 10px; /* 손잡이 둥글게 */
+}
+
+.list-container::-webkit-scrollbar-track {
+  background-color: #333; /* 트랙 배경 색상 */
+  border-radius: 10px; /* 트랙 둥글게 */
+}
+
+/* 호버 시 손잡이 색상 변경 */
+.list-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(
+    120,
+    120,
+    0
+  ); /* 호버 시 손잡이 색상 변경, 약한 노란색 */
+}
+.iconBundle {
+  display: flex; // flexbox 사용
+  align-items: center; // 세로 중앙 정렬
+  gap: 10px; // 아이콘 간 간격
+  padding-left: 20px;
+}
+
+.main {
   background-color: black;
   padding: 0px 25vw;
   display: flex;

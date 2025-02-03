@@ -8,7 +8,7 @@ import { db } from "./firebaseConfig";
 
 // TODO : 타자 기록, 최대 타수,
 
-function TypingInput() {
+function TypingInput({ selectedText }) {
   const [codeToType, setCodeToType] = useState(
     "애국가 1. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세."
   );
@@ -111,6 +111,13 @@ function TypingInput() {
       setSpeed(((inputJamo * 60) / currentTime).toFixed(1)); // 실시간 타자 속도 계산
     }
   }, [userInput, currentTime, startTime, isFinish]); // userInput, currentTime 변경 시 실시간으로 speed 업데이
+
+  // selectedText가 변경되면 codeToType을 업데이트
+  useEffect(() => {
+    if (selectedText) {
+      setCodeToType(selectedText); // selectedText를 codeToType에 할당
+    }
+  }, [selectedText]);
 
   const renderCode = () => {
     return codeToType.split("").map((char, index) => {
