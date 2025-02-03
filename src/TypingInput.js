@@ -72,7 +72,7 @@ function TypingInput({ selectedText }) {
       const inputJamo = countJamo(userInput);
 
       setAccuracy(((correctJamoCount / totalJamo) * 100).toFixed(1));
-      setSpeed(((inputJamo * 60) / takenTime).toFixed(1));
+      setSpeed(((inputJamo * 50) / takenTime).toFixed(1));
 
       setIsFinish(true);
       setIsDialogOpen(true);
@@ -103,7 +103,7 @@ function TypingInput({ selectedText }) {
   useEffect(() => {
     if (startTime && !isFinish) {
       const inputJamo = countJamo(userInput);
-      setSpeed(((inputJamo * 60) / currentTime).toFixed(1)); // 실시간 타자 속도 계산
+      setSpeed(((inputJamo * 50) / currentTime).toFixed(1)); // 실시간 타자 속도 계산
     }
   }, [userInput, currentTime, startTime, isFinish]); // userInput, currentTime 변경 시 실시간으로 speed 업데이
 
