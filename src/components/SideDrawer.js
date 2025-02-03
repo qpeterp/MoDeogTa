@@ -76,7 +76,7 @@ function SideDrawer({ onTextSelect }) {
         }}
         PaperProps={{
           sx: {
-            width: "50vw",
+            width: "45vw",
             backgroundColor: "#272727", // 배경색 검은색으로 설정
           }, // 전체 Drawer 크기 조절
         }}
@@ -89,7 +89,7 @@ function SideDrawer({ onTextSelect }) {
                 sx={{
                   color: "white",
                   "&:hover": { color: "yellow", backgroundColor: "#434343" },
-                  padding: "12px 8px",
+                  padding: "16px 24px",
                 }} // 글자 색을 흰색으로 변경
               />
             </ListItem>
