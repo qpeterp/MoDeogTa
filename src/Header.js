@@ -8,16 +8,19 @@ function Header({ onMenuSelect }) {
     onMenuSelect(MenuType.TUTORIAL);
   };
 
-  const handleSettingClick = () => {
-    onMenuSelect(MenuType.SETTINGS);
-  };
+  // const handleSettingClick = () => {
+  //   onMenuSelect(MenuType.SETTINGS);
+  // };
 
   return (
     <div className="header-background">
       <header className="header">
         <img src="logo.svg" alt="Logo" className="header-logo" />
         <nav>
-          <SettingsIcon className="menu-icon" onClick={handleSettingClick} />
+          <SettingsIcon
+            className="menu-icon"
+            // onClick={handleSettingClick}
+          />
 
           <HelpOutlineIcon
             className="menu-icon"

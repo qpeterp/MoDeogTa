@@ -42,7 +42,7 @@ function App() {
   return (
     <>
       {showTutorial ? (
-        <div className="tutorial-overlay">
+        <div className="tutorial-overlay overlay">
           <div className="tutorial-content">
             <h2>환영합니다!</h2>
             <p>이용 방법은 아래 내용을 참고하세요:</p>
@@ -80,6 +80,11 @@ function App() {
         </div>
       ) : (
         <>
+          {showSetting && (
+            <div className="setting-overlay overlay">
+              <div className="tutorial-content"></div>
+            </div>
+          )}
           <Header onMenuSelect={handleMenuSelect} />
           <div className="main">
             <TypingInput selectedText={codeToType} />
