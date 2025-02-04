@@ -37,6 +37,8 @@ function App() {
       case MenuType.SETTINGS:
         setShowSetting(true);
         break;
+      default:
+        break;
     }
   };
   return (
