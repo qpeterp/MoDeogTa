@@ -3,10 +3,14 @@ import { Drawer, List, ListItem, ListItemText } from "@mui/material";
 import { FaBook, FaArrowRight, FaSortAmountDown } from "react-icons/fa"; // 글쓰기, 필기 느낌
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import { TextField, IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 function SideDrawer({ onTextSelect }) {
   const [open, setOpen] = useState(false);
   const [documents, setDocuments] = useState([]);
+  const [filteredDocuments, setFilteredDocuments] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   const toggleDrawer = (state) => () => {
     setOpen(state);
@@ -14,15 +18,15 @@ function SideDrawer({ onTextSelect }) {
 
   const sortWithLength = () => {
     console.log("길이 순 정렬 클릭");
-    setDocuments(
-      documents.toSorted((a, b) => a.script.length - b.script.length)
+    setFilteredDocuments(
+      filteredDocuments.toSorted((a, b) => a.script.length - b.script.length)
     );
   };
 
   const sortWithAlphabetically = () => {
     console.log("가나다 순 정렬 클릭");
-    setDocuments(
-      documents.toSorted((a, b) => a.script.localeCompare(b.script))
+    setFilteredDocuments(
+      filteredDocuments.toSorted((a, b) => a.script.localeCompare(b.script))
     );
   };
 
@@ -45,12 +49,26 @@ function SideDrawer({ onTextSelect }) {
     }
   };
 
+  useEffect(() => {
+    // 검색어가 있을 때만 필터링
+    if (searchText.trim() === "") {
+      setFilteredDocuments(documents); // 검색어가 비어 있으면 전체 문서 출력
+    } else {
+      setFilteredDocuments(
+        documents.filter((text) => {
+          return text.script.toLowerCase().includes(searchText.toLowerCase());
+        })
+      );
+    }
+  }, [searchText]); // searchText가 변경될 때마다 실행
+
   // 첫 렌더링 시에만 데이터를 가져오는 useEffect
   useEffect(() => {
     const fetchDocuments = async () => {
       const typingList = await getAllDocument();
       if (typingList) {
         setDocuments(typingList); // 가져온 문서를 상태에 저장
+        setFilteredDocuments(typingList); // 가져온 문서를 상태에 저장
       }
     };
 
@@ -96,6 +114,19 @@ function SideDrawer({ onTextSelect }) {
         }}
       >
         <div className="allScriptHeader">
+          <TextField
+            variant="outlined"
+            fullWidth
+            label="글 검색"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            className="custom-textfield"
+            autoComplete="off"
+          />
+          <IconButton>
+            <SearchIcon sx={{ color: "yellow" }} />
+          </IconButton>
+
           <div className="sortIcon">
             <FaSortAmountDown style={{ width: "24px", height: "24px" }} />
             <div className="dropdown-content">
@@ -106,7 +137,7 @@ function SideDrawer({ onTextSelect }) {
         </div>
 
         <List className="list-container">
-          {documents.map((doc, index) => (
+          {filteredDocuments.map((doc, index) => (
             <ListItem button key={index} onClick={() => handleChoice(doc.id)}>
               <ListItemText
                 primary={doc.script}
