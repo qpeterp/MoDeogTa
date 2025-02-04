@@ -20,6 +20,9 @@ function TypingInput({ selectedText }) {
   const timerRef = useRef(null);
 
   const handleInputChange = (e) => {
+    const sound = new Audio("au_typing.wav"); // 파일 경로 입력
+    sound.play();
+
     if (e.nativeEvent.inputType === "insertLineBreak" || e.key === "Enter") {
       setUserInput((prev) => prev + " ");
     } else {
@@ -29,9 +32,6 @@ function TypingInput({ selectedText }) {
     if (!startTime) {
       setStartTime(new Date().getTime());
     }
-
-    const sound = new Audio("au_typing.mp3"); // 파일 경로 입력
-    sound.play();
   };
 
   const handleResetClick = () => {

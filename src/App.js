@@ -8,6 +8,7 @@ import { MenuType } from "./common/MenuType";
 
 function App() {
   const [showTutorial, setShowTutorial] = useState(false);
+  const [showSetting, setShowSetting] = useState(false);
   const [codeToType, setCodeToType] = useState(""); // SideDrawer에서 받아올 텍스트 상태
 
   useEffect(() => {
@@ -29,14 +30,18 @@ function App() {
   };
 
   const handleMenuSelect = (selectedMenu) => {
-    if (selectedMenu === MenuType.TUTORIAL) {
-      setShowTutorial(true);
+    switch (selectedMenu) {
+      case MenuType.TUTORIAL:
+        setShowTutorial(true);
+        break;
+      case MenuType.SETTINGS:
+        setShowSetting(true);
+        break;
     }
   };
-
   return (
     <>
-      {showTutorial && (
+      {showTutorial ? (
         <div className="tutorial-overlay">
           <div className="tutorial-content">
             <h2>환영합니다!</h2>
@@ -73,9 +78,7 @@ function App() {
             <button onClick={handleCloseTutorial}>이해했어요!</button>
           </div>
         </div>
-      )}
-
-      {!showTutorial && (
+      ) : (
         <>
           <Header onMenuSelect={handleMenuSelect} />
           <div className="main">
