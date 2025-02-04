@@ -60,7 +60,7 @@ function SideDrawer({ onTextSelect }) {
         })
       );
     }
-  }, [searchText]); // searchText가 변경될 때마다 실행
+  }, [searchText, documents]); // searchText가 변경될 때마다 실행
 
   // 첫 렌더링 시에만 데이터를 가져오는 useEffect
   useEffect(() => {
