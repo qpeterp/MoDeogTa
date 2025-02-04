@@ -11,6 +11,8 @@ function SideDrawer({ onTextSelect }) {
   const [documents, setDocuments] = useState([]);
   const [filteredDocuments, setFilteredDocuments] = useState([]);
   const [searchText, setSearchText] = useState("");
+  // TODO :: 상수로 지정하기. 기억안남 ㅇㅇ
+  const FAILED_LOAD_SCRIPT = "전체글을 불러오려다 말았습니다.";
 
   const toggleDrawer = (state) => () => {
     setOpen(state);
@@ -137,10 +139,27 @@ function SideDrawer({ onTextSelect }) {
         </div>
 
         <List className="list-container">
-          {filteredDocuments.map((doc, index) => (
-            <ListItem button key={index} onClick={() => handleChoice(doc.id)}>
+          {filteredDocuments.length > 0 ? (
+            filteredDocuments.map((doc, index) => (
+              <ListItem button key={index} onClick={() => handleChoice(doc.id)}>
+                <ListItemText
+                  primary={doc.script}
+                  sx={{
+                    color: "white",
+                    "&:hover": { color: "yellow", backgroundColor: "#434343" },
+                    padding: "16px 24px",
+                  }} // 글자 색을 흰색으로 변경
+                />
+              </ListItem>
+            ))
+          ) : (
+            <ListItem
+              button
+              key={0}
+              onClick={() => onTextSelect(FAILED_LOAD_SCRIPT)}
+            >
               <ListItemText
-                primary={doc.script}
+                primary={FAILED_LOAD_SCRIPT}
                 sx={{
                   color: "white",
                   "&:hover": { color: "yellow", backgroundColor: "#434343" },
@@ -148,7 +167,7 @@ function SideDrawer({ onTextSelect }) {
                 }} // 글자 색을 흰색으로 변경
               />
             </ListItem>
-          ))}
+          )}
         </List>
       </Drawer>
     </div>

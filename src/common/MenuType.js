@@ -1,5 +1,5 @@
 export const MenuType = {
   TUTORIAL: "tutorial",
-  PRACTICE: "practice",
   SETTINGS: "settings",
+  SUGGEST_BOARD: "suggestBoard",
 };

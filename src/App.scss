@@ -15,6 +15,10 @@ header {
 button {
   cursor: pointer;
 }
+button:hover {
+  color: yellow;
+  transition: color 0.3s ease; /* 부드러운 색 변경 */
+}
 
 .list {
   background-color: black;
@@ -125,6 +129,12 @@ button {
     position: relative; /* 상대 위치 */
     z-index: 0; /* typing-text 아래에 위치하도록 설정 */
   }
+}
+
+.nav-wrap {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .header {

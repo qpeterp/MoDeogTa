@@ -37,6 +37,9 @@ function App() {
       case MenuType.SETTINGS:
         setShowSetting(true);
         break;
+      case MenuType.SUGGEST_BOARD:
+        // 여기서 추천 게시판으로 이동하기. 근데 이동하는거는 뭘로 하지 아;;
+        break;
       default:
         break;
     }
