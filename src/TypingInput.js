@@ -174,8 +174,16 @@ function TypingInput({ selectedText }) {
         />
       </div>
       <div style={{ display: "flex", gap: "10px" }}>
-        <IconButton icon={<FaRedo />} onClick={handleResetClick} />
-        <IconButton icon={<FaRandom />} onClick={handleGetScriptClick} />
+        <IconButton
+          className="button"
+          icon={<FaRedo />}
+          onClick={handleResetClick}
+        />
+        <IconButton
+          className="button"
+          icon={<FaRandom />}
+          onClick={handleGetScriptClick}
+        />
       </div>
       {isDialogOpen && (
         <ResultDialog
