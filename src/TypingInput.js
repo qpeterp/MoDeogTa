@@ -5,8 +5,6 @@ import ResultDialog from "./components/ResultDialog";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
-// TODO : 타자 기록, 최대 타수,
-
 function TypingInput({ selectedText }) {
   const [codeToType, setCodeToType] = useState(
     "애국가 1. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세."
@@ -22,6 +20,9 @@ function TypingInput({ selectedText }) {
   const timerRef = useRef(null);
 
   const handleInputChange = (e) => {
+    const sound = new Audio("au_typing.wav"); // 파일 경로 입력
+    sound.play();
+
     if (e.nativeEvent.inputType === "insertLineBreak" || e.key === "Enter") {
       setUserInput((prev) => prev + " ");
     } else {
@@ -173,8 +174,16 @@ function TypingInput({ selectedText }) {
         />
       </div>
       <div style={{ display: "flex", gap: "10px" }}>
-        <IconButton icon={<FaRedo />} onClick={handleResetClick} />
-        <IconButton icon={<FaRandom />} onClick={handleGetScriptClick} />
+        <IconButton
+          className="button"
+          icon={<FaRedo />}
+          onClick={handleResetClick}
+        />
+        <IconButton
+          className="button"
+          icon={<FaRandom />}
+          onClick={handleGetScriptClick}
+        />
       </div>
       {isDialogOpen && (
         <ResultDialog
