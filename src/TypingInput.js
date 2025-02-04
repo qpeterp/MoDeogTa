@@ -5,8 +5,6 @@ import ResultDialog from "./components/ResultDialog";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
-// TODO : 타자 기록, 최대 타수,
-
 function TypingInput({ selectedText }) {
   const [codeToType, setCodeToType] = useState(
     "애국가 1. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세."
@@ -31,6 +29,9 @@ function TypingInput({ selectedText }) {
     if (!startTime) {
       setStartTime(new Date().getTime());
     }
+
+    const sound = new Audio("au_typing.mp3"); // 파일 경로 입력
+    sound.play();
   };
 
   const handleResetClick = () => {
