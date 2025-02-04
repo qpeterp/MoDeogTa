@@ -7,23 +7,6 @@ body {
   user-select: none; /* 드래그 방지 */
 }
 
-canvas {
-  width: 100%;
-  height: 100%;
-}
-
-input {
-  all: unset; /* 모든 기본 스타일 제거 */
-  background-color: transparent;
-  width: 100%;
-  position: absolute;
-  border-radius: 15px;
-}
-
-input:focus {
-  outline: none; /* 포커스 시 기본 아웃라인 제거 */
-}
-
 header {
   display: flex;
   justify-content: space-between;
@@ -160,6 +143,27 @@ button {
 .allScriptHeader {
   display: flex;
   justify-content: flex-end;
+  padding: 20px 20px;
+}
+
+.custom-textfield .MuiOutlinedInput-root {
+  border-radius: 8px; /* 둥근 테두리 */
+  background-color: #747474; /* 연한 배경색 */
+  height: 40px;
+  color: white; /* 기본 글자 색상 */
+  top: 50%; /* 라벨을 위쪽으로 조정 */
+  transform: translateY(-50%); /* 정확히 중앙 정렬 */
+}
+
+.custom-textfield .MuiOutlinedInput-root.Mui-focused fieldset {
+  border-color: #888800; /* 포커스 시 테두리 색 */
+}
+
+.custom-textfield .MuiInputLabel-root.Mui-focused {
+  color: #dddd00; /* 포커스 시 라벨 색상 */
+}
+.custom-textfield .MuiInputLabel-root {
+  color: black; /* 그냥 라벨 색상 */
 }
 
 /* 로고 이미지 스타일 */
