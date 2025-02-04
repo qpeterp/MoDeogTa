@@ -2,8 +2,9 @@ import "./App.scss";
 import Header from "./Header";
 import TypingInput from "./TypingInput";
 import React, { useState, useEffect } from "react";
-import { FaRedo, FaRandom, FaBook } from "react-icons/fa";
+import { FaRedo, FaRandom, FaBook, FaSortAmountDown } from "react-icons/fa";
 import SideDrawer from "./components/SideDrawer";
+import { MenuType } from "./common/MenuType";
 
 function App() {
   const [showTutorial, setShowTutorial] = useState(false);
@@ -27,13 +28,19 @@ function App() {
     setCodeToType(selectedText); // SideDrawer에서 전달받은 코드 텍스트 설정
   };
 
+  const handleMenuSelect = (selectedMenu) => {
+    if (selectedMenu === MenuType.TUTORIAL) {
+      setShowTutorial(true);
+    }
+  };
+
   return (
     <>
       {showTutorial && (
         <div className="tutorial-overlay">
           <div className="tutorial-content">
             <h2>환영합니다!</h2>
-            <p>모득타를 처음 방문하셨네요! 아래 내용을 참고하세요:</p>
+            <p>이용 방법은 아래 내용을 참고하세요:</p>
 
             <div>
               <h3>기본 이용 방법</h3>
@@ -57,6 +64,9 @@ function App() {
                 <li>
                   <FaBook /> 전체 글 중 선택하기
                 </li>
+                <li>
+                  <FaSortAmountDown /> 전체 글 정렬하기
+                </li>
               </ol>
             </div>
 
@@ -67,7 +77,7 @@ function App() {
 
       {!showTutorial && (
         <>
-          <Header />
+          <Header onMenuSelect={handleMenuSelect} />
           <div className="main">
             <TypingInput selectedText={codeToType} />
             <div>
