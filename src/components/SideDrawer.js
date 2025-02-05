@@ -11,7 +11,6 @@ function SideDrawer({ onTextSelect }) {
   const [documents, setDocuments] = useState([]);
   const [filteredDocuments, setFilteredDocuments] = useState([]);
   const [searchText, setSearchText] = useState("");
-  // TODO :: 상수로 지정하기. 기억안남 ㅇㅇ
   const FAILED_LOAD_SCRIPT = "전체글을 불러오려다 말았습니다.";
 
   const toggleDrawer = (state) => () => {
