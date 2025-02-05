@@ -22,12 +22,12 @@ function Header({ onMenuSelect }) {
       <header className="header">
         <img src="logo.svg" alt="Logo" className="header-logo" />
         <div className="nav-wrap">
-          <nav>
+          {/* <nav>
             <QuestionAnswerIcon
               className="menu-icon"
               onClick={handleSuggestBoardClick}
             />
-          </nav>
+          </nav> */}
           <nav>
             <SettingsIcon
               className="menu-icon"
