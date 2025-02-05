@@ -29,6 +29,7 @@ button:hover {
 .someUltimateCls {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .divider {
@@ -36,7 +37,6 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: nowrap;
 
   .clickable {
     width: 8px;
@@ -79,6 +79,7 @@ button:hover {
     0
   ); /* 호버 시 손잡이 색상 변경, 약한 노란색 */
 }
+
 .iconBundle {
   display: flex; // flexbox 사용
   align-items: center; // 세로 중앙 정렬

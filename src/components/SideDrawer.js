@@ -67,7 +67,6 @@ function SideDrawer({ onTextSelect }) {
   }, [searchText, documents]); // searchText가 변경될 때마다 실행
 
   const handleMouseDown = () => {
-    // howto??
     setIsDragging(true);
   };
 
@@ -81,9 +80,7 @@ function SideDrawer({ onTextSelect }) {
 
       const newX = (x * 100) / maxX;
 
-      if (newX < drawerWidth + 2 || newX > drawerWidth - 2) {
-        setDrawerWidth(Math.min(65, Math.max(20, newX)));
-      }
+      setDrawerWidth(Math.min(85, Math.max(37, newX)));
     };
 
     const handleMouseUp = () => {
@@ -217,7 +214,7 @@ function SideDrawer({ onTextSelect }) {
           </List>
         </div>
         <div className="divider" onMouseDown={handleMouseDown}>
-          <div className="clickable"></div>
+          <div className="clickable" />
         </div>
       </Drawer>
     </div>
