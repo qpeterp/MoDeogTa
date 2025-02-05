@@ -26,6 +26,30 @@ button:hover {
   margin-top: 20px;
 }
 
+.someUltimateCls {
+  display: flex;
+  flex-direction: column;
+}
+
+.divider {
+  margin: 0 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  .clickable {
+    width: 8px;
+    height: 100px;
+
+    background-color: #aaa;
+    border-radius: 30px;
+  }
+  .clickable:hover {
+    background-color: #fff;
+  }
+}
+
 .list-container {
   max-height: 100vh; /* 최대 높이를 지정하여 스크롤 가능하게 만듦 */
   overflow-y: auto; /* 스크롤을 자동으로 활성화 */

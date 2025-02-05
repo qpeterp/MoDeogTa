@@ -11,6 +11,9 @@ function SideDrawer({ onTextSelect }) {
   const [documents, setDocuments] = useState([]);
   const [filteredDocuments, setFilteredDocuments] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [drawerWidth, setDrawerWidth] = useState(45);
+  const [isDragging, setIsDragging] = useState(false);
+
   const FAILED_LOAD_SCRIPT = "전체글을 불러오려다 말았습니다.";
 
   const toggleDrawer = (state) => () => {
@@ -63,6 +66,41 @@ function SideDrawer({ onTextSelect }) {
     }
   }, [searchText, documents]); // searchText가 변경될 때마다 실행
 
+  const handleMouseDown = () => {
+    // howto??
+    setIsDragging(true);
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      if (!isDragging) return;
+
+      // 현재 X 좌표 (화면 전체 기준)
+      const x = event.clientX;
+      const maxX = document.documentElement.clientWidth; // 최대 X 좌표 (예: 화면 오른쪽 끝)
+
+      // X 좌표를 20~85 범위로 변환
+      const newX = (x * 100) / maxX;
+
+      // 20~85 범위 유지
+      if (newX < drawerWidth + 2 || newX > drawerWidth - 2) {
+        setDrawerWidth(Math.min(85, Math.max(20, newX)));
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isDragging]);
+
   // 첫 렌더링 시에만 데이터를 가져오는 useEffect
   useEffect(() => {
     const fetchDocuments = async () => {
@@ -109,40 +147,68 @@ function SideDrawer({ onTextSelect }) {
         }}
         PaperProps={{
           sx: {
-            width: "45vw",
+            flexDirection: "row",
+            height: "100vh",
+            flexWrap: "0",
+            width: `${drawerWidth}vw`, // ✅ 백틱(`)을 사용하여 px 단위 추가
             backgroundColor: "#272727", // 배경색 검은색으로 설정
+            overflow: "hidden",
           }, // 전체 Drawer 크기 조절
         }}
       >
-        <div className="allScriptHeader">
-          <TextField
-            variant="outlined"
-            fullWidth
-            label="글 검색"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            className="custom-textfield"
-            autoComplete="off"
-          />
-          <IconButton>
-            <SearchIcon sx={{ color: "yellow" }} />
-          </IconButton>
+        <div className="someUltimateCls">
+          <div className="allScriptHeader">
+            <TextField
+              variant="outlined"
+              fullWidth
+              label="글 검색"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              className="custom-textfield"
+              autoComplete="off"
+            />
+            <IconButton>
+              <SearchIcon sx={{ color: "yellow" }} />
+            </IconButton>
 
-          <div className="sortIcon">
-            <FaSortAmountDown style={{ width: "24px", height: "24px" }} />
-            <div className="dropdown-content">
-              <p onClick={sortWithLength}>길이 순 정렬</p>
-              <p onClick={sortWithAlphabetically}>가나다 순 정렬</p>
+            <div className="sortIcon">
+              <FaSortAmountDown style={{ width: "24px", height: "24px" }} />
+              <div className="dropdown-content">
+                <p onClick={sortWithLength}>길이 순 정렬</p>
+                <p onClick={sortWithAlphabetically}>가나다 순 정렬</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <List className="list-container">
-          {filteredDocuments.length > 0 ? (
-            filteredDocuments.map((doc, index) => (
-              <ListItem button key={index} onClick={() => handleChoice(doc.id)}>
+          <List className="list-container">
+            {filteredDocuments.length > 0 ? (
+              filteredDocuments.map((doc, index) => (
+                <ListItem
+                  button
+                  key={index}
+                  onClick={() => handleChoice(doc.id)}
+                >
+                  <ListItemText
+                    primary={doc.script}
+                    sx={{
+                      color: "white",
+                      "&:hover": {
+                        color: "yellow",
+                        backgroundColor: "#434343",
+                      },
+                      padding: "16px 24px",
+                    }} // 글자 색을 흰색으로 변경
+                  />
+                </ListItem>
+              ))
+            ) : (
+              <ListItem
+                button
+                key={0}
+                onClick={() => onTextSelect(FAILED_LOAD_SCRIPT)}
+              >
                 <ListItemText
-                  primary={doc.script}
+                  primary={FAILED_LOAD_SCRIPT}
                   sx={{
                     color: "white",
                     "&:hover": { color: "yellow", backgroundColor: "#434343" },
@@ -150,24 +216,12 @@ function SideDrawer({ onTextSelect }) {
                   }} // 글자 색을 흰색으로 변경
                 />
               </ListItem>
-            ))
-          ) : (
-            <ListItem
-              button
-              key={0}
-              onClick={() => onTextSelect(FAILED_LOAD_SCRIPT)}
-            >
-              <ListItemText
-                primary={FAILED_LOAD_SCRIPT}
-                sx={{
-                  color: "white",
-                  "&:hover": { color: "yellow", backgroundColor: "#434343" },
-                  padding: "16px 24px",
-                }} // 글자 색을 흰색으로 변경
-              />
-            </ListItem>
-          )}
-        </List>
+            )}
+          </List>
+        </div>
+        <div className="divider" onMouseDown={handleMouseDown}>
+          <div className="clickable"></div>
+        </div>
       </Drawer>
     </div>
   );
