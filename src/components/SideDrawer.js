@@ -79,12 +79,10 @@ function SideDrawer({ onTextSelect }) {
       const x = event.clientX;
       const maxX = document.documentElement.clientWidth; // 최대 X 좌표 (예: 화면 오른쪽 끝)
 
-      // X 좌표를 20~85 범위로 변환
       const newX = (x * 100) / maxX;
 
-      // 20~85 범위 유지
       if (newX < drawerWidth + 2 || newX > drawerWidth - 2) {
-        setDrawerWidth(Math.min(85, Math.max(20, newX)));
+        setDrawerWidth(Math.min(65, Math.max(20, newX)));
       }
     };
 
@@ -149,7 +147,6 @@ function SideDrawer({ onTextSelect }) {
           sx: {
             flexDirection: "row",
             height: "100vh",
-            flexWrap: "0",
             width: `${drawerWidth}vw`, // ✅ 백틱(`)을 사용하여 px 단위 추가
             backgroundColor: "#272727", // 배경색 검은색으로 설정
             overflow: "hidden",
