@@ -5,6 +5,7 @@ html {
 
 body {
   user-select: none; /* 드래그 방지 */
+  background-color: #000000;
 }
 
 header {
@@ -15,10 +16,38 @@ header {
 button {
   cursor: pointer;
 }
+button:hover {
+  color: yellow;
+  transition: color 0.3s ease; /* 부드러운 색 변경 */
+}
 
 .list {
   background-color: black;
   margin-top: 20px;
+}
+
+.someUltimateCls {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.divider {
+  padding: 0 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .clickable {
+    width: 8px;
+    height: 100px;
+
+    background-color: #aaa;
+    border-radius: 30px;
+  }
+  .clickable:hover {
+    background-color: #fff;
+  }
 }
 
 .list-container {
@@ -50,6 +79,7 @@ button {
     0
   ); /* 호버 시 손잡이 색상 변경, 약한 노란색 */
 }
+
 .iconBundle {
   display: flex; // flexbox 사용
   align-items: center; // 세로 중앙 정렬
@@ -126,6 +156,12 @@ button {
     z-index: 0; /* typing-text 아래에 위치하도록 설정 */
   }
 }
+
+// .nav-wrap {
+//   display: flex;
+//   justify-content: space-between;
+//   width: 100%;
+// }
 
 .header {
   background-color: #202020;
