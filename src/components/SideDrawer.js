@@ -97,7 +97,7 @@ function SideDrawer({ onTextSelect }) {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isDragging]);
+  }, [isDragging, drawerWidth]);
 
   // 첫 렌더링 시에만 데이터를 가져오는 useEffect
   useEffect(() => {

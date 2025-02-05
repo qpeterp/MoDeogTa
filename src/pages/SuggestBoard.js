@@ -12,7 +12,7 @@ import EditIcon from "@mui/icons-material/Edit"; // 글쓰기 버튼 아이콘
 
 const SuggestBoard = () => {
   // 게시글 리스트 (샘플 데이터)
-  const [posts, setPosts] = useState([
+  const posts = useState([
     {
       id: 1,
       title:
