@@ -375,3 +375,101 @@ button:hover {
 .sortIcon:hover .dropdown-content {
   display: block;
 }
+
+// 설정설정설정설정설정설정설정설정설정설정설정설정설정
+// ========================================================================================
+
+.setting-menu-wrap {
+  display: flex; /* 또는 grid */
+  gap: 12px; /* 내부 요소 간 간격 */
+  justify-content: center; /* 가로 정렬 */
+  align-items: start; /* 세로 정렬 */
+  flex-direction: column; /* 요소들을 세로로 배치 */
+  margin: 20px 48px;
+}
+
+.setting-menu {
+  color: #747474;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+}
+.setting-menu:hover {
+  color: #dfdddd;
+}
+
+.setting-arrow {
+  transition: transform 0.3s ease;
+}
+.setting-arrow.rotate {
+  transform: rotate(90deg);
+}
+
+.menu-content {
+  overflow: hidden;
+  max-height: 0;
+  width: 100%;
+  margin: 0px 16px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: max-height 0.3s ease-out, opacity 0.2s ease-out,
+    transform 0.3s ease-out;
+}
+.menu-content.open {
+  max-height: 2000px; /* 실제 내용 크기에 맞춰 조정 */
+  opacity: 1;
+  transform: translateY(0);
+  transition: max-height 0.3s ease-in, opacity 0.2s ease-in,
+    transform 0.5s ease-in;
+}
+
+.setting-description {
+  font-weight: bold;
+  font-size: medium;
+  color: #dfdddd;
+  margin-top: 0;
+  margin-bottom: 40px;
+}
+
+.setting-label {
+  font-weight: bold;
+  font-size: medium;
+  color: #747474;
+  margin-bottom: 14px;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto 1fr;
+  -moz-column-gap: 2rem;
+  column-gap: 2rem;
+  row-gap: 0.5rem;
+  align-items: center;
+}
+
+.range-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 트랙 색상 변경 */
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #474747; /* 트랙 색상 */
+  height: 1.2rem; /* 트랙의 높이 */
+  border-radius: 10px; /* 트랙의 둥근 모서리 */
+}
+
+/* 슬라이더 thumb 색상 및 크기 */
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 6vw; /* thumb 크기 */
+  height: 1.2rem;
+  border-radius: 10px; /* thumb 모양을 원형으로 */
+  background-color: #dddd00; /* thumb 색상 */
+  cursor: pointer; /* 마우스를 올리면 포인터로 변경 */
+}

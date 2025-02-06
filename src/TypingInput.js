@@ -4,6 +4,7 @@ import { FaRedo, FaRandom } from "react-icons/fa";
 import ResultDialog from "./components/ResultDialog";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
+import { useSound } from "./contexts/SoundContext";
 
 function TypingInput({ selectedText }) {
   const [codeToType, setCodeToType] = useState(
@@ -20,6 +21,7 @@ function TypingInput({ selectedText }) {
   const timerRef = useRef(null); // todo:: 다른 방법 고안
   const audioContextRef = useRef(null); // todo:: 다른 방법 고안
   const audioBufferRef = useRef(null); // todo:: 다른 방법 고안
+  const { volume } = useSound();
 
   const handleInputChange = (e) => {
     if (e.nativeEvent.inputType === "insertLineBreak" || e.key === "Enter") {
@@ -34,14 +36,20 @@ function TypingInput({ selectedText }) {
   };
 
   const handleSound = (ev) => {
-    console.log(ev);
-    if ((ev.key.length != 1 && ev.key != "Backspace") || ev.repeat) {
+    if (
+      volume === 0 ||
+      (ev.key.length !== 1 && ev.key !== "Backspace") ||
+      ev.repeat
+    ) {
       return;
     }
     if (audioContextRef.current && audioBufferRef.current) {
       const source = audioContextRef.current.createBufferSource();
       source.buffer = audioBufferRef.current;
-      source.connect(audioContextRef.current.destination);
+      const gainNode = audioContextRef.current.createGain();
+      gainNode.gain.value = volume;
+      source.connect(gainNode);
+      gainNode.connect(audioContextRef.current.destination);
       source.start(audioContextRef.current.currentTime);
     }
   };
@@ -65,8 +73,9 @@ function TypingInput({ selectedText }) {
     }
   };
 
-  // 소리 로드
+  // 타이핑 소리 로드
   useEffect(() => {
+    if (volume === 0) return; // 소리가 꺼져 있으면 로드하지 않음
     // Web Audio API 초기화
     audioContextRef.current = new (window.AudioContext ||
       window.webkitAudioContext)();
@@ -79,7 +88,7 @@ function TypingInput({ selectedText }) {
       .then((audioBuffer) => {
         audioBufferRef.current = audioBuffer;
       });
-  }, []);
+  }, [volume]);
 
   useEffect(() => {
     if (userInput.length > codeToType.length) {
