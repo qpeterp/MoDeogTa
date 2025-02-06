@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
   const [showTutorial, setShowTutorial] = useState(false);
-  const [showSetting, setShowSetting] = useState(false);
   const [codeToType, setCodeToType] = useState(""); // SideDrawer에서 받아올 텍스트 상태
 
   useEffect(() => {
@@ -36,7 +35,7 @@ function Home() {
         setShowTutorial(true);
         break;
       case MenuType.SETTINGS:
-        setShowSetting(true);
+        navigate("/settings");
         break;
       case MenuType.SUGGEST_BOARD:
         navigate("/suggest-board"); // 추천 게시판으로 이동
@@ -87,11 +86,6 @@ function Home() {
         </div>
       ) : (
         <>
-          {showSetting && (
-            <div className="setting-overlay overlay">
-              <div className="tutorial-content"></div>
-            </div>
-          )}
           <Header onMenuSelect={handleMenuSelect} />
           <div className="main">
             <TypingInput selectedText={codeToType} />

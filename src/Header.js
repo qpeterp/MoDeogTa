@@ -9,9 +9,9 @@ function Header({ onMenuSelect }) {
     onMenuSelect(MenuType.TUTORIAL);
   };
 
-  // const handleSettingClick = () => {
-  //   onMenuSelect(MenuType.SETTINGS);
-  // };
+  const handleSettingClick = () => {
+    onMenuSelect(MenuType.SETTINGS);
+  };
 
   // const handleSuggestBoardClick = () => {
   //   onMenuSelect(MenuType.SUGGEST_BOARD);
@@ -29,10 +29,7 @@ function Header({ onMenuSelect }) {
             />
           </nav> */}
           <nav>
-            <SettingsIcon
-              className="menu-icon"
-              // onClick={handleSettingClick}
-            />
+            <SettingsIcon className="menu-icon" onClick={handleSettingClick} />
             <HelpOutlineIcon
               className="menu-icon"
               onClick={handleTutorialClick}

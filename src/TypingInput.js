@@ -4,6 +4,7 @@ import { FaRedo, FaRandom } from "react-icons/fa";
 import ResultDialog from "./components/ResultDialog";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
+import { useSound } from "./contexts/SoundContext";
 
 function TypingInput({ selectedText }) {
   const [codeToType, setCodeToType] = useState(
@@ -17,12 +18,12 @@ function TypingInput({ selectedText }) {
   const [speed, setSpeed] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false); // dialog 상태 관리
 
-  const timerRef = useRef(null);
+  const timerRef = useRef(null); // todo:: 다른 방법 고안
+  const audioContextRef = useRef(null); // todo:: 다른 방법 고안
+  const audioBufferRef = useRef(null); // todo:: 다른 방법 고안
+  const { volume, typingSound } = useSound();
 
   const handleInputChange = (e) => {
-    const sound = new Audio("au_typing.wav"); // 파일 경로 입력
-    sound.play();
-
     if (e.nativeEvent.inputType === "insertLineBreak" || e.key === "Enter") {
       setUserInput((prev) => prev + " ");
     } else {
@@ -31,6 +32,25 @@ function TypingInput({ selectedText }) {
 
     if (!startTime) {
       setStartTime(new Date().getTime());
+    }
+  };
+
+  const handleSound = (ev) => {
+    if (
+      volume === 0 ||
+      (ev.key.length !== 1 && ev.key !== "Backspace") ||
+      ev.repeat
+    ) {
+      return;
+    }
+    if (audioContextRef.current && audioBufferRef.current) {
+      const source = audioContextRef.current.createBufferSource();
+      source.buffer = audioBufferRef.current;
+      const gainNode = audioContextRef.current.createGain();
+      gainNode.gain.value = volume;
+      source.connect(gainNode);
+      gainNode.connect(audioContextRef.current.destination);
+      source.start(audioContextRef.current.currentTime);
     }
   };
 
@@ -43,7 +63,7 @@ function TypingInput({ selectedText }) {
     setStartTime("");
     setIsDialogOpen(false); // dialog 닫기
 
-    document.getElementById("userInput").focus();
+    document.getElementById("userInput").focus(); // todo:: 수정
   };
 
   const handleGetScriptClick = async () => {
@@ -52,6 +72,23 @@ function TypingInput({ selectedText }) {
       setCodeToType(randomDoc.script); // script 필드를 codeToType에 할당
     }
   };
+
+  // 타이핑 소리 로드
+  useEffect(() => {
+    if (volume < 0.4 || typingSound === "off") return; // 소리가 꺼져 있으면 로드하지 않음
+    // Web Audio API 초기화
+    audioContextRef.current = new (window.AudioContext ||
+      window.webkitAudioContext)();
+
+    fetch(typingSound)
+      .then((response) => response.arrayBuffer())
+      .then((arrayBuffer) =>
+        audioContextRef.current.decodeAudioData(arrayBuffer)
+      )
+      .then((audioBuffer) => {
+        audioBufferRef.current = audioBuffer;
+      });
+  }, [volume, typingSound]);
 
   useEffect(() => {
     if (userInput.length > codeToType.length) {
@@ -167,6 +204,7 @@ function TypingInput({ selectedText }) {
           className="typing-text"
           value={userInput}
           onChange={handleInputChange}
+          onKeyDown={handleSound}
           onPaste={(e) => e.preventDefault()} // 붙여넣기 금지
           autoComplete="off"
           spellCheck="false"
