@@ -105,6 +105,24 @@ function Settings() {
             >
               고양이
             </button>
+            {/* <button
+              className={`single-button ${
+                typingSound === "au_tong.mp3" ? "active" : ""
+              }`}
+              onClick={handleTypingSoundButtonClick}
+              data-typingSound="au_tong.mp3"
+            >
+              통
+            </button> */}
+            <button
+              className={`single-button ${
+                typingSound === "au_swing.mp3" ? "active" : ""
+              }`}
+              onClick={handleTypingSoundButtonClick}
+              data-typingSound="au_swing.mp3"
+            >
+              모래
+            </button>
           </div>
         </div>
         {/* <IconLabel
