@@ -75,7 +75,7 @@ function TypingInput({ selectedText }) {
 
   // 타이핑 소리 로드
   useEffect(() => {
-    if (volume === 0) return; // 소리가 꺼져 있으면 로드하지 않음
+    if (volume < 0.4 || typingSound === "off") return; // 소리가 꺼져 있으면 로드하지 않음
     // Web Audio API 초기화
     audioContextRef.current = new (window.AudioContext ||
       window.webkitAudioContext)();
