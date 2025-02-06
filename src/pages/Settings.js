@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { FaAngleRight } from "react-icons/fa"; // 글쓰기, 필기 느낌
-import { FaVolumeDown } from "react-icons/fa";
+import { FaVolumeDown, FaVolumeUp } from "react-icons/fa";
 import IconLabel from "../components/IconLabel";
 import { useSound } from "../contexts/SoundContext";
 
 function Settings() {
   const [soundIsOpen, setSoundIsOpen] = useState(false);
-  const { volume, setVolume } = useSound();
+  const { volume, setVolume, typingSound, setTypingSound } = useSound();
 
   const handleSoundMenuClick = () => {
     setSoundIsOpen(!soundIsOpen);
@@ -14,6 +14,11 @@ function Settings() {
 
   const handleVolumeChange = (ev) => {
     setVolume(ev.target.value);
+  };
+
+  const handleTypingSoundButtonClick = (ev) => {
+    const soundName = ev.target.getAttribute("data-typingSound");
+    setTypingSound(soundName);
   };
 
   return (
@@ -34,6 +39,7 @@ function Settings() {
             icon={FaVolumeDown}
             labelText="소리 크기"
             description="음향 효과 크기 변경"
+            className="icon-label"
           />
           <div className="range-container">
             <div style={{ color: "white" }}>{volume}</div>
@@ -56,12 +62,52 @@ function Settings() {
           </div>
         </div>
 
+        <div className="section">
+          <IconLabel
+            icon={FaVolumeUp}
+            labelText="타자 소리"
+            description="키 입력 시, 재생될 짧은 소리 선택"
+          />
+          <div className="buttons">
+            <button
+              className={`single-button ${
+                typingSound === "off" ? "active" : ""
+              }`}
+              onClick={handleTypingSoundButtonClick}
+              data-typingSound="off"
+            >
+              없음
+            </button>
+            <button
+              className={`single-button ${
+                typingSound === "au_keyboard.wav" ? "active" : ""
+              }`}
+              onClick={handleTypingSoundButtonClick}
+              data-typingSound="au_keyboard.wav"
+            >
+              키보드
+            </button>
+            <button
+              className={`single-button ${
+                typingSound === "au_waterdrop.mp3" ? "active" : ""
+              }`}
+              onClick={handleTypingSoundButtonClick}
+              data-typingSound="au_waterdrop.mp3"
+            >
+              물방울
+            </button>
+            <button
+              className={`single-button ${
+                typingSound === "au_cat.mp3" ? "active" : ""
+              }`}
+              onClick={handleTypingSoundButtonClick}
+              data-typingSound="au_cat.mp3"
+            >
+              고양이
+            </button>
+          </div>
+        </div>
         {/* <IconLabel
-          icon={FaVolumeUp}
-          labelText="타자 소리"
-          description="키 입력 시, 재생될 짧은 소리 선택"
-        />
-        <IconLabel
           icon={FaVolumeMute}
           labelText="에러 소리"
           description="잘못된 키 입력 시, 재생될 짧은 소리 선택"

@@ -3,14 +3,14 @@ import { createContext, useContext, useState } from "react";
 const SoundContext = createContext();
 
 export function SoundProvider({ children }) {
-  const [typingSound, setTypingSound] = useState(true); // 기본값: 소리 활성화
+  const [typingSound, setTypingSound] = useState("off");
   const [volume, setVolume] = useState(3);
 
   return (
     <SoundContext.Provider
       value={{
-        isTypingSoundEnabled: typingSound,
-        setIsTypingSoundEnabled: setTypingSound,
+        typingSound,
+        setTypingSound,
         volume,
         setVolume,
       }}

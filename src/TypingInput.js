@@ -21,7 +21,7 @@ function TypingInput({ selectedText }) {
   const timerRef = useRef(null); // todo:: 다른 방법 고안
   const audioContextRef = useRef(null); // todo:: 다른 방법 고안
   const audioBufferRef = useRef(null); // todo:: 다른 방법 고안
-  const { volume } = useSound();
+  const { volume, typingSound } = useSound();
 
   const handleInputChange = (e) => {
     if (e.nativeEvent.inputType === "insertLineBreak" || e.key === "Enter") {
@@ -80,7 +80,7 @@ function TypingInput({ selectedText }) {
     audioContextRef.current = new (window.AudioContext ||
       window.webkitAudioContext)();
 
-    fetch("au_typing.wav")
+    fetch(typingSound)
       .then((response) => response.arrayBuffer())
       .then((arrayBuffer) =>
         audioContextRef.current.decodeAudioData(arrayBuffer)
@@ -88,7 +88,7 @@ function TypingInput({ selectedText }) {
       .then((audioBuffer) => {
         audioBufferRef.current = audioBuffer;
       });
-  }, [volume]);
+  }, [volume, typingSound]);
 
   useEffect(() => {
     if (userInput.length > codeToType.length) {
