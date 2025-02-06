@@ -4,7 +4,7 @@ const SoundContext = createContext();
 
 export function SoundProvider({ children }) {
   const [typingSound, setTypingSound] = useState(true); // 기본값: 소리 활성화
-  const [volume, setVolume] = useState(10);
+  const [volume, setVolume] = useState(3);
 
   return (
     <SoundContext.Provider
