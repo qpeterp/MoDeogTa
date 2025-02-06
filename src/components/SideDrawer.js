@@ -199,7 +199,10 @@ function SideDrawer({ onTextSelect }) {
               <ListItem
                 button
                 key={0}
-                onClick={() => onTextSelect(FAILED_LOAD_SCRIPT)}
+                onClick={() => {
+                  setOpen(false);
+                  onTextSelect(FAILED_LOAD_SCRIPT);
+                }}
               >
                 <ListItemText
                   primary={FAILED_LOAD_SCRIPT}
@@ -207,7 +210,7 @@ function SideDrawer({ onTextSelect }) {
                     color: "white",
                     "&:hover": { color: "yellow", backgroundColor: "#434343" },
                     padding: "16px 24px",
-                  }} // 글자 색을 흰색으로 변경
+                  }}
                 />
               </ListItem>
             )}
