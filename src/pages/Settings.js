@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { FaAngleRight } from "react-icons/fa"; // 글쓰기, 필기 느낌
-import { FaVolumeDown, FaVolumeUp } from "react-icons/fa";
+import { FaVolumeDown, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import IconLabel from "../components/IconLabel";
 import { useSound } from "../contexts/SoundContext";
 
 function Settings() {
   const [soundIsOpen, setSoundIsOpen] = useState(false);
-  const { volume, setVolume, typingSound, setTypingSound } = useSound();
+  const {
+    volume,
+    setVolume,
+    typingSound,
+    setTypingSound,
+    wrongSound,
+    setWrongSound,
+  } = useSound();
 
   const handleSoundMenuClick = () => {
     setSoundIsOpen(!soundIsOpen);
@@ -19,6 +26,11 @@ function Settings() {
   const handleTypingSoundButtonClick = (ev) => {
     const soundName = ev.target.getAttribute("data-typingSound");
     setTypingSound(soundName);
+  };
+
+  const handleWrongSoundButtonClick = (ev) => {
+    const soundName = ev.target.getAttribute("data-wrongSound");
+    setWrongSound(soundName);
   };
 
   return (
@@ -105,13 +117,45 @@ function Settings() {
             >
               고양이
             </button>
+
+            <button
+              className={`single-button ${
+                typingSound === "au_swing.mp3" ? "active" : ""
+              }`}
+              onClick={handleTypingSoundButtonClick}
+              data-typingSound="au_swing.mp3"
+            >
+              모래
+            </button>
           </div>
         </div>
-        {/* <IconLabel
-          icon={FaVolumeMute}
-          labelText="에러 소리"
-          description="잘못된 키 입력 시, 재생될 짧은 소리 선택"
-        /> */}
+        <div className="section">
+          <IconLabel
+            icon={FaVolumeMute}
+            labelText="에러 소리"
+            description="잘못된 키 입력 시, 재생될 짧은 소리 선택"
+          />
+          <div className="buttons">
+            <button
+              className={`single-button ${
+                wrongSound === "off" ? "active" : ""
+              }`}
+              onClick={handleWrongSoundButtonClick}
+              data-wrongSound="off"
+            >
+              없음
+            </button>
+            <button
+              className={`single-button ${
+                wrongSound === "au_tong.mp3" ? "active" : ""
+              }`}
+              onClick={handleWrongSoundButtonClick}
+              data-wrongSound="au_tong.mp3"
+            >
+              통
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* <div className="setting-menu">

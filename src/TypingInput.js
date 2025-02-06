@@ -17,11 +17,14 @@ function TypingInput({ selectedText }) {
   const [accuracy, setAccuracy] = useState("");
   const [speed, setSpeed] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false); // dialog 상태 관리
+  const [wrongInput, setWrongInput] = useState(false); // 잘못된 입력 상태 추가
 
   const timerRef = useRef(null); // todo:: 다른 방법 고안
-  const audioContextRef = useRef(null); // todo:: 다른 방법 고안
-  const audioBufferRef = useRef(null); // todo:: 다른 방법 고안
-  const { volume, typingSound } = useSound();
+  const typingSoundContextRef = useRef(null); // todo:: 다른 방법 고안
+  const typingSoundBufferRef = useRef(null); // todo:: 다른 방법 고안
+  const wrongSoundContextRef = useRef(null); // todo:: 다른 방법 고안
+  const wrongSoundBufferRef = useRef(null); // todo:: 다른 방법 고안
+  const { volume, typingSound, wrongSound } = useSound();
 
   const handleInputChange = (e) => {
     if (e.nativeEvent.inputType === "insertLineBreak" || e.key === "Enter") {
@@ -29,13 +32,14 @@ function TypingInput({ selectedText }) {
     } else {
       setUserInput(e.target.value);
     }
+    setWrongInput(false);
 
     if (!startTime) {
       setStartTime(new Date().getTime());
     }
   };
 
-  const handleSound = (ev) => {
+  const handleTypingSound = (ev) => {
     if (
       volume === 0 ||
       (ev.key.length !== 1 && ev.key !== "Backspace") ||
@@ -43,15 +47,31 @@ function TypingInput({ selectedText }) {
     ) {
       return;
     }
-    if (audioContextRef.current && audioBufferRef.current) {
-      const source = audioContextRef.current.createBufferSource();
-      source.buffer = audioBufferRef.current;
-      const gainNode = audioContextRef.current.createGain();
+    if (typingSoundContextRef.current && typingSoundBufferRef.current) {
+      const source = typingSoundContextRef.current.createBufferSource();
+      source.buffer = typingSoundBufferRef.current;
+      const gainNode = typingSoundContextRef.current.createGain();
       gainNode.gain.value = volume;
       source.connect(gainNode);
-      gainNode.connect(audioContextRef.current.destination);
-      source.start(audioContextRef.current.currentTime);
+      gainNode.connect(typingSoundContextRef.current.destination);
+      source.start(typingSoundContextRef.current.currentTime);
     }
+  };
+
+  const handleWrongSound = () => {
+    if (volume === 0 || wrongInput) return; // 잘못된 입력이 이미 발생했으면 소리 안 남
+
+    if (wrongSoundContextRef.current && wrongSoundBufferRef.current) {
+      const source = wrongSoundContextRef.current.createBufferSource();
+      source.buffer = wrongSoundBufferRef.current;
+      const gainNode = wrongSoundContextRef.current.createGain();
+      gainNode.gain.value = volume;
+      source.connect(gainNode);
+      gainNode.connect(wrongSoundContextRef.current.destination);
+      source.start(wrongSoundContextRef.current.currentTime);
+    }
+
+    setWrongInput(true);
   };
 
   const handleResetClick = () => {
@@ -75,20 +95,36 @@ function TypingInput({ selectedText }) {
 
   // 타이핑 소리 로드
   useEffect(() => {
-    if (volume < 0.4 || typingSound === "off") return; // 소리가 꺼져 있으면 로드하지 않음
+    if (volume < 0.1 || typingSound === "off") return; // 소리가 꺼져 있으면 로드하지 않음
     // Web Audio API 초기화
-    audioContextRef.current = new (window.AudioContext ||
+    typingSoundContextRef.current = new (window.AudioContext ||
       window.webkitAudioContext)();
 
     fetch(typingSound)
       .then((response) => response.arrayBuffer())
       .then((arrayBuffer) =>
-        audioContextRef.current.decodeAudioData(arrayBuffer)
+        typingSoundContextRef.current.decodeAudioData(arrayBuffer)
       )
       .then((audioBuffer) => {
-        audioBufferRef.current = audioBuffer;
+        typingSoundBufferRef.current = audioBuffer;
       });
   }, [volume, typingSound]);
+
+  useEffect(() => {
+    if (volume < 0.1 || wrongSound === "off") return; // 소리가 꺼져 있으면 로드하지 않음
+    // Web Audio API 초기화
+    wrongSoundContextRef.current = new (window.AudioContext ||
+      window.webkitAudioContext)();
+
+    fetch(wrongSound)
+      .then((response) => response.arrayBuffer())
+      .then((arrayBuffer) =>
+        wrongSoundContextRef.current.decodeAudioData(arrayBuffer)
+      )
+      .then((audioBuffer) => {
+        wrongSoundBufferRef.current = audioBuffer;
+      });
+  }, [volume, wrongSound]);
 
   useEffect(() => {
     if (userInput.length > codeToType.length) {
@@ -154,20 +190,18 @@ function TypingInput({ selectedText }) {
 
   const renderCode = () => {
     return codeToType.split("").map((char, index) => {
-      let color;
-      let bgColor;
-      if (index < userInput.length - 1) {
-        if (userInput[index] !== char) {
-          bgColor = "red";
-          color = "red";
-        }
+      const isWrong = index < userInput.length - 1 && userInput[index] !== char;
+
+      if (isWrong && !wrongInput) {
+        handleWrongSound(); // 처음 잘못된 입력에서만 소리 재생
       }
+
       return (
         <span
           key={index}
           style={{
-            backgroundColor: bgColor,
-            color: color,
+            backgroundColor: isWrong ? "red" : "",
+            color: isWrong ? "red" : "",
           }}
         >
           {char}
@@ -204,7 +238,11 @@ function TypingInput({ selectedText }) {
           className="typing-text"
           value={userInput}
           onChange={handleInputChange}
-          onKeyDown={handleSound}
+          onKeyDown={(e) => {
+            if (!wrongInput) {
+              handleTypingSound(e);
+            }
+          }}
           onPaste={(e) => e.preventDefault()} // 붙여넣기 금지
           autoComplete="off"
           spellCheck="false"
