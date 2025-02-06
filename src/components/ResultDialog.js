@@ -40,6 +40,9 @@ function ResultDialog({ accuracy, speed, onClose }) {
         paddingTop: "20px",
         paddingBottom: "20px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
         zIndex: 1000,
         outline: "none", // 다이얼로그 바깥쪽에서 tab 키로 넘어가지 않게
       }}
