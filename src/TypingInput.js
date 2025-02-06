@@ -13,9 +13,10 @@ function TypingInput({ selectedText }) {
   const [userInput, setUserInput] = useState("");
   const [startTime, setStartTime] = useState("");
   const [isFinish, setIsFinish] = useState(false);
-  const [currentTime, setCurrentTime] = useState("");
+  const [beforeSpeed, setBeforeSpeed] = useState("0");
+  const [currentTime, setCurrentTime] = useState("0");
   const [accuracy, setAccuracy] = useState("");
-  const [speed, setSpeed] = useState("");
+  const [speed, setSpeed] = useState("0");
   const [isDialogOpen, setIsDialogOpen] = useState(false); // dialog 상태 관리
   const [wrongInput, setWrongInput] = useState(false); // 잘못된 입력 상태 추가
 
@@ -75,11 +76,13 @@ function TypingInput({ selectedText }) {
   };
 
   const handleResetClick = () => {
+    setBeforeSpeed(speed);
+
     setAccuracy("");
     setIsFinish(false);
     setUserInput("");
-    setCurrentTime("");
-    setSpeed("");
+    setCurrentTime("0");
+    setSpeed("0");
     setStartTime("");
     setIsDialogOpen(false); // dialog 닫기
 
@@ -225,9 +228,10 @@ function TypingInput({ selectedText }) {
 
   return (
     <>
-      <div>
-        <p className="text">경과시간 : {currentTime}초</p>
-        <p className="text">타수 : {speed}</p>
+      <div className="status-container">
+        <p className="text status">이전 타수 : {beforeSpeed}타</p>
+        <p className="text status">경과시간 : {currentTime}초</p>
+        <p className="text status">현재 타수 : {speed}타</p>
       </div>
       <div className="stroke-box">
         <p className="text hint-text">{renderCode()}</p>

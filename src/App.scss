@@ -13,6 +13,11 @@ header {
   justify-content: space-between;
 }
 
+p,
+textarea {
+  font-weight: bold;
+}
+
 button {
   cursor: pointer;
 }
@@ -119,8 +124,7 @@ button:hover {
   width: 80vw;
   height: auto;
   background-color: transparent;
-  border: 2px solid yellow;
-  border-radius: 15px;
+  border: 2px solid #dddd00;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -324,6 +328,23 @@ button:hover {
 
 .tutorial-content button:hover {
   background: #ffd700;
+}
+
+.status-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 80vw;
+  margin-top: 16px;
+}
+
+.status {
+  width: 100%;
+  border: 2px solid #dddd00;
+  margin: 0px;
+  padding: 12px 0px;
+  display: flex;
+  justify-content: center;
 }
 
 .menu-icon {
