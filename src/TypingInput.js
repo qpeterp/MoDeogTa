@@ -61,18 +61,28 @@ function TypingInput({ selectedText }) {
       source.start(typingSoundContextRef.current.currentTime);
     }
   };
-
   const handleWrongSound = () => {
-    if (volume === 0 || wrongInput) return; // 잘못된 입력이 이미 발생했으면 소리 안 남
+    if (volume === 0 || wrongInput) return;
 
     if (wrongSoundContextRef.current && wrongSoundBufferRef.current) {
+      // 이전 gainNode 연결 해제
+      if (wrongSoundContextRef.current.gainNode) {
+        wrongSoundContextRef.current.gainNode.disconnect();
+      }
+
       const source = wrongSoundContextRef.current.createBufferSource();
       source.buffer = wrongSoundBufferRef.current;
+
+      // 새로운 gainNode 생성
       const gainNode = wrongSoundContextRef.current.createGain();
       gainNode.gain.value = volume;
       source.connect(gainNode);
       gainNode.connect(wrongSoundContextRef.current.destination);
+
       source.start(wrongSoundContextRef.current.currentTime);
+
+      // 새로운 gainNode를 저장
+      wrongSoundContextRef.current.gainNode = gainNode; // 저장된 gainNode를 통해 이전 노드를 관리할 수 있음
     }
 
     setWrongInput(true);

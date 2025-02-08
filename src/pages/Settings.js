@@ -182,12 +182,21 @@ function Settings() {
             </button>
             <button
               className={`single-button ${
-                backgroundMusic === "au_space.mp3" ? "active" : ""
+                backgroundMusic === "au_lastboss.mp3" ? "active" : ""
               }`}
               onClick={handleBackgroundMusicButtonClick}
-              data-music="au_space.mp3"
+              data-music="au_lastboss.mp3"
             >
-              우주
+              마지막 싸움
+            </button>
+            <button
+              className={`single-button ${
+                backgroundMusic === "au_dream.mp3" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="au_dream.mp3"
+            >
+              평화로운 망각
             </button>
           </div>
         </div>
