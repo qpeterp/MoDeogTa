@@ -21,11 +21,14 @@ function TypingInput({ selectedText }) {
   const [wrongInput, setWrongInput] = useState(false); // 잘못된 입력 상태 추가
 
   const timerRef = useRef(null); // todo:: 다른 방법 고안
+  const backgroundMusicContextRef = useRef(null); // todo:: 다른 방법 고안
+  const backgroundMusicBufferRef = useRef(null); // todo:: 다른 방법 고안
+  const backgroundMusicSourceRef = useRef(null);
   const typingSoundContextRef = useRef(null); // todo:: 다른 방법 고안
   const typingSoundBufferRef = useRef(null); // todo:: 다른 방법 고안
   const wrongSoundContextRef = useRef(null); // todo:: 다른 방법 고안
   const wrongSoundBufferRef = useRef(null); // todo:: 다른 방법 고안
-  const { volume, typingSound, wrongSound } = useSound();
+  const { volume, typingSound, wrongSound, backgroundMusic } = useSound();
 
   const handleInputChange = (e) => {
     if (e.nativeEvent.inputType === "insertLineBreak" || e.key === "Enter") {
@@ -75,6 +78,15 @@ function TypingInput({ selectedText }) {
     setWrongInput(true);
   };
 
+  // 배경 음악 정지 함수
+  const stopBackgroundMusic = () => {
+    if (backgroundMusicSourceRef.current) {
+      backgroundMusicSourceRef.current.stop();
+      backgroundMusicSourceRef.current.disconnect();
+      backgroundMusicSourceRef.current = null;
+    }
+  };
+
   const handleResetClick = () => {
     setBeforeSpeed(speed);
 
@@ -95,6 +107,55 @@ function TypingInput({ selectedText }) {
       setCodeToType(randomDoc.script); // script 필드를 codeToType에 할당
     }
   };
+
+  // 배경음악 소리 로드
+  useEffect(() => {
+    if (volume < 0.1 || backgroundMusic === "off") return; // 소리가 꺼져 있으면 로드하지 않음
+
+    // 기존 AudioContext 종료 (있다면)
+    if (backgroundMusicContextRef.current) {
+      backgroundMusicContextRef.current.close();
+    }
+
+    // 새로운 AudioContext 생성
+    backgroundMusicContextRef.current = new (window.AudioContext ||
+      window.webkitAudioContext)();
+
+    fetch(backgroundMusic)
+      .then((response) => response.arrayBuffer())
+      .then((arrayBuffer) =>
+        backgroundMusicContextRef.current.decodeAudioData(arrayBuffer)
+      )
+      .then((audioBuffer) => {
+        backgroundMusicBufferRef.current = audioBuffer;
+        if (
+          !backgroundMusicBufferRef.current ||
+          !backgroundMusicContextRef.current
+        )
+          return;
+
+        // 기존 소리 정지
+        stopBackgroundMusic();
+
+        // 새로운 오디오 소스 생성
+        const source = backgroundMusicContextRef.current.createBufferSource();
+        source.buffer = backgroundMusicBufferRef.current;
+        source.loop = true; // 무한 반복 설정
+
+        const gainNode = backgroundMusicContextRef.current.createGain();
+        gainNode.gain.value = volume; // 볼륨 설정
+
+        source.connect(gainNode);
+        gainNode.connect(backgroundMusicContextRef.current.destination);
+
+        source.start(0);
+        backgroundMusicSourceRef.current = source; // 현재 재생 중인 소스를 저장
+      });
+
+    return () => {
+      stopBackgroundMusic(); // 컴포넌트 언마운트 시 정리
+    };
+  }, [volume, backgroundMusic]);
 
   // 타이핑 소리 로드
   useEffect(() => {
@@ -229,9 +290,9 @@ function TypingInput({ selectedText }) {
   return (
     <>
       <div className="status-container">
-        <p className="text status">이전 타수 : {beforeSpeed}타</p>
+        <p className="text status">이전타수 : {beforeSpeed}타</p>
         <p className="text status">경과시간 : {currentTime}초</p>
-        <p className="text status">현재 타수 : {speed}타</p>
+        <p className="text status">현재타수 : {speed}타</p>
       </div>
       <div className="stroke-box">
         <p className="text hint-text">{renderCode()}</p>
