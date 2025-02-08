@@ -3,9 +3,10 @@ import { createContext, useContext, useState } from "react";
 const SoundContext = createContext();
 
 export function SoundProvider({ children }) {
-  const [volume, setVolume] = useState(3);
+  const [volume, setVolume] = useState(0.5);
   const [typingSound, setTypingSound] = useState("off");
   const [wrongSound, setWrongSound] = useState("off");
+  const [backgroundMusic, setBackgroundMusic] = useState("off");
 
   return (
     <SoundContext.Provider
@@ -15,6 +16,9 @@ export function SoundProvider({ children }) {
 
         wrongSound,
         setWrongSound,
+
+        backgroundMusic,
+        setBackgroundMusic,
 
         volume,
         setVolume,

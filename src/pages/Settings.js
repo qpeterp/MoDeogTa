@@ -13,6 +13,8 @@ function Settings() {
     setTypingSound,
     wrongSound,
     setWrongSound,
+    backgroundMusic,
+    setBackgroundMusic,
   } = useSound();
 
   const handleSoundMenuClick = () => {
@@ -33,6 +35,11 @@ function Settings() {
     setWrongSound(soundName);
   };
 
+  const handleBackgroundMusicButtonClick = (ev) => {
+    const soundName = ev.target.getAttribute("data-music");
+    setBackgroundMusic(soundName);
+  };
+
   return (
     <div className="setting-menu-wrap">
       <div className="setting-menu" onClick={handleSoundMenuClick}>
@@ -49,7 +56,7 @@ function Settings() {
         <div className="section">
           <IconLabel
             icon={FaVolumeDown}
-            labelText="소리 크기"
+            labelText="소리크기"
             description="음향 효과 크기 변경"
             className="icon-label"
           />
@@ -58,8 +65,8 @@ function Settings() {
             <input
               type="range"
               min={0}
-              max={10}
-              step={0.5}
+              max={1}
+              step={0.1}
               value={volume}
               onChange={handleVolumeChange}
               style={{
@@ -73,12 +80,11 @@ function Settings() {
             />
           </div>
         </div>
-
         <div className="section">
           <IconLabel
             icon={FaVolumeUp}
-            labelText="타자 소리"
-            description="키 입력 시, 재생될 짧은 소리 선택"
+            labelText="타자소리"
+            description="키 입력 시, 재생되는 짧은 소리 선택"
           />
           <div className="buttons">
             <button
@@ -129,11 +135,12 @@ function Settings() {
             </button>
           </div>
         </div>
+
         <div className="section">
           <IconLabel
             icon={FaVolumeMute}
-            labelText="에러 소리"
-            description="잘못된 키 입력 시, 재생될 짧은 소리 선택"
+            labelText="에러소리"
+            description="잘못된 키 입력 시, 재생되는 짧은 소리 선택"
           />
           <div className="buttons">
             <button
@@ -153,6 +160,43 @@ function Settings() {
               data-wrongSound="au_tong.mp3"
             >
               통
+            </button>
+          </div>
+        </div>
+
+        <div className="section">
+          <IconLabel
+            icon={FaVolumeUp}
+            labelText="배경음악"
+            description="하루 온종일 재생되는 배경음악 선택"
+          />
+          <div className="buttons">
+            <button
+              className={`single-button ${
+                backgroundMusic === "off" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="off"
+            >
+              없음
+            </button>
+            <button
+              className={`single-button ${
+                backgroundMusic === "au_lastboss.mp3" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="au_lastboss.mp3"
+            >
+              마지막 싸움
+            </button>
+            <button
+              className={`single-button ${
+                backgroundMusic === "au_dream.mp3" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="au_dream.mp3"
+            >
+              평화로운 망각
             </button>
           </div>
         </div>
