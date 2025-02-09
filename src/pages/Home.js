@@ -56,19 +56,19 @@ function Home() {
             <div>
               <h3>기본 이용 방법</h3>
               <p className="instructions">
-                글을 모두 입력하신 뒤에는{" "}
+                1. 글을 모두 입력하신 뒤에는{" "}
                 <span className="keyboard-text">Enter</span> 혹은{" "}
                 <span className="keyboard-text"> Spacebar </span>를 눌러야
                 작성이 완료됩니다.
               </p>
               <p className="instructions">
-                입력한 글에 오타가 존재할 경우, 타자연습은 완료되지 않습니다.
+                2. 입력한 글에 오타가 존재할 경우, 타자연습은 완료되지 않습니다.
               </p>
             </div>
 
             <div>
               <h3>기능 설명</h3>
-              <ol>
+              <ul className="tutorial-grid">
                 <li>
                   <FaRedo /> 현재 글 다시 시도하기
                 </li>
@@ -81,7 +81,7 @@ function Home() {
                 <li>
                   <FaSortAmountDown /> 전체 글 정렬하기
                 </li>
-              </ol>
+              </ul>
             </div>
 
             <button onClick={handleCloseTutorial}>이해했어요!</button>
