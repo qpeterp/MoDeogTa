@@ -201,7 +201,7 @@ function TypingInput({ selectedText }) {
   }, [volume, wrongSound]);
 
   useEffect(() => {
-    if (userInput.length > codeToType.length) {
+    if (userInput.length > codeToType.length && !wrongInput) {
       const endTime = new Date().getTime();
       const takenTime = (endTime - startTime) / 1000;
 
@@ -225,7 +225,7 @@ function TypingInput({ selectedText }) {
       setIsFinish(true);
       setIsDialogOpen(true);
     }
-  }, [userInput, codeToType, startTime]);
+  }, [userInput, codeToType, startTime, wrongInput]);
 
   useEffect(() => {
     if (startTime && !isFinish) {

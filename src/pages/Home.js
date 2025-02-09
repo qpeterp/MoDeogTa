@@ -61,6 +61,9 @@ function Home() {
                 <span className="keyboard-text"> Spacebar </span>를 눌러야
                 작성이 완료됩니다.
               </p>
+              <p className="instructions">
+                입력한 글에 오타가 존재할 경우, 타자연습은 완료되지 않습니다.
+              </p>
             </div>
 
             <div>
