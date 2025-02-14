@@ -5,7 +5,8 @@ import { FaRedo, FaRandom, FaBook, FaSortAmountDown } from "react-icons/fa";
 import SideDrawer from "../components/SideDrawer";
 import { MenuType } from "../common/MenuType";
 import { useNavigate } from "react-router-dom";
-
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline"; // 물음표 아이콘
+import SettingsIcon from "@mui/icons-material/Settings"; // 세팅 아이콘
 function Home() {
   const navigate = useNavigate();
   const [showTutorial, setShowTutorial] = useState(false);
@@ -80,6 +81,12 @@ function Home() {
                 </li>
                 <li>
                   <FaSortAmountDown /> 전체 글 정렬하기
+                </li>
+                <li>
+                  <HelpOutlineIcon /> 도움말 - 튜토리얼
+                </li>
+                <li>
+                  <SettingsIcon /> 환경 설정
                 </li>
               </ul>
             </div>
