@@ -154,6 +154,15 @@ function Settings() {
             </button>
             <button
               className={`single-button ${
+                wrongSound === "au_damage.mp3" ? "active" : ""
+              }`}
+              onClick={handleWrongSoundButtonClick}
+              data-wrongSound="au_damage.mp3"
+            >
+              데미지
+            </button>
+            <button
+              className={`single-button ${
                 wrongSound === "au_tong.mp3" ? "active" : ""
               }`}
               onClick={handleWrongSoundButtonClick}
@@ -182,12 +191,30 @@ function Settings() {
             </button>
             <button
               className={`single-button ${
+                backgroundMusic === "au_rain.mp3" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="au_rain.mp3"
+            >
+              빗소리
+            </button>
+            <button
+              className={`single-button ${
+                backgroundMusic === "au_jazz.mp3" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="au_jazz.mp3"
+            >
+              재즈
+            </button>
+            <button
+              className={`single-button ${
                 backgroundMusic === "au_lastboss.mp3" ? "active" : ""
               }`}
               onClick={handleBackgroundMusicButtonClick}
               data-music="au_lastboss.mp3"
             >
-              마지막 싸움
+              마지막
             </button>
             <button
               className={`single-button ${
@@ -196,7 +223,7 @@ function Settings() {
               onClick={handleBackgroundMusicButtonClick}
               data-music="au_dream.mp3"
             >
-              평화로운 망각
+              망각
             </button>
           </div>
         </div>
