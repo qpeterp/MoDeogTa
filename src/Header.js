@@ -1,20 +1,22 @@
 import React from "react";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline"; // 물음표 아이콘
+import { useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings"; // 세팅 아이콘
 // import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import { MenuType } from "./common/MenuType";
 
-function Header({ onMenuSelect }) {
+function Header() {
+  const navigate = useNavigate();
+
   const handleTutorialClick = () => {
-    onMenuSelect(MenuType.TUTORIAL);
+    navigate("/");
   };
 
   const handleSettingClick = () => {
-    onMenuSelect(MenuType.SETTINGS);
+    navigate("/settings");
   };
 
   // const handleSuggestBoardClick = () => {
-  //   onMenuSelect(MenuType.SUGGEST_BOARD);
+  //   onMenuSelect("/suggest-board");
   // };
 
   return (

@@ -258,6 +258,15 @@ function Settings() {
             >
               망각
             </button>
+            <button
+              className={`single-button ${
+                backgroundMusic === "au_doubt.mp3" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="au_doubt.mp3"
+            >
+              여유만만
+            </button>
           </div>
         </div>
       </div>
