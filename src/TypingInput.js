@@ -28,7 +28,13 @@ function TypingInput({ selectedText }) {
   const typingSoundBufferRef = useRef(null); // todo:: 다른 방법 고안
   const wrongSoundContextRef = useRef(null); // todo:: 다른 방법 고안
   const wrongSoundBufferRef = useRef(null); // todo:: 다른 방법 고안
-  const { volume, typingSound, wrongSound, backgroundMusic } = useSound();
+  const {
+    volume,
+    backgroundMusicVolume,
+    typingSound,
+    wrongSound,
+    backgroundMusic,
+  } = useSound();
 
   const handleInputChange = (e) => {
     if (e.nativeEvent.inputType === "insertLineBreak" || e.key === "Enter") {
@@ -120,7 +126,7 @@ function TypingInput({ selectedText }) {
 
   // 배경음악 소리 로드
   useEffect(() => {
-    if (volume < 0.1 || backgroundMusic === "off") return; // 소리가 꺼져 있으면 로드하지 않음
+    if (backgroundMusicVolume < 0.1 || backgroundMusic === "off") return; // 소리가 꺼져 있으면 로드하지 않음
 
     // 기존 AudioContext 종료 (있다면)
     if (backgroundMusicContextRef.current) {
@@ -153,7 +159,7 @@ function TypingInput({ selectedText }) {
         source.loop = true; // 무한 반복 설정
 
         const gainNode = backgroundMusicContextRef.current.createGain();
-        gainNode.gain.value = volume; // 볼륨 설정
+        gainNode.gain.value = backgroundMusicVolume; // 볼륨 설정
 
         source.connect(gainNode);
         gainNode.connect(backgroundMusicContextRef.current.destination);
@@ -165,7 +171,7 @@ function TypingInput({ selectedText }) {
     return () => {
       stopBackgroundMusic(); // 컴포넌트 언마운트 시 정리
     };
-  }, [volume, backgroundMusic]);
+  }, [backgroundMusicVolume, backgroundMusic]);
 
   // 타이핑 소리 로드
   useEffect(() => {
