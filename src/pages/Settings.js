@@ -9,6 +9,8 @@ function Settings() {
   const {
     volume,
     setVolume,
+    backgroundMusicVolume,
+    setBackgroundMusicVolume,
     typingSound,
     setTypingSound,
     wrongSound,
@@ -23,6 +25,10 @@ function Settings() {
 
   const handleVolumeChange = (ev) => {
     setVolume(ev.target.value);
+  };
+
+  const handleBackgroundMusicVolumeChange = (ev) => {
+    setBackgroundMusicVolume(ev.target.value);
   };
 
   const handleTypingSoundButtonClick = (ev) => {
@@ -56,8 +62,8 @@ function Settings() {
         <div className="section">
           <IconLabel
             icon={FaVolumeDown}
-            labelText="소리크기"
-            description="음향 효과 크기 변경"
+            labelText="타자소리 음량"
+            description="타자소리 음량을 변경합니다. 0 ~ 1 까지의 범위 중에서 원하는 음량을 드래그 or 클릭하여 선택하세요."
             className="icon-label"
           />
           <div className="range-container">
@@ -84,7 +90,7 @@ function Settings() {
           <IconLabel
             icon={FaVolumeUp}
             labelText="타자소리"
-            description="키 입력 시, 재생되는 짧은 소리 선택"
+            description="키 입력 시, 재생될 짧은 소리를 선택하세요."
           />
           <div className="buttons">
             <button
@@ -140,7 +146,7 @@ function Settings() {
           <IconLabel
             icon={FaVolumeMute}
             labelText="에러소리"
-            description="잘못된 키 입력 시, 재생되는 짧은 소리 선택"
+            description="잘못된 키 입력 시, 재생될 짧은 소리를 선택하세요."
           />
           <div className="buttons">
             <button
@@ -172,12 +178,39 @@ function Settings() {
             </button>
           </div>
         </div>
+        <div className="section" style={{ marginTop: "5vh" }}>
+          <IconLabel
+            icon={FaVolumeDown}
+            labelText="배경음악 음량"
+            description="배경음악 음량을 변경합니다. 0 ~ 1 까지의 범위 중에서 원하는 음량을 드래그 or 클릭하여 선택하세요."
+            className="icon-label"
+          />
+          <div className="range-container">
+            <div style={{ color: "white" }}>{backgroundMusicVolume}</div>
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step={0.1}
+              value={backgroundMusicVolume}
+              onChange={handleBackgroundMusicVolumeChange}
+              style={{
+                width: "80%",
+                appearance: "none", // 기본 스타일을 제거
+                backgroundColor: "#ddd", // 트랙 색상
+                height: "8px", // 트랙 높이
+                borderRadius: "5px", // 트랙의 둥근 모서리
+                marginRight: "3vw",
+              }}
+            />
+          </div>
+        </div>
 
         <div className="section">
           <IconLabel
             icon={FaVolumeUp}
             labelText="배경음악"
-            description="하루 온종일 재생되는 배경음악 선택"
+            description="하루 온종일 재생될 배경음악을 선택하세요."
           />
           <div className="buttons">
             <button

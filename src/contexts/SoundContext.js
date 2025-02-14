@@ -4,6 +4,7 @@ const SoundContext = createContext();
 
 export function SoundProvider({ children }) {
   const [volume, setVolume] = useState(0.5);
+  const [backgroundMusicVolume, setBackgroundMusicVolume] = useState(0.5);
   const [typingSound, setTypingSound] = useState("off");
   const [wrongSound, setWrongSound] = useState("off");
   const [backgroundMusic, setBackgroundMusic] = useState("off");
@@ -22,6 +23,9 @@ export function SoundProvider({ children }) {
 
         volume,
         setVolume,
+
+        backgroundMusicVolume,
+        setBackgroundMusicVolume,
       }}
     >
       {children}
