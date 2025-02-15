@@ -1,0 +1,61 @@
+@import "../styles/variables.scss"; // 변수를 가져와서 사용
+
+header {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
+}
+
+.menu-icon {
+  width: 24px;
+  height: 24px;
+  color: #747474;
+  cursor: pointer;
+  margin-left: 24px;
+}
+
+.menu-icon:hover {
+  color: $primary-color;
+  transition: color 0.3s;
+}
+
+/* 로고 이미지 스타일 */
+.header-logo {
+  width: 120px; /* 로고 크기 */
+  height: auto; /* 비율 유지 */
+  object-fit: cover; /* 비율 유지하면서 로고 표시 */
+  margin-right: 10px; /* 텍스트와의 간격 */
+}
+
+.nav-wrap {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header {
+  background-color: #202020;
+  border-radius: 15px;
+  padding: 8px 40px;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.header-background {
+  background-color: $background-color;
+}
+
+/* 크롬, 사파리, 엣지 */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* 파이어폭스 */
+html {
+  scrollbar-width: none;
+}

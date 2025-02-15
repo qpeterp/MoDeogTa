@@ -3,6 +3,7 @@ import { FaAngleRight } from "react-icons/fa"; // 글쓰기, 필기 느낌
 import { FaVolumeDown, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import IconLabel from "../components/IconLabel";
 import { useSound } from "../contexts/SoundContext";
+import "./Settings.scss";
 
 function Settings() {
   const [soundIsOpen, setSoundIsOpen] = useState(false);
@@ -257,6 +258,15 @@ function Settings() {
               data-music="au_dream.mp3"
             >
               망각
+            </button>
+            <button
+              className={`single-button ${
+                backgroundMusic === "au_doubt.mp3" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="au_doubt.mp3"
+            >
+              여유만만
             </button>
           </div>
         </div>
