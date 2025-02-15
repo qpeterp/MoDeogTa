@@ -1,6 +1,7 @@
 import TypingInput from "../TypingInput";
 import React, { useState } from "react";
 import SideDrawer from "../components/SideDrawer";
+import "./Home.scss";
 
 function Home() {
   const [codeToType, setCodeToType] = useState(""); // SideDrawer에서 받아올 텍스트 상태

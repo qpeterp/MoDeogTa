@@ -3,6 +3,7 @@ import { FaAngleRight } from "react-icons/fa"; // 글쓰기, 필기 느낌
 import { FaVolumeDown, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import IconLabel from "../components/IconLabel";
 import { useSound } from "../contexts/SoundContext";
+import "./Settings.scss";
 
 function Settings() {
   const [soundIsOpen, setSoundIsOpen] = useState(false);

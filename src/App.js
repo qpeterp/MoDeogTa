@@ -5,7 +5,7 @@ import SuggestBoard from "./pages/SuggestBoard";
 import Settings from "./pages/Settings";
 import Tutorial from "./pages/Tutorial";
 import { SoundProvider } from "./contexts/SoundContext";
-import Header from "./Header";
+import Header from "./components/Header";
 
 function App() {
   return (

@@ -1,0 +1,137 @@
+@import "../styles/variables.scss"; // 변수를 가져와서 사용
+body {
+  background-color: $background-color;
+}
+
+.setting-menu-wrap {
+  display: flex; /* 또는 grid */
+  gap: 12px; /* 내부 요소 간 간격 */
+  justify-content: center; /* 가로 정렬 */
+  align-items: start; /* 세로 정렬 */
+  flex-direction: column; /* 요소들을 세로로 배치 */
+  margin: 20px 48px;
+  margin-top: 100px;
+}
+
+.setting-menu {
+  color: $modeogta-gray;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  gap: 16px;
+  cursor: pointer;
+}
+.setting-menu:hover {
+  color: white;
+}
+
+.setting-arrow {
+  transition: transform 0.3s ease;
+}
+.setting-arrow.rotate {
+  transform: rotate(90deg);
+}
+
+.menu-content {
+  overflow: hidden;
+  max-height: 0;
+  width: 100%;
+  margin: 0px 16px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: max-height 0.3s ease-out, opacity 0.2s ease-out,
+    transform 0.3s ease-out;
+}
+.menu-content.open {
+  max-height: 2000px; /* 실제 내용 크기에 맞춰 조정 */
+  opacity: 1;
+  transform: translateY(0);
+  transition: max-height 0.3s ease-in, opacity 0.2s ease-in,
+    transform 0.5s ease-in;
+}
+
+.setting-description {
+  grid-area: text;
+  font-weight: bold;
+  font-size: medium;
+  color: white;
+  margin-top: 0;
+  margin-bottom: 40px;
+}
+
+.setting-label {
+  grid-area: title;
+  font-weight: bold;
+  font-size: medium;
+  color: $modeogta-gray;
+  margin-bottom: 14px;
+}
+
+.section {
+  display: grid;
+  grid-template-areas:
+    "label text"
+    "buttons buttons";
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto 1fr;
+  -moz-column-gap: 1rem;
+  column-gap: 1rem;
+  row-gap: 0.5rem;
+  align-items: center;
+}
+
+.icon-label {
+  grid-area: label;
+}
+
+.range-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 트랙 색상 변경 */
+input[type="range"]::-webkit-slider-runnable-track {
+  background: $secondary-color; /* 트랙 색상 */
+  height: 1.2rem; /* 트랙의 높이 */
+  border-radius: 10px; /* 트랙의 둥근 모서리 */
+}
+
+/* 슬라이더 thumb 색상 및 크기 */
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 6vw; /* thumb 크기 */
+  height: 1.2rem;
+  border-radius: 10px; /* thumb 모양을 원형으로 */
+  background-color: $primary-color; /* thumb 색상 */
+  cursor: pointer; /* 마우스를 올리면 포인터로 변경 */
+}
+
+.buttons {
+  grid-area: buttons;
+  margin-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr));
+  gap: 0.5rem;
+  margin-top: -40px;
+
+  .single-button {
+    padding: 12px 16px;
+    border-radius: 6px;
+    border: transparent;
+    background-color: #474747;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+  }
+  .single-button.active {
+    background-color: #dddd00;
+    color: black;
+  }
+  .single-button:hover {
+    background-color: #dfdddd;
+    color: #000000;
+  }
+}

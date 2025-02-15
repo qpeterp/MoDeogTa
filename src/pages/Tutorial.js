@@ -2,7 +2,8 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline"; // 물음표 아�
 import SettingsIcon from "@mui/icons-material/Settings"; // 세팅 아이콘
 import { FaRedo, FaRandom, FaBook, FaSortAmountDown } from "react-icons/fa";
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ 올바른 import
+import { useNavigate } from "react-router-dom";
+import "./Tutorial.scss";
 
 const Tutorial = () => {
   const navigate = useNavigate();

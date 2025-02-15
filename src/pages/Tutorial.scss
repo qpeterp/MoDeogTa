@@ -1,0 +1,130 @@
+@import "../styles/variables.scss"; // 변수를 가져와서 사용
+
+body {
+  user-select: none; /* 드래그 방지 */
+  background-color: $background-color;
+}
+
+.tutorial-overlay {
+  background: $background-color;
+}
+
+.tutorial-content {
+  background: $background-color; /* 배경 검은색 */
+  padding: 30px;
+  margin: 40px;
+  border-radius: 10px;
+  color: $primary-color; /* 텍스트 노란색 */
+  box-shadow: 0 4px 10px rgba(255, 255, 0, 0.5); /* 노란빛 그림자 */
+  display: flex;
+  flex-direction: column; /* 세로로 정렬 */
+  align-items: flex-start; /* 왼쪽 정렬 */
+  width: 100%;
+}
+
+.tutorial-content h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.tutorial-content ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.tutorial-content li {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.tutorial-content li svg {
+  margin-right: 10px; /* 아이콘과 텍스트 간격 */
+  color: $primary-color; /* 아이콘 노란색 */
+  font-size: 20px;
+}
+
+.tutorial-content button {
+  background: $primary-color;
+  color: $background-color;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  align-self: flex-end; /* 버튼을 오른쪽으로 정렬 */
+}
+
+.tutorial-content button:hover {
+  background: $primary-color;
+}
+
+.sortIcon {
+  position: relative; /* 드롭다운 위치를 위한 기준 */
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  padding: 8px 20px;
+  transition: color 0.3s ease; /* 부드러운 색 변경 */
+}
+
+.sortIcon:hover {
+  color: $primary-color; /* hover 시 아이콘 색 변경 */
+}
+
+.dropdown-content {
+  display: none; /* 기본적으로 숨김 */
+  position: absolute;
+  right: 0;
+  z-index: 2; /* 다른 요소들보다 앞에 배치 */
+  background-color: #333; /* 배경 색 */
+  border-radius: 5px; /* 경계선 둥글게 */
+  padding: 10px;
+  margin-right: 1vw;
+  width: 100px; /* 원하는 너비 */
+}
+
+.dropdown-content p {
+  color: white; /* 텍스트 색상 */
+  margin: 5px 0;
+  padding: 5px;
+  cursor: pointer;
+}
+
+/* .sortIcon이 아닌 .allScriptHeader 전체를 hover했을 때 dropdown 표시 */
+.sortIcon:hover .dropdown-content {
+  display: block;
+}
+
+.tutorial-grid {
+  list-style: none;
+  width: 80vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr));
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  padding-left: 0;
+  margin: 0;
+  li {
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* 공통 오버레이 스타일 */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  color: $primary-color; /* 기본 텍스트 색상 */
+}

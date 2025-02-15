@@ -2,7 +2,9 @@ import React from "react";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline"; // 물음표 아이콘
 import { useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings"; // 세팅 아이콘
+import KeyboardIcon from "@mui/icons-material/Keyboard";
 // import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import "./Header.scss";
 
 function Header() {
   const navigate = useNavigate();
@@ -15,6 +17,10 @@ function Header() {
     navigate("/settings");
   };
 
+  const handleHomeClick = () => {
+    navigate("/home");
+  };
+
   // const handleSuggestBoardClick = () => {
   //   onMenuSelect("/suggest-board");
   // };
@@ -24,12 +30,13 @@ function Header() {
       <header className="header">
         <img src="logo.svg" alt="Logo" className="header-logo" />
         <div className="nav-wrap">
-          {/* <nav>
-            <QuestionAnswerIcon
+          <nav>
+            {/* <QuestionAnswerIcon
               className="menu-icon"
               onClick={handleSuggestBoardClick}
-            />
-          </nav> */}
+            /> */}
+            <KeyboardIcon className="menu-icon" onClick={handleHomeClick} />
+          </nav>
           <nav>
             <SettingsIcon className="menu-icon" onClick={handleSettingClick} />
             <HelpOutlineIcon
