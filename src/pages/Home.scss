@@ -24,7 +24,7 @@ body {
     border-radius: 30px;
   }
   .clickable:hover {
-    background-color: #fff;
+    background-color: $modeogta-white;
   }
 }
 
@@ -106,7 +106,7 @@ body {
     background-color: transparent;
     border: none;
     outline: none;
-    color: white;
+    color: $modeogta-white;
     resize: none;
     padding: 0;
     font-family: Arial, sans-serif;
@@ -139,7 +139,7 @@ body {
   border-radius: 8px; /* 둥근 테두리 */
   background-color: $modeogta-gray; /* 연한 배경색 */
   height: 40px;
-  color: white; /* 기본 글자 색상 */
+  color: $modeogta-white; /* 기본 글자 색상 */
   top: 50%; /* 라벨을 위쪽으로 조정 */
   transform: translateY(-50%); /* 정확히 중앙 정렬 */
 }

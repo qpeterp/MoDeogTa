@@ -289,6 +289,72 @@ function Settings() {
           <strong>Theme</strong>
         </h1>
       </div>
+      <div className={`menu-content ${themeIsOpen ? "open" : ""}`}>
+        <div className="section">
+          <IconLabel
+            icon={FaVolumeUp}
+            labelText="테마"
+            description="타자연습 사이트의 색상을 변경합니다."
+          />
+
+          <div className="buttons">
+            <button
+              className={`single-button ${
+                backgroundMusic === "off" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="off"
+            >
+              없음
+            </button>
+            <button
+              className={`single-button ${
+                backgroundMusic === "au_rain.mp3" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="au_rain.mp3"
+            >
+              빗소리
+            </button>
+            <button
+              className={`single-button ${
+                backgroundMusic === "au_jazz.mp3" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="au_jazz.mp3"
+            >
+              재즈
+            </button>
+            <button
+              className={`single-button ${
+                backgroundMusic === "au_lastboss.mp3" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="au_lastboss.mp3"
+            >
+              마지막
+            </button>
+            <button
+              className={`single-button ${
+                backgroundMusic === "au_dream.mp3" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="au_dream.mp3"
+            >
+              망각
+            </button>
+            <button
+              className={`single-button ${
+                backgroundMusic === "au_doubt.mp3" ? "active" : ""
+              }`}
+              onClick={handleBackgroundMusicButtonClick}
+              data-music="au_doubt.mp3"
+            >
+              여유만만
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
