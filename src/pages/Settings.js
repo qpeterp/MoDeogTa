@@ -7,6 +7,8 @@ import "./Settings.scss";
 
 function Settings() {
   const [soundIsOpen, setSoundIsOpen] = useState(false);
+  const [themeIsOpen, setThemeIsOpen] = useState(false);
+
   const {
     volume,
     setVolume,
@@ -20,6 +22,7 @@ function Settings() {
     setBackgroundMusic,
   } = useSound();
 
+  // 소리 관련
   const handleSoundMenuClick = () => {
     setSoundIsOpen(!soundIsOpen);
   };
@@ -45,6 +48,11 @@ function Settings() {
   const handleBackgroundMusicButtonClick = (ev) => {
     const soundName = ev.target.getAttribute("data-music");
     setBackgroundMusic(soundName);
+  };
+
+  // 테마 관련
+  const handleThemeMenuClick = () => {
+    setThemeIsOpen(!themeIsOpen);
   };
 
   return (
@@ -272,12 +280,15 @@ function Settings() {
         </div>
       </div>
 
-      {/* <div className="setting-menu">
-        <FaAngleRight className="setting-arrow" size={28} />
-        <h1>
+      <div className="setting-menu" onClick={handleThemeMenuClick}>
+        <FaAngleRight
+          className={`setting-arrow ${themeIsOpen ? "rotate" : ""}`}
+          size={28}
+        />
+        <h1 className="test">
           <strong>Theme</strong>
         </h1>
-      </div> */}
+      </div>
     </div>
   );
 }
