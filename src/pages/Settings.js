@@ -3,10 +3,14 @@ import { FaAngleRight } from "react-icons/fa"; // 글쓰기, 필기 느낌
 import { FaVolumeDown, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import IconLabel from "../components/IconLabel";
 import { useSound } from "../contexts/SoundContext";
+import { useTheme } from "../contexts/ThemeContext";
+
 import "./Settings.scss";
 
 function Settings() {
   const [soundIsOpen, setSoundIsOpen] = useState(false);
+  const [themeIsOpen, setThemeIsOpen] = useState(false);
+
   const {
     volume,
     setVolume,
@@ -20,6 +24,9 @@ function Settings() {
     setBackgroundMusic,
   } = useSound();
 
+  const { themeColor, setThemeColor } = useTheme();
+
+  // 소리 관련
   const handleSoundMenuClick = () => {
     setSoundIsOpen(!soundIsOpen);
   };
@@ -45,6 +52,16 @@ function Settings() {
   const handleBackgroundMusicButtonClick = (ev) => {
     const soundName = ev.target.getAttribute("data-music");
     setBackgroundMusic(soundName);
+  };
+
+  // 테마 관련
+  const handleThemeMenuClick = () => {
+    setThemeIsOpen(!themeIsOpen);
+  };
+
+  const handleThemeColorButtonClick = (ev) => {
+    const themeColor = ev.target.getAttribute("data-theme");
+    setThemeColor(themeColor);
   };
 
   return (
@@ -272,12 +289,72 @@ function Settings() {
         </div>
       </div>
 
-      {/* <div className="setting-menu">
-        <FaAngleRight className="setting-arrow" size={28} />
-        <h1>
+      <div className="setting-menu" onClick={handleThemeMenuClick}>
+        <FaAngleRight
+          className={`setting-arrow ${themeIsOpen ? "rotate" : ""}`}
+          size={28}
+        />
+        <h1 className="test">
           <strong>Theme</strong>
         </h1>
-      </div> */}
+      </div>
+      <div className={`menu-content ${themeIsOpen ? "open" : ""}`}>
+        <div className="section">
+          <IconLabel
+            icon={FaVolumeUp}
+            labelText="테마"
+            description="타자연습 사이트의 색상을 변경합니다."
+          />
+
+          <div className="buttons">
+            <button
+              className={`single-button ${
+                themeColor === "lightning" ? "active" : ""
+              }`}
+              onClick={handleThemeColorButtonClick}
+              data-theme="lightning"
+            >
+              번개
+            </button>
+            <button
+              className={`single-button ${
+                themeColor === "rain" ? "active" : ""
+              }`}
+              onClick={handleThemeColorButtonClick}
+              data-theme="rain"
+            >
+              소나기
+            </button>
+            <button
+              className={`single-button ${
+                themeColor === "fire" ? "active" : ""
+              }`}
+              onClick={handleThemeColorButtonClick}
+              data-theme="fire"
+            >
+              화재
+            </button>
+            <button
+              className={`single-button ${
+                themeColor === "nature" ? "active" : ""
+              }`}
+              onClick={handleThemeColorButtonClick}
+              data-theme="nature"
+            >
+              자연
+            </button>
+            <button
+              className={`single-button ${
+                themeColor === "night" ? "active" : ""
+              }`}
+              onClick={handleThemeColorButtonClick}
+              data-theme="night"
+            >
+              밤하늘
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

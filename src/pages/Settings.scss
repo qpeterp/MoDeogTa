@@ -23,7 +23,7 @@ body {
   cursor: pointer;
 }
 .setting-menu:hover {
-  color: white;
+  color: $modeogta-white;
 }
 
 .setting-arrow {
@@ -55,7 +55,7 @@ body {
   grid-area: text;
   font-weight: bold;
   font-size: medium;
-  color: white;
+  color: $modeogta-white;
   margin-top: 0;
   margin-bottom: 40px;
 }
@@ -121,17 +121,17 @@ input[type="range"]::-webkit-slider-thumb {
     padding: 12px 16px;
     border-radius: 6px;
     border: transparent;
-    background-color: #474747;
-    color: white;
+    background-color: $secondary-color;
+    color: $modeogta-white;
     font-weight: bold;
     transition: background-color 0.2s ease;
   }
   .single-button.active {
-    background-color: #dddd00;
-    color: black;
+    background-color: $primary-color;
+    color: $modeogta-black;
   }
   .single-button:hover {
-    background-color: #dfdddd;
-    color: #000000;
+    background-color: $modeogta-white;
+    color: $modeogta-black;
   }
 }
