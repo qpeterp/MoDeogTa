@@ -152,7 +152,7 @@ body {
   color: $primary-color; /* 포커스 시 라벨 색상 */
 }
 .custom-textfield .MuiInputLabel-root {
-  color: black; /* 그냥 라벨 색상 */
+  color: $modeogta-black; /* 그냥 라벨 색상 */
 }
 
 .reset-button {
@@ -210,4 +210,31 @@ body {
   padding: 12px 0px;
   display: flex;
   justify-content: center;
+}
+
+.side-drawer-icon {
+  color: $primary-color;
+  width: 36px;
+  height: 36px;
+}
+.side-drawer-arrow {
+  color: $background-color;
+  background-color: $primary-color;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.typing-script-item {
+  color: $modeogta-white;
+  padding: 24px 32px;
+}
+.typing-script-item:hover {
+  color: $primary-color;
+  background-color: $modeogta-white;
+}
+
+.color {
+  color: $primary-color;
 }

@@ -112,25 +112,8 @@ function SideDrawer({ onTextSelect }) {
   return (
     <div className="list">
       <div className="iconBundle" onClick={toggleDrawer(true)}>
-        <FaBook
-          variant="contained"
-          style={{
-            width: "36px",
-            height: "36px",
-            color: "yellow", // 아이콘 색상
-          }}
-        />
-        <FaArrowRight
-          variant="contained"
-          style={{
-            width: "12px",
-            height: "12px",
-            color: "black", // 아이콘 색상
-            backgroundColor: "yellow", // 배경 색상
-            borderRadius: "50%", // 원 모양 만들기
-            padding: "5px",
-          }}
-        />
+        <FaBook variant="contained" className="side-drawer-icon" />
+        <FaArrowRight variant="contained" className="side-drawer-arrow" />
       </div>
 
       <Drawer
@@ -140,14 +123,15 @@ function SideDrawer({ onTextSelect }) {
         ModalProps={{
           keepMounted: true, // 성능 최적화 (선택 사항)
         }}
+        style={{}}
         PaperProps={{
-          sx: {
-            flexDirection: "row",
+          style: {
+            backgroundColor: "var(--background-color)", // CSS 변수 사용
             height: "100vh",
-            width: `${drawerWidth}vw`, // ✅ 백틱(`)을 사용하여 px 단위 추가
-            backgroundColor: "#272727", // 배경색 검은색으로 설정
+            width: `${drawerWidth}vw`,
             overflow: "hidden",
-          }, // 전체 Drawer 크기 조절
+            flexDirection: "row",
+          },
         }}
       >
         <div className="someUltimateCls">
@@ -162,7 +146,7 @@ function SideDrawer({ onTextSelect }) {
               autoComplete="off"
             />
             <IconButton>
-              <SearchIcon sx={{ color: "yellow" }} />
+              <SearchIcon className="color" />
             </IconButton>
 
             <div className="sortIcon">
@@ -181,17 +165,11 @@ function SideDrawer({ onTextSelect }) {
                   button
                   key={index}
                   onClick={() => handleChoice(doc.id)}
+                  style={{ padding: "0" }}
                 >
                   <ListItemText
                     primary={doc.script}
-                    sx={{
-                      color: "white",
-                      "&:hover": {
-                        color: "yellow",
-                        backgroundColor: "#434343",
-                      },
-                      padding: "16px 24px",
-                    }} // 글자 색을 흰색으로 변경
+                    className="typing-script-item"
                   />
                 </ListItem>
               ))
@@ -206,11 +184,7 @@ function SideDrawer({ onTextSelect }) {
               >
                 <ListItemText
                   primary={FAILED_LOAD_SCRIPT}
-                  sx={{
-                    color: "white",
-                    "&:hover": { color: "yellow", backgroundColor: "#434343" },
-                    padding: "16px 24px",
-                  }}
+                  className="typing-script-item"
                 />
               </ListItem>
             )}

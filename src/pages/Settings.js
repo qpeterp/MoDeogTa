@@ -3,6 +3,8 @@ import { FaAngleRight } from "react-icons/fa"; // 글쓰기, 필기 느낌
 import { FaVolumeDown, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import IconLabel from "../components/IconLabel";
 import { useSound } from "../contexts/SoundContext";
+import { useTheme } from "../contexts/ThemeContext";
+
 import "./Settings.scss";
 
 function Settings() {
@@ -21,6 +23,8 @@ function Settings() {
     backgroundMusic,
     setBackgroundMusic,
   } = useSound();
+
+  const { themeColor, setThemeColor } = useTheme();
 
   // 소리 관련
   const handleSoundMenuClick = () => {
@@ -53,6 +57,11 @@ function Settings() {
   // 테마 관련
   const handleThemeMenuClick = () => {
     setThemeIsOpen(!themeIsOpen);
+  };
+
+  const handleThemeColorButtonClick = (ev) => {
+    const themeColor = ev.target.getAttribute("data-theme");
+    setThemeColor(themeColor);
   };
 
   return (
@@ -300,57 +309,48 @@ function Settings() {
           <div className="buttons">
             <button
               className={`single-button ${
-                backgroundMusic === "off" ? "active" : ""
+                themeColor === "lightning" ? "active" : ""
               }`}
-              onClick={handleBackgroundMusicButtonClick}
-              data-music="off"
+              onClick={handleThemeColorButtonClick}
+              data-theme="lightning"
             >
-              없음
+              번개
             </button>
             <button
               className={`single-button ${
-                backgroundMusic === "au_rain.mp3" ? "active" : ""
+                themeColor === "rain" ? "active" : ""
               }`}
-              onClick={handleBackgroundMusicButtonClick}
-              data-music="au_rain.mp3"
+              onClick={handleThemeColorButtonClick}
+              data-theme="rain"
             >
-              빗소리
+              소나기
             </button>
             <button
               className={`single-button ${
-                backgroundMusic === "au_jazz.mp3" ? "active" : ""
+                themeColor === "fire" ? "active" : ""
               }`}
-              onClick={handleBackgroundMusicButtonClick}
-              data-music="au_jazz.mp3"
+              onClick={handleThemeColorButtonClick}
+              data-theme="fire"
             >
-              재즈
+              화재
             </button>
             <button
               className={`single-button ${
-                backgroundMusic === "au_lastboss.mp3" ? "active" : ""
+                themeColor === "nature" ? "active" : ""
               }`}
-              onClick={handleBackgroundMusicButtonClick}
-              data-music="au_lastboss.mp3"
+              onClick={handleThemeColorButtonClick}
+              data-theme="nature"
             >
-              마지막
+              자연
             </button>
             <button
               className={`single-button ${
-                backgroundMusic === "au_dream.mp3" ? "active" : ""
+                themeColor === "night" ? "active" : ""
               }`}
-              onClick={handleBackgroundMusicButtonClick}
-              data-music="au_dream.mp3"
+              onClick={handleThemeColorButtonClick}
+              data-theme="night"
             >
-              망각
-            </button>
-            <button
-              className={`single-button ${
-                backgroundMusic === "au_doubt.mp3" ? "active" : ""
-              }`}
-              onClick={handleBackgroundMusicButtonClick}
-              data-music="au_doubt.mp3"
-            >
-              여유만만
+              밤하늘
             </button>
           </div>
         </div>
