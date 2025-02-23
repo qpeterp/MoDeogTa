@@ -13,7 +13,7 @@ const Tutorial = () => {
     const isTutorialShown = sessionStorage.getItem("isTutorialShown");
 
     if (!isTutorialShown) {
-      navigate("/tutorial");
+      navigate("/");
       sessionStorage.setItem("isTutorialShown", "true"); // 튜토리얼 표시 기록
     }
   }, [navigate]);
