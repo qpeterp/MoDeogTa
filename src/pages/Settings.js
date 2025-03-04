@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { FaAngleRight } from "react-icons/fa"; // 글쓰기, 필기 느낌
-import { FaVolumeDown, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import { FaVolumeDown, FaVolumeUp, FaVolumeMute, FaSave } from "react-icons/fa";
 import IconLabel from "../components/IconLabel";
 import { useSound } from "../contexts/SoundContext";
 import { useTheme } from "../contexts/ThemeContext";
-
 import "./Settings.scss";
 
 function Settings() {
+  const { themeColor, setThemeColor, backgroundUrl, setBackgroundUrl } =
+    useTheme();
+
   const [soundIsOpen, setSoundIsOpen] = useState(false);
   const [themeIsOpen, setThemeIsOpen] = useState(false);
+  const [tempBackgroundUrl, setTempBackgroundUrl] = useState(backgroundUrl);
 
   const {
     volume,
@@ -23,8 +26,6 @@ function Settings() {
     backgroundMusic,
     setBackgroundMusic,
   } = useSound();
-
-  const { themeColor, setThemeColor } = useTheme();
 
   // 소리 관련
   const handleSoundMenuClick = () => {
@@ -64,6 +65,14 @@ function Settings() {
     setThemeColor(themeColor);
   };
 
+  const handleTempBackgroundUrl = (ev) => {
+    setTempBackgroundUrl(ev.target.value);
+  };
+
+  const handleBackgroundUrlButton = () => {
+    setBackgroundUrl(tempBackgroundUrl);
+  };
+
   return (
     <div className="setting-menu-wrap">
       <div className="setting-menu" onClick={handleSoundMenuClick}>
@@ -84,7 +93,7 @@ function Settings() {
             description="타자소리 음량을 변경합니다. 0 ~ 1 까지의 범위 중에서 원하는 음량을 드래그 or 클릭하여 선택하세요."
             className="icon-label"
           />
-          <div className="range-container">
+          <div className="row-container">
             <div style={{ color: "white" }}>{volume}</div>
             <input
               type="range"
@@ -352,6 +361,29 @@ function Settings() {
             >
               밤하늘
             </button>
+          </div>
+        </div>
+        <div className="section">
+          <IconLabel
+            icon={FaVolumeUp}
+            labelText="커스텀 배경"
+            description="이미지 Url을 작성하여, 원하는 이미지를 사이트 배경화면으로 설정하세요."
+          />
+
+          <div className="row-container">
+            <div className="row-container" style={{ gap: "8px" }}>
+              <input
+                className="background-url"
+                onChange={handleTempBackgroundUrl}
+                value={tempBackgroundUrl}
+              />
+              <div
+                className="background-url-button"
+                onClick={handleBackgroundUrlButton}
+              >
+                <FaSave />
+              </div>
+            </div>
           </div>
         </div>
       </div>

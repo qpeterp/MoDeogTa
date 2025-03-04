@@ -2,7 +2,7 @@
 
 body {
   user-select: none; /* 드래그 방지 */
-  background-color: $background-color;
+  overscroll-behavior: none;
 }
 
 .someUltimateCls {
@@ -67,13 +67,12 @@ body {
 }
 
 .main {
-  background-color: $background-color;
   padding: 0px 25vw;
   display: flex;
   flex-direction: column; /* 세로로 배치 */
   align-items: center; /* 가운데 정렬 */
   height: 100vh; /* 화면 전체 높이 */
-  margin-top: 20vh;
+  padding-top: 20vh;
 }
 
 .keyboard-text {
@@ -200,7 +199,7 @@ body {
   flex-direction: row;
   justify-content: space-around;
   width: 80vw;
-  margin-top: 16px;
+  padding-top: 16px;
 }
 
 .status {

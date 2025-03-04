@@ -4,6 +4,7 @@ const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   const [themeColor, setThemeColor] = useState("off");
+  const [backgroundUrl, setBackgroundUrl] = useState("");
 
   useEffect(() => {
     const root = document.documentElement;
@@ -37,6 +38,9 @@ export function ThemeProvider({ children }) {
       value={{
         themeColor,
         setThemeColor,
+
+        backgroundUrl,
+        setBackgroundUrl,
       }}
     >
       {children}
@@ -45,5 +49,11 @@ export function ThemeProvider({ children }) {
 }
 
 export function useTheme() {
-  return useContext(ThemeContext);
+  const context = useContext(ThemeContext);
+
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+
+  return context;
 }
