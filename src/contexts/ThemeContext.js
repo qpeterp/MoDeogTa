@@ -4,6 +4,9 @@ const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   const [themeColor, setThemeColor] = useState("off");
+  const [backgroundUrl, setBackgroundUrl] = useState(
+    "https://cdn.prod.website-files.com/62d84e447b4f9e7263d31e94/6399a4d27711a5ad2c9bf5cd_ben-sweet-2LowviVHZ-E-unsplash-1.jpeg"
+  );
 
   useEffect(() => {
     const root = document.documentElement;
@@ -37,6 +40,9 @@ export function ThemeProvider({ children }) {
       value={{
         themeColor,
         setThemeColor,
+
+        backgroundUrl,
+        setBackgroundUrl,
       }}
     >
       {children}
@@ -45,5 +51,11 @@ export function ThemeProvider({ children }) {
 }
 
 export function useTheme() {
-  return useContext(ThemeContext);
+  const context = useContext(ThemeContext);
+
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+
+  return context;
 }

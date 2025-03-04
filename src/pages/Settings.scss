@@ -1,6 +1,14 @@
 @import "../styles/variables.scss"; // 변수를 가져와서 사용
+
+html,
 body {
   background-color: $background-color;
+  height: 100%; /* html과 body 모두 100% */
+  margin: 0; /* 기본 여백 제거 */
+}
+
+#root {
+  height: 100%; /* React 루트 요소도 100%로 확장 */
 }
 
 .setting-menu-wrap {
@@ -9,8 +17,8 @@ body {
   justify-content: center; /* 가로 정렬 */
   align-items: start; /* 세로 정렬 */
   flex-direction: column; /* 요소들을 세로로 배치 */
-  margin: 20px 48px;
-  margin-top: 100px;
+  margin: 0px 48px;
+  padding-top: 120px;
 }
 
 .setting-menu {
@@ -85,7 +93,7 @@ body {
   grid-area: label;
 }
 
-.range-container {
+.row-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -116,22 +124,57 @@ input[type="range"]::-webkit-slider-thumb {
   grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr));
   gap: 0.5rem;
   margin-top: -40px;
-
-  .single-button {
-    padding: 12px 16px;
-    border-radius: 6px;
-    border: transparent;
-    background-color: $secondary-color;
-    color: $modeogta-white;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
-  }
-  .single-button.active {
+}
+.single-button {
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: transparent;
+  background-color: $secondary-color;
+  color: $modeogta-white;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+  &:active {
     background-color: $primary-color;
     color: $modeogta-black;
   }
-  .single-button:hover {
+  &:hover {
     background-color: $modeogta-white;
     color: $modeogta-black;
+  }
+}
+.active {
+  background-color: $primary-color;
+  color: $modeogta-black;
+}
+
+.background-url {
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 2px solid transparent; // 기본 테두리 투명
+  background-color: $secondary-color;
+  color: $modeogta-white;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out; // 부드러운 효과
+
+  &:focus {
+    outline: none; // 기본 아웃라인 제거
+    border-color: $primary-color; // primary 색상으로 테두리 변경
+  }
+}
+
+.background-url-button {
+  color: $primary-color; // 기본 아이콘 색상
+  background-color: $secondary-color; // 기본 배경 투명
+  transition: all 0.1s ease-in-out;
+  padding: 12px 16px;
+  border-radius: 6px;
+
+  &:hover {
+    background-color: $modeogta-gray; // 호버 시 약간의 배경색 추가
+  }
+
+  &:active {
+    background-color: $primary-color; // 클릭 시 더 강한 색상
+    color: $secondary-color;
   }
 }
