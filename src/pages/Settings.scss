@@ -154,7 +154,8 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: $secondary-color;
   color: $modeogta-white;
   font-weight: bold;
-  transition: all 0.3s ease-in-out; // 부드러운 효과
+  width: 22vw;
+  transition: border 0.3s ease-in-out; // 부드러운 효과
 
   &:focus {
     outline: none; // 기본 아웃라인 제거
