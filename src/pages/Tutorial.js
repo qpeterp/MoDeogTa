@@ -29,6 +29,11 @@ const Tutorial = () => {
         <p>이용 방법은 아래 내용을 참고하세요:</p>
 
         <div>
+          <div className="description">
+            모두 함께 타자연습! 다양한 커스텀 기능과 함께 빠르고 재미있게 타자
+            실력을 키워보세요.
+          </div>
+
           <h3>기본 이용 방법</h3>
           <p className="instructions">
             1. 글을 모두 입력하신 뒤에는{" "}
