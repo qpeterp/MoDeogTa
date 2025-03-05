@@ -10,8 +10,8 @@ function Settings() {
   const { themeColor, setThemeColor, backgroundUrl, setBackgroundUrl } =
     useTheme();
 
-  const [soundIsOpen, setSoundIsOpen] = useState(false);
-  const [themeIsOpen, setThemeIsOpen] = useState(false);
+  const [soundIsOpen, setSoundIsOpen] = useState(true);
+  const [themeIsOpen, setThemeIsOpen] = useState(true);
   const [tempBackgroundUrl, setTempBackgroundUrl] = useState(backgroundUrl);
 
   const {
