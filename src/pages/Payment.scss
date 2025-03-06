@@ -1,0 +1,9 @@
+.payment-root {
+  display: flex; /* 또는 grid */
+  gap: 12px; /* 내부 요소 간 간격 */
+  justify-content: center; /* 가로 정렬 */
+  align-items: start; /* 세로 정렬 */
+  flex-direction: column; /* 요소들을 세로로 배치 */
+  margin: 0px 48px;
+  padding-top: 120px;
+}
