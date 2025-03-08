@@ -7,8 +7,8 @@ export const requestKakaoPay = async (userId, amount) => {
 
     const orderId = new Date().getTime();
     const response = await axios.post(
-      //   "https://us-central1-modeogta-b54db.cloudfunctions.net/requestKakaoPay",
-      "http://127.0.0.1:5001/modeogta-b54db/us-central1/requestKakaoPay",
+      "https://requestkakaopay-a6z55ez5bq-uc.a.run.app",
+      //   "http://127.0.0.1:8081/modeogta-b54db/us-central1/requestKakaoPay",
       { userId, amount, orderId }
     );
 
@@ -35,11 +35,10 @@ export const responseKakaoPayApproval = async (pgToken) => {
   if (savedPgToken === pgToken) return;
 
   localStorage.setItem("pgToken", pgToken);
-  console.log("responseKakaoPayApproval의 tid : ", tid);
   try {
     const response = await axios.post(
-      //   "https://us-central1-your-project-id.cloudfunctions.net/handleKakaoPayApproval",
-      "http://127.0.0.1:5001/modeogta-b54db/us-central1/handleKakaoPayApproval",
+      //   "https://us-central1-modeogta-b54db.cloudfunctions.net/handleKakaoPayApproval",
+      "https://handleKakaoPayApproval-a6z55ez5bq-uc.a.run.app",
 
       {
         pgToken,

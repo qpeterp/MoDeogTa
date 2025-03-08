@@ -24,8 +24,6 @@ function Payment() {
       const urlParams = new URLSearchParams(window.location.search);
       const pg_token = urlParams.get("pg_token");
 
-      console.log(`pg_token: ${pg_token}`);
-
       if (pg_token) {
         const isSuccess = responseKakaoPayApproval(pg_token);
 
