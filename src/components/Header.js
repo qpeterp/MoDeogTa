@@ -22,9 +22,9 @@ function Header() {
     navigate("/home");
   };
 
-  const handlePaymentClick = () => {
-    navigate("/payment");
-  };
+  // const handlePaymentClick = () => {
+  //   navigate("/payment");
+  // };
 
   // const handleSuggestBoardClick = () => {
   //   onMenuSelect("/suggest-board");
@@ -41,10 +41,10 @@ function Header() {
               onClick={handleSuggestBoardClick}
             /> */}
             <KeyboardIcon className="menu-icon" onClick={handleHomeClick} />
-            <AttachMoneyIcon
+            {/* <AttachMoneyIcon
               className="menu-icon"
               onClick={handlePaymentClick}
-            />
+            /> */}
           </nav>
           <nav>
             <SettingsIcon className="menu-icon" onClick={handleSettingClick} />
