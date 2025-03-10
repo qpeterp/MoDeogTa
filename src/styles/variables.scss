@@ -5,6 +5,7 @@
   --modeogta-gray: #5a5a5a; /* 중간 회색 */
   --modeogta-white: #f4f4f4; /* 살짝 따뜻한 느낌의 흰색 */
   --modeogta-black: #000; /* 깊은 검정 */
+  --modeogta-hover: #ffd700; /* 황금빛 전기 느낌 */
 
   --font-small: 12px;
   --font-medium: 16px;
@@ -16,61 +17,67 @@
   --secondary-color: #2c3e50; /* 어두운 회색 */
   --background-color: #1e272e; /* 흐린 하늘 느낌 */
   --modeogta-gray: #747474;
-  --modeogta-white: #d1d8e0; /* 부드러운 회색 흰색 (차분한 느낌) */
+  --modeogta-white: #d1d8e0; /* 기본 글자색 */
   --modeogta-black: #000;
+  --modeogta-hover: #2a3b47; /* 기존 배경색보다 살짝 밝은 톤 */
 }
 
 .theme-fire {
-  --primary-color: #ff6a00; /* 조금 더 밝은 오렌지 (불꽃 느낌) */
-  --secondary-color: #8b0000; /* 더 짙은 다크 레드 (강한 불길) */
-  --background-color: #290000; /* 더 어두운 바탕으로 대비 강화 */
-  --modeogta-gray: #ffcc99; /* 🔥 연기 속 불빛 같은 밝은 색 (가독성 강화) */
-  --modeogta-white: #ffdab9; /* 불빛 반사되는 부드러운 복숭아색 */
-  --modeogta-black: #000; /* 유지 */
+  --primary-color: #ff6a00; /* 불꽃 오렌지 */
+  --secondary-color: #8b0000; /* 다크 레드 */
+  --background-color: #290000; /* 어두운 바탕 */
+  --modeogta-gray: #ffcc99;
+  --modeogta-white: #ffdab9;
+  --modeogta-black: #000;
+  --modeogta-hover: #550000; /* 기존 배경보다 약간 밝은 톤 */
 }
 
 .theme-nature {
   --primary-color: #2ecc71; /* 생기 넘치는 녹색 */
-  --secondary-color: #1e8449; /* 더 진하고 깊은 녹색 */
+  --secondary-color: #1e8449;
   --background-color: #145a32; /* 숲속 어두운 색 */
-  --modeogta-gray: #a0b787; /* 자연을 느끼게 하는 부드러운 그린 그레이 */
-  --modeogta-white: #d9e4d3; /* 자연스러운 녹색이 살짝 섞인 부드러운 흰색 */
+  --modeogta-gray: #a0b787;
+  --modeogta-white: #d9e4d3;
   --modeogta-black: #000;
+  --modeogta-hover: #1b6a3f; /* 기존 배경보다 약간 밝은 초록색 */
 }
 
 .theme-night {
   --primary-color: #8e44ad; /* 신비로운 보라색 */
-  --secondary-color: #2c3e50; /* 어두운 청색 */
+  --secondary-color: #2c3e50;
   --background-color: #1a1a2e; /* 깊은 밤 색 */
   --modeogta-gray: #5d6d7e;
-  --modeogta-white: #d1cbe1; /* 어두운 밤에 빛나는 회색 흰색 */
+  --modeogta-white: #d1cbe1;
   --modeogta-black: #000;
+  --modeogta-hover: #242442; /* 기존 배경보다 조금 밝은 남색 */
 }
 
 .theme-cyber {
   --primary-color: #00ffff; /* 네온 블루 */
-  --secondary-color: #ff00ff; /* 네온 핑크 */
+  --secondary-color: #ff00ff;
   --background-color: #121212; /* 다크 블랙 */
   --modeogta-gray: #3a3a3a;
-  --modeogta-white: #e0e0e0; /* 사이버 느낌의 밝은 회색 */
+  --modeogta-white: #e0e0e0;
   --modeogta-black: #000000;
+  --modeogta-hover: #1a1a1a; /* 기존 배경보다 살짝 연한 다크 톤 */
 }
 
 .theme-lightning {
-  --primary-color: #f7d038; /* 강렬한 전기빛 노란색 */
-  --secondary-color: #2c2c2c; /* 어두운 스틸 그레이 (강렬한 대비) */
-  --background-color: #1a1a1a; /* 깊은 어둠, 폭풍 전야 */
-  --modeogta-gray: #5a5a5a; /* 중간 회색 */
-  --modeogta-white: #f0f0f0; /* 밝은 회색 흰색, 전기와의 대비 강조 */
-  --modeogta-black: #000; /* 깊은 검정 */
+  --primary-color: #f7d038; /* 강렬한 전기 노란색 */
+  --secondary-color: #2c2c2c;
+  --background-color: #1a1a1a; /* 폭풍 전야 */
+  --modeogta-gray: #5a5a5a;
+  --modeogta-white: #f0f0f0;
+  --modeogta-black: #000;
+  --modeogta-hover: #2d2d2d; /* 기존 배경보다 약간 밝은 회색 */
 }
-
 $primary-color: var(--primary-color);
 $secondary-color: var(--secondary-color);
 $background-color: var(--background-color);
 $modeogta-gray: var(--modeogta-gray);
 $modeogta-white: var(--modeogta-white);
 $modeogta-black: var(--modeogta-black);
+$modeogta-hover: var(--modeogta-hover);
 
 $font-small: var(--font-small);
 $font-medium: var(--font-medium);
