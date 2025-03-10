@@ -3,7 +3,7 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline"; // 물음표 아�
 import { useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings"; // 세팅 아이콘
 import KeyboardIcon from "@mui/icons-material/Keyboard";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+// import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 // import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import "./Header.scss";
 
