@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [themeColor, setThemeColor] = useState("off");
+  const [themeColor, setThemeColor] = useState("lightning");
   const [backgroundUrl, setBackgroundUrl] = useState("");
 
   useEffect(() => {
