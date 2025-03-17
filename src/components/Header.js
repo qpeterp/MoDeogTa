@@ -33,7 +33,7 @@ function Header() {
   return (
     <div className="header-background">
       <header className="header">
-        <img src="logo.svg" alt="Logo" className="header-logo" />
+        <img src="logo.svg" alt="Logo" className="header-logo" width="120" />
         <div className="nav-wrap">
           <nav>
             {/* <QuestionAnswerIcon

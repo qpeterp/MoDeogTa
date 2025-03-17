@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 
 function IconButton({ icon, label, onClick }) {
   return (
-    <button onClick={onClick} className="reset-button">
+    <button
+      onClick={onClick}
+      className="reset-button"
+      name={icon}
+      aria-label={icon}
+    >
       {icon && (
         <span
           style={{

@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 import IconButton from "./components/DeaugTaButton";
 import { FaRedo, FaRandom } from "react-icons/fa";
 import ResultDialog from "./components/ResultDialog";
@@ -67,7 +73,8 @@ function TypingInput({ selectedText }) {
       source.start(typingSoundContextRef.current.currentTime);
     }
   };
-  const handleWrongSound = () => {
+
+  const handleWrongSound = useCallback(() => {
     if (volume === 0 || wrongInput) return;
 
     if (wrongSoundContextRef.current && wrongSoundBufferRef.current) {
@@ -88,11 +95,11 @@ function TypingInput({ selectedText }) {
       source.start(wrongSoundContextRef.current.currentTime);
 
       // 새로운 gainNode를 저장
-      wrongSoundContextRef.current.gainNode = gainNode; // 저장된 gainNode를 통해 이전 노드를 관리할 수 있음
+      wrongSoundContextRef.current.gainNode = gainNode;
     }
 
     setWrongInput(true);
-  };
+  }, [volume, wrongInput]);
 
   // 배경 음악 정지 함수
   const stopBackgroundMusic = () => {
@@ -268,7 +275,7 @@ function TypingInput({ selectedText }) {
     }
   }, [selectedText]);
 
-  const renderCode = () => {
+  const renderCodeMemo = useMemo(() => {
     return codeToType.split("").map((char, index) => {
       const isWrong = index < userInput.length - 1 && userInput[index] !== char;
 
@@ -288,7 +295,7 @@ function TypingInput({ selectedText }) {
         </span>
       );
     });
-  };
+  }, [codeToType, handleWrongSound, userInput, wrongInput]); // 빈 배열을 두면 최초 렌더링 시만 실행됩니다.
 
   // ================================================================================
   // ================================================================================
@@ -311,11 +318,12 @@ function TypingInput({ selectedText }) {
         <p className="text status">현재타수 : {speed}타</p>
       </div>
       <div className="stroke-box">
-        <p className="text hint-text">{renderCode()}</p>
+        <p className="text hint-text">{renderCodeMemo}</p>
         <textarea
           ref={textareaRef} // ref를 제대로 연결
           id="userInput"
           type="text"
+          aria-label="typingText label"
           className="typing-text"
           value={userInput}
           onChange={handleInputChange}
