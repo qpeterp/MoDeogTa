@@ -1,6 +1,6 @@
-import TypingInput from "../TypingInput";
+import TypingInput from "../../TypingInput";
 import React, { useState } from "react";
-import SideDrawer from "../components/SideDrawer";
+import SideDrawer from "../../components/SideDrawer";
 import "./Home.scss";
 
 function Home() {

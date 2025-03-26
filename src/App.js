@@ -1,10 +1,10 @@
 import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import SuggestBoard from "./pages/SuggestBoard";
-import Settings from "./pages/Settings";
+import Settings from "./pages/setting/Settings";
 import Tutorial from "./pages/Tutorial";
-import Payment from "./pages/Payment";
+import Payment from "./pages/payment/Payment";
 import PaymentSuccess from "./components/PaymentSuccess";
 import PaymentFailed from "./components/PaymentFailed";
 import PaymentCancel from "./components/PaymentCancel";
