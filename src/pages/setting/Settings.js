@@ -128,6 +128,7 @@ function Settings() {
               max={1}
               step={0.1}
               value={volume}
+              aria-label="change typingsound volume"
               onChange={handleVolumeChange}
               style={{
                 width: "80%",
@@ -179,6 +180,7 @@ function Settings() {
               min={0}
               max={1}
               step={0.1}
+              aria-label="change background music volume"
               value={backgroundMusicVolume}
               onChange={handleBackgroundMusicVolumeChange}
               style={{
@@ -242,6 +244,7 @@ function Settings() {
             <div className="row-container" style={{ gap: "8px" }}>
               <input
                 className="background-url"
+                aria-label="input background image url"
                 onChange={handleTempBackgroundUrl}
                 value={tempBackgroundUrl}
               />
