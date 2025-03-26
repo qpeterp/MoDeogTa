@@ -1,9 +1,10 @@
 import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
-import SuggestBoard from "./pages/SuggestBoard";
+import Battle from "./pages/battle/Battle";
+import SuggestBoard from "./pages/suggest-board/SuggestBoard";
 import Settings from "./pages/setting/Settings";
-import Tutorial from "./pages/Tutorial";
+import Tutorial from "./pages/tutorial/Tutorial";
 import Payment from "./pages/payment/Payment";
 import PaymentSuccess from "./components/PaymentSuccess";
 import PaymentFailed from "./components/PaymentFailed";
@@ -31,6 +32,7 @@ function App() {
         <div style={containerStyle}>
           <Routes>
             <Route path="/home" element={<Home />} />
+            <Route path="/battle" element={<Battle />} />
             <Route path="/suggest-board" element={<SuggestBoard />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/" element={<Tutorial />} />

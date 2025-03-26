@@ -1,0 +1,21 @@
+@import "../../styles/variables.scss";
+
+html,
+body {
+  background-color: $background-color;
+  height: 100%; /* html과 body 모두 100% */
+  margin: 0; /* 기본 여백 제거 */
+}
+
+#root {
+  height: 100%; /* React 루트 요소도 100%로 확장 */
+}
+
+.battle-page-wrap {
+  display: flex; /* 또는 grid */
+  justify-content: center; /* 가로 정렬 */
+  align-items: start; /* 세로 정렬 */
+  flex-direction: column; /* 요소들을 세로로 배치 */
+  margin: 0px 48px;
+  padding-top: 20vh;
+}
