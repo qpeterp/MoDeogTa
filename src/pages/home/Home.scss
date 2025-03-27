@@ -98,7 +98,7 @@ body {
   padding: 40px;
   box-sizing: border-box;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 
   .typing-text {
     width: calc(100% - 80px); /* 80px은 좌우 padding 값(40px * 2)을 빼는 값 */
@@ -113,8 +113,10 @@ body {
     font-size: 20px;
     box-sizing: border-box;
     overflow: hidden;
-    position: absolute; /* absolute 사용 */
-    z-index: 1; /* 텍스트가 hint-text 위에 오도록 설정 */
+    position: absolute;
+    margin-top: 24px;
+    z-index: 1;
+    line-height: 2.7;
   }
 
   .hint-text {
@@ -126,6 +128,7 @@ body {
     box-sizing: border-box;
     position: relative; /* 상대 위치 */
     z-index: 0; /* typing-text 아래에 위치하도록 설정 */
+    line-height: 2.7; /* 기본보다 더 크게 설정해서 줄 간격 늘리기 */
   }
 }
 

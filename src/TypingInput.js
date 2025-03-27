@@ -272,7 +272,6 @@ function TypingInput({ selectedText }) {
         <span
           key={index}
           style={{
-            backgroundColor: isWrong ? "red" : "",
             color: isWrong ? "red" : "",
           }}
         >
