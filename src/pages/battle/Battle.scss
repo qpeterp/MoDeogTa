@@ -11,11 +11,87 @@ body {
   height: 100%; /* React 루트 요소도 100%로 확장 */
 }
 
+.battle-colume {
+  width: min-content;
+  display: flex;
+  flex-direction: column;
+  margin: 0 5vw;
+}
+
+.battle-view-wrap {
+  display: flex; /* flexbox로 가로 정렬 */
+  justify-content: space-between; /* 두 개를 양쪽 끝에 배치 */
+  align-items: flex-start; /* 세로로 위쪽에 정렬 */
+  width: 100%; /* 부모 요소의 너비 100% */
+  height: 100%; /* 부모 요소의 높이 100% */
+}
+
 .battle-page-wrap {
-  display: flex; /* 또는 grid */
-  justify-content: center; /* 가로 정렬 */
-  align-items: start; /* 세로 정렬 */
-  flex-direction: column; /* 요소들을 세로로 배치 */
-  margin: 0px 48px;
+  display: flex; /* flexbox 사용 */
+  flex-direction: column; /* 세로로 정렬 */
+  justify-content: center; /* 세로 중앙 정렬 */
+  align-items: center; /* 가로 중앙 정렬 */
+  width: 100vw; /* 각 화면의 너비를 48%로 설정, 2개가 나란히 배치됨 */
+  gap: 10vh;
   padding-top: 20vh;
+}
+
+.battle-status-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 16px;
+}
+
+.battle-status {
+  width: 100%;
+  border: 2px solid $primary-color;
+  margin: 0px;
+  padding: 12px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.battle-stroke-box {
+  width: 40vw;
+  height: auto;
+  background-color: transparent;
+  border: 2px solid $primary-color;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  .battle-typing-text {
+    width: calc(100% - 80px); /* 80px은 좌우 padding 값(40px * 2)을 빼는 값 */
+    height: auto;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: $primary-color;
+    resize: none;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: absolute; /* absolute 사용 */
+    z-index: 1; /* 텍스트가 hint-text 위에 오도록 설정 */
+  }
+
+  .battle-hint-text {
+    width: 100%;
+    text-align: start;
+    color: $modeogta-gray;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative; /* 상대 위치 */
+    z-index: 0; /* typing-text 아래에 위치하도록 설정 */
+  }
+}
+
+.battle-bar {
 }
