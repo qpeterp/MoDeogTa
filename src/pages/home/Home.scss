@@ -190,12 +190,56 @@ body {
   }
 }
 
-.result-dialog.dialog-enter {
-  animation: dialog-enter 0.3s ease-out forwards;
+.result-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $background-color;
+  border-radius: 10px;
+  padding-left: 20vw;
+  padding-right: 20vw;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  box-shadow: 0 2px 2px $primary-color;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1000;
+  outline: none; // 다이얼로그 바깥쪽에서 tab 키로 넘어가지 않게
+
+  .dialog-enter {
+    animation: dialog-enter 0.3s ease-out forwards;
+  }
+
+  .dialog-exit {
+    animation: dialog-exit 0.3s ease-in forwards;
+  }
 }
 
-.result-dialog.dialog-exit {
-  animation: dialog-exit 0.3s ease-in forwards;
+.dialog-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  color: $modeogta-white;
+  background-color: transparent;
+  border: 1px $primary-color solid;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: $primary-color;
+    border: 1px $primary-color solid;
+    color: $modeogta-black;
+    transition: all 0.3s;
+  }
+
+  &:active {
+    background-color: $secondary-color;
+    border: 1px $primary-color solid;
+    color: $modeogta-white;
+    transition: all 0.3s;
+  }
 }
 
 .status-container {
