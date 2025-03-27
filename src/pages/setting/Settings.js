@@ -1,14 +1,27 @@
 import React, { useState } from "react";
 import { FaAngleRight } from "react-icons/fa"; // 글쓰기, 필기 느낌
-import { FaVolumeDown, FaVolumeUp, FaVolumeMute, FaSave } from "react-icons/fa";
+import {
+  FaVolumeDown,
+  FaVolumeUp,
+  FaVolumeMute,
+  FaSave,
+  FaTint,
+} from "react-icons/fa";
+
 import IconLabel from "../../components/IconLabel";
 import { useSound } from "../../contexts/SoundContext";
 import { useTheme } from "../../contexts/ThemeContext";
 import "./Settings.scss";
 
 function Settings() {
-  const { themeColor, setThemeColor, backgroundUrl, setBackgroundUrl } =
-    useTheme();
+  const {
+    themeColor,
+    setThemeColor,
+    backgroundUrl,
+    setBackgroundUrl,
+    alpha,
+    setAlpha,
+  } = useTheme();
 
   const [soundIsOpen, setSoundIsOpen] = useState(true);
   const [themeIsOpen, setThemeIsOpen] = useState(true);
@@ -96,6 +109,10 @@ function Settings() {
     setTempBackgroundUrl(ev.target.value);
   };
 
+  const handleBackgroundAlphaChange = (ev) => {
+    setAlpha(ev.target.value);
+  };
+
   const handleBackgroundUrlButton = () => {
     setBackgroundUrl(tempBackgroundUrl);
   };
@@ -173,7 +190,7 @@ function Settings() {
             description="배경음악 음량을 변경합니다. 0 ~ 1 까지의 범위 중에서 원하는 음량을 드래그 or 클릭하여 선택하세요."
             className="icon-label"
           />
-          <div className="range-container">
+          <div className="row-container">
             <div style={{ color: "white" }}>{backgroundMusicVolume}</div>
             <input
               type="range"
@@ -233,28 +250,53 @@ function Settings() {
             callback={handleThemeColorButtonClick}
           />
         </div>
+
         <div className="section">
           <IconLabel
             icon={FaVolumeUp}
             labelText="커스텀 배경"
             description="이미지 Url을 작성하여, 원하는 이미지를 사이트 배경화면으로 설정하세요."
           />
-
           <div className="row-container">
-            <div className="row-container" style={{ gap: "8px" }}>
-              <input
-                className="background-url"
-                aria-label="input background image url"
-                onChange={handleTempBackgroundUrl}
-                value={tempBackgroundUrl}
-              />
-              <div
-                className="background-url-button"
-                onClick={handleBackgroundUrlButton}
-              >
-                <FaSave />
-              </div>
+            <input
+              className="background-url"
+              aria-label="input background image url"
+              onChange={handleTempBackgroundUrl}
+              value={tempBackgroundUrl}
+            />
+            <div
+              className="background-url-button"
+              onClick={handleBackgroundUrlButton}
+            >
+              <FaSave />
             </div>
+          </div>
+
+          <IconLabel
+            icon={FaTint}
+            labelText="배경 투명도"
+            description="배경 투명도를 변경합니다. 0 ~ 1 까지의 범위 중에서 원하는 음량을 드래그 or 클릭하여 선택하세요."
+            className="icon-label"
+          />
+          <div className="row-container">
+            <div style={{ color: "white" }}>{alpha}</div>
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step={0.1}
+              value={alpha}
+              aria-label="change typingsound volume"
+              onChange={handleBackgroundAlphaChange}
+              style={{
+                width: "80%",
+                appearance: "none", // 기본 스타일을 제거
+                backgroundColor: "#ddd", // 트랙 색상
+                height: "8px", // 트랙 높이
+                borderRadius: "5px", // 트랙의 둥근 모서리
+                marginRight: "3vw",
+              }}
+            />
           </div>
         </div>
       </div>

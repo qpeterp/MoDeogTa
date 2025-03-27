@@ -5,6 +5,7 @@ const ThemeContext = createContext();
 export function ThemeProvider({ children }) {
   const [themeColor, setThemeColor] = useState("lightning");
   const [backgroundUrl, setBackgroundUrl] = useState("");
+  const [alpha, setAlpha] = useState(0);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -41,6 +42,9 @@ export function ThemeProvider({ children }) {
 
         backgroundUrl,
         setBackgroundUrl,
+
+        alpha,
+        setAlpha,
       }}
     >
       {children}
