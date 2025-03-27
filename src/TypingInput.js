@@ -21,7 +21,6 @@ function TypingInput({ selectedText }) {
   const [isFinish, setIsFinish] = useState(false);
   const [beforeSpeed, setBeforeSpeed] = useState("0");
   const [currentTime, setCurrentTime] = useState("0");
-  const [accuracy, setAccuracy] = useState("");
   const [speed, setSpeed] = useState("0");
   const [isDialogOpen, setIsDialogOpen] = useState(false); // dialog 상태 관리
   const [wrongInput, setWrongInput] = useState(false); // 잘못된 입력 상태 추가
@@ -113,7 +112,6 @@ function TypingInput({ selectedText }) {
   const handleResetClick = () => {
     setBeforeSpeed(speed);
 
-    setAccuracy("");
     setIsFinish(false);
     setUserInput("");
     setCurrentTime("0");
@@ -214,25 +212,12 @@ function TypingInput({ selectedText }) {
   }, [volume, wrongSound]);
 
   useEffect(() => {
-    if (userInput.length > codeToType.length && !wrongInput) {
+    if (userInput.length >= codeToType.length && !wrongInput) {
       const endTime = new Date().getTime();
       const takenTime = (endTime - startTime) / 1000;
 
-      // 자소 단위로 정확도 및 타수 계산
-      const correctJamoCount = userInput
-        .split("")
-        .reduce((count, char, index) => {
-          const targetJamo = splitHangulToJamo(codeToType[index]);
-          const inputJamo = splitHangulToJamo(char);
-          return (
-            count + targetJamo.filter((jamo, i) => jamo === inputJamo[i]).length
-          );
-        }, 0);
-
-      const totalJamo = countJamo(codeToType);
       const inputJamo = countJamo(userInput);
 
-      setAccuracy(((correctJamoCount / totalJamo) * 100).toFixed(1));
       setSpeed(((inputJamo * 50) / takenTime).toFixed(1));
 
       setIsFinish(true);
@@ -352,7 +337,6 @@ function TypingInput({ selectedText }) {
       </div>
       {isDialogOpen && (
         <ResultDialog
-          accuracy={accuracy}
           speed={speed}
           onClose={() => {
             setIsDialogOpen(false);

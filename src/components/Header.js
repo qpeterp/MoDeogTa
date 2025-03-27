@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline"; // 물음표 아이콘
 import { useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings"; // 세팅 아이콘
@@ -9,16 +9,20 @@ import "./Header.scss";
 
 function Header() {
   const navigate = useNavigate();
+  const [selectedMenu, setSelectedMenu] = useState("home");
 
   const handleTutorialClick = () => {
     navigate("/");
+    setSelectedMenu("home");
   };
 
   const handleSettingClick = () => {
+    setSelectedMenu("setting");
     navigate("/settings");
   };
 
   const handleHomeClick = () => {
+    setSelectedMenu("home");
     navigate("/home");
   };
 
@@ -40,16 +44,28 @@ function Header() {
               className="menu-icon"
               onClick={handleSuggestBoardClick}
             /> */}
-            <KeyboardIcon className="menu-icon" onClick={handleHomeClick} />
+            <KeyboardIcon
+              className={`menu-icon ${
+                selectedMenu === "home" ? "menu-active" : ""
+              }`}
+              onClick={handleHomeClick}
+            />
             {/* <AttachMoneyIcon
               className="menu-icon"
               onClick={handlePaymentClick}
             /> */}
           </nav>
           <nav>
-            <SettingsIcon className="menu-icon" onClick={handleSettingClick} />
+            <SettingsIcon
+              className={`menu-icon ${
+                selectedMenu === "setting" ? "menu-active" : ""
+              }`}
+              onClick={handleSettingClick}
+            />
             <HelpOutlineIcon
-              className="menu-icon"
+              className={`menu-icon ${
+                selectedMenu === "tutorial" ? "menu-active" : ""
+              }`}
               onClick={handleTutorialClick}
             />
           </nav>

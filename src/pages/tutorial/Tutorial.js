@@ -35,15 +35,11 @@ const Tutorial = () => {
           </div>
 
           <h3>기본 이용 방법</h3>
+
           <p className="instructions">
-            1. 글을 모두 입력하신 뒤에는{" "}
-            <span className="keyboard-text">Enter</span> 혹은{" "}
-            <span className="keyboard-text"> Spacebar </span>를 눌러야 작성이
-            완료됩니다.
+            1. 입력한 글에 오타가 존재할 경우, 타자연습은 완료되지 않습니다.
           </p>
-          <p className="instructions">
-            2. 입력한 글에 오타가 존재할 경우, 타자연습은 완료되지 않습니다.
-          </p>
+          <p className="instructions">2. 재미있게 타자연습을 즐기세요!</p>
         </div>
 
         <div>
