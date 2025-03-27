@@ -23,6 +23,10 @@ header {
   }
 }
 
+.menu-active {
+  color: $primary-color;
+}
+
 /* 로고 이미지 스타일 */
 .header-logo {
   object-fit: cover; /* 비율 유지하면서 로고 표시 */

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-function ResultDialog({ accuracy, speed, onClose }) {
+function ResultDialog({ speed, onClose }) {
   const [animationClass, setAnimationClass] = useState("dialog-enter");
 
   const handleClose = () => {
@@ -49,9 +49,6 @@ function ResultDialog({ accuracy, speed, onClose }) {
       tabIndex={-1} // 다이얼로그 내부에서만 포커스가 가능하도록 설정
       onKeyDown={handleKeyDown} // 키보드 입력 처리
     >
-      <p className="text">
-        정확도: <strong>{accuracy}%</strong>
-      </p>
       <p className="text">
         타수: <strong>{speed}</strong>
       </p>
