@@ -28,42 +28,13 @@ function ResultDialog({ speed, onClose }) {
   return (
     <div
       className={`result-dialog ${animationClass}`}
-      style={{
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        backgroundColor: "#202020",
-        borderRadius: "10px",
-        paddingLeft: "20vw",
-        paddingRight: "20vw",
-        paddingTop: "20px",
-        paddingBottom: "20px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        zIndex: 1000,
-        outline: "none", // 다이얼로그 바깥쪽에서 tab 키로 넘어가지 않게
-      }}
       tabIndex={-1} // 다이얼로그 내부에서만 포커스가 가능하도록 설정
       onKeyDown={handleKeyDown} // 키보드 입력 처리
     >
       <p className="text">
         타수: <strong>{speed}</strong>
       </p>
-      <button
-        onClick={handleClose}
-        style={{
-          marginTop: "10px",
-          padding: "10px 20px",
-          color: "white",
-          backgroundColor: "transparent",
-          border: "1px yellow solid",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
+      <button onClick={handleClose} className="dialog-button">
         닫기
       </button>
     </div>
