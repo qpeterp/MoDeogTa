@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "./Payment.scss";
-import { requestKakaoPay } from "../services/paymentService";
-import { responseKakaoPayApproval } from "../services/paymentService";
+import { requestKakaoPay } from "../../services/paymentService";
+import { responseKakaoPayApproval } from "../../services/paymentService";
 import { useNavigate } from "react-router-dom";
 
 function Payment() {
