@@ -212,7 +212,7 @@ function TypingInput({ selectedText }) {
   }, [volume, wrongSound]);
 
   useEffect(() => {
-    if (userInput.length >= codeToType.length && !wrongInput) {
+    if (userInput.length > codeToType.length && !wrongInput) {
       const endTime = new Date().getTime();
       const takenTime = (endTime - startTime) / 1000;
 
