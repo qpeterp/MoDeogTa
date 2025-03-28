@@ -19,3 +19,23 @@ button:hover {
   color: $modeogta-gray;
   font-weight: bold;
 }
+
+/* 모바일 화면 */
+@media screen and (max-width: 600px) {
+  .text {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: $modeogta-gray;
+    font-weight: bold;
+  }
+}
+
+/* 태블릿 화면 */
+@media screen and (max-width: 1024px) and (min-width: 601px) {
+  .text {
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    color: $modeogta-gray;
+    font-weight: bold;
+  }
+}
