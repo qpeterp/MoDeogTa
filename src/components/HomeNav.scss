@@ -1,0 +1,29 @@
+@import "../styles/variables.scss";
+
+.home-menu-nav {
+  display: flex;
+  gap: 10px;
+  background-color: $secondary-color;
+  padding: 8px 16px;
+  border-radius: 12px;
+}
+
+.home-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 14px;
+  color: $modeogta-gray;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+  padding: 8px;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.home-menu-active {
+  color: $primary-color;
+}
