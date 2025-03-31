@@ -12,7 +12,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 import { useSound } from "./contexts/SoundContext";
 
-function TypingInput({ selectedText }) {
+function TypingInput({ selectedText, typingType }) {
   const [codeToType, setCodeToType] = useState(
     "애국가 1. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세."
   );
@@ -116,6 +116,13 @@ function TypingInput({ selectedText }) {
   };
 
   const handleResetClick = () => {
+    if (!wrongInput) {
+      setBeforeSpeed(speed);
+      if (speed > maxSpeed) {
+        setMaxSpeed(speed);
+      }
+    }
+
     setIsFinish(false);
     setUserInput("");
     setCurrentTime("0");
@@ -215,6 +222,7 @@ function TypingInput({ selectedText }) {
       });
   }, [volume, wrongSound]);
 
+  // 타자연습 종료 인식
   useEffect(() => {
     if (userInput.length > codeToType.length && !wrongInput) {
       setIsFinish(true);
@@ -226,9 +234,19 @@ function TypingInput({ selectedText }) {
 
       setSpeed(((inputJamo * 50) / takenTime).toFixed(1));
 
-      setIsDialogOpen(true);
+      switch (typingType) {
+        case "loop":
+          setIsDialogOpen(true);
+          break;
+        case "random":
+          handleResetClick();
+          handleGetScriptClick();
+          break;
+        default:
+          break;
+      }
     }
-  }, [userInput, codeToType, startTime, wrongInput]);
+  }, [userInput, codeToType, startTime, wrongInput, typingType]);
 
   useEffect(() => {
     if (startTime && !isFinish) {
@@ -345,10 +363,6 @@ function TypingInput({ selectedText }) {
           speed={speed}
           onClose={() => {
             setIsDialogOpen(false);
-            setBeforeSpeed(speed);
-            if (speed > maxSpeed) {
-              setMaxSpeed(speed);
-            }
             handleResetClick();
           }}
         />
