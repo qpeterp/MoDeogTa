@@ -43,6 +43,11 @@ function TypingInput({ selectedText }) {
   } = useSound();
 
   const handleInputChange = (e) => {
+    if (e.nativeEvent.inputType === "deleteContentBackward") {
+      setUserInput(e.target.value);
+    }
+
+    if (userInput.length > codeToType.length) return;
     if (e.nativeEvent.inputType === "insertLineBreak" || e.key === "Enter") {
       setUserInput((prev) => prev + " ");
     } else {
