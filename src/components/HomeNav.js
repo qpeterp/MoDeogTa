@@ -20,7 +20,7 @@ const HomeNav = ({ isActive, onClick }) => {
         onClick={() => onClick("random")}
       >
         <FaRandom />
-        다음 문장
+        연속 문장
       </label>
     </nav>
   );
