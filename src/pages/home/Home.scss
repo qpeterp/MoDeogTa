@@ -112,7 +112,7 @@ body {
     font-family: Arial, sans-serif;
     font-size: 20px;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: visible;
     position: absolute;
     margin-top: 24px;
     z-index: 1;
@@ -126,9 +126,13 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    position: relative; /* 상대 위치 */
-    z-index: 0; /* typing-text 아래에 위치하도록 설정 */
-    line-height: 2.7; /* 기본보다 더 크게 설정해서 줄 간격 늘리기 */
+    position: relative;
+    z-index: 0;
+    line-height: 2.7;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    color: $modeogta-gray;
+    font-weight: bold;
   }
 }
 
@@ -247,7 +251,7 @@ body {
   flex-direction: row;
   justify-content: space-around;
   width: 80vw;
-  padding-top: 16px;
+  padding: 16px 0px;
 }
 
 .status {
@@ -284,4 +288,36 @@ body {
 
 .color {
   color: $primary-color;
+}
+
+/* 모바일 화면 */
+@media screen and (max-width: 600px) {
+  .hint-text {
+    width: 100%;
+    text-align: start;
+    color: $modeogta-gray;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative; /* 상대 위치 */
+    z-index: 0; /* typing-text 아래에 위치하도록 설정 */
+    line-height: 2.7;
+    font-size: 20px;
+  }
+}
+
+/* 태블릿 화면 */
+@media screen and (max-width: 1024px) and (min-width: 601px) {
+  .hint-text {
+    width: 100%;
+    text-align: start;
+    color: $modeogta-gray;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 0;
+    line-height: 2.7;
+    font-size: 20px;
+  }
 }

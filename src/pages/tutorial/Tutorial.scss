@@ -132,3 +132,61 @@ body {
 .description {
   display: none;
 }
+
+/* 모바일 화면 */
+@media screen and (max-width: 600px) {
+  .text {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: $modeogta-gray;
+    font-weight: bold;
+  }
+
+  .tutorial-content h2 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .tutorial-content li svg {
+    margin-right: 2px; /* 아이콘과 텍스트 간격 */
+    color: $primary-color; /* 아이콘 노란색 */
+    font-size: 14px;
+  }
+
+  .tutorial-grid {
+    list-style: none;
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    padding-left: 0;
+    margin: 0;
+    li {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+/* 태블릿 화면 */
+@media screen and (max-width: 1024px) and (min-width: 601px) {
+  .text {
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    color: $modeogta-gray;
+    font-weight: bold;
+  }
+
+  .tutorial-content h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .tutorial-content li svg {
+    margin-right: 6px; /* 아이콘과 텍스트 간격 */
+    color: $primary-color; /* 아이콘 노란색 */
+    font-size: 16px;
+  }
+}

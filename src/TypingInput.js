@@ -22,6 +22,7 @@ function TypingInput({ selectedText }) {
   const [beforeSpeed, setBeforeSpeed] = useState("0");
   const [currentTime, setCurrentTime] = useState("0");
   const [speed, setSpeed] = useState("0");
+  const [maxSpeed, setMaxSpeed] = useState("0");
   const [isDialogOpen, setIsDialogOpen] = useState(false); // dialog 상태 관리
   const [wrongInput, setWrongInput] = useState(false); // 잘못된 입력 상태 추가
 
@@ -42,6 +43,11 @@ function TypingInput({ selectedText }) {
   } = useSound();
 
   const handleInputChange = (e) => {
+    if (e.nativeEvent.inputType === "deleteContentBackward") {
+      setUserInput(e.target.value);
+    }
+
+    if (userInput.length > codeToType.length) return;
     if (e.nativeEvent.inputType === "insertLineBreak" || e.key === "Enter") {
       setUserInput((prev) => prev + " ");
     } else {
@@ -110,8 +116,6 @@ function TypingInput({ selectedText }) {
   };
 
   const handleResetClick = () => {
-    setBeforeSpeed(speed);
-
     setIsFinish(false);
     setUserInput("");
     setCurrentTime("0");
@@ -213,6 +217,8 @@ function TypingInput({ selectedText }) {
 
   useEffect(() => {
     if (userInput.length > codeToType.length && !wrongInput) {
+      setIsFinish(true);
+
       const endTime = new Date().getTime();
       const takenTime = (endTime - startTime) / 1000;
 
@@ -220,7 +226,6 @@ function TypingInput({ selectedText }) {
 
       setSpeed(((inputJamo * 50) / takenTime).toFixed(1));
 
-      setIsFinish(true);
       setIsDialogOpen(true);
     }
   }, [userInput, codeToType, startTime, wrongInput]);
@@ -298,11 +303,12 @@ function TypingInput({ selectedText }) {
     <>
       <div className="status-container">
         <p className="text status">이전타수 : {beforeSpeed}타</p>
+        <p className="text status">최고타수 : {maxSpeed}타</p>
         <p className="text status">경과시간 : {currentTime}초</p>
         <p className="text status">현재타수 : {speed}타</p>
       </div>
       <div className="stroke-box">
-        <p className="text hint-text">{renderCodeMemo}</p>
+        <p className="hint-text">{renderCodeMemo}</p>
         <textarea
           ref={textareaRef} // ref를 제대로 연결
           id="userInput"
@@ -339,6 +345,10 @@ function TypingInput({ selectedText }) {
           speed={speed}
           onClose={() => {
             setIsDialogOpen(false);
+            setBeforeSpeed(speed);
+            if (speed > maxSpeed) {
+              setMaxSpeed(speed);
+            }
             handleResetClick();
           }}
         />
