@@ -115,7 +115,7 @@ function TypingInput({ selectedText, typingType }) {
     }
   };
 
-  const handleResetClick = () => {
+  const handleResetClick = useCallback(() => {
     if (!wrongInput) {
       setBeforeSpeed(speed);
       if (speed > maxSpeed) {
@@ -131,7 +131,7 @@ function TypingInput({ selectedText, typingType }) {
     setIsDialogOpen(false); // dialog 닫기
 
     document.getElementById("userInput").focus(); // todo:: 수정
-  };
+  }, [wrongInput, speed, maxSpeed]);
 
   const handleGetScriptClick = async () => {
     const randomDoc = await getRandomDocument(); // 비동기 호출
@@ -246,7 +246,14 @@ function TypingInput({ selectedText, typingType }) {
           break;
       }
     }
-  }, [userInput, codeToType, startTime, wrongInput, typingType]);
+  }, [
+    userInput,
+    codeToType,
+    startTime,
+    wrongInput,
+    typingType,
+    handleResetClick,
+  ]);
 
   useEffect(() => {
     if (startTime && !isFinish) {
