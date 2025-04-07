@@ -21,10 +21,13 @@ function Settings() {
     setBackgroundUrl,
     alpha,
     setAlpha,
+    typingStyle,
+    setTypingStyle,
   } = useTheme();
 
   const [soundIsOpen, setSoundIsOpen] = useState(true);
   const [themeIsOpen, setThemeIsOpen] = useState(true);
+  const [typingIsOpen, setTypingIsOpen] = useState(true);
   const [tempBackgroundUrl, setTempBackgroundUrl] = useState(backgroundUrl);
 
   const {
@@ -48,7 +51,7 @@ function Settings() {
     { key: "night", label: "밤하늘" },
   ];
 
-  const typingSounds = [
+  const typingSoundsOptions = [
     { key: "off", label: "없음" },
     { key: "au_keyboard.wav", label: "키보드" },
     { key: "au_waterdrop.mp3", label: "물방울" },
@@ -56,19 +59,24 @@ function Settings() {
     { key: "au_swing.mp3", label: "모래" },
   ];
 
-  const wrongSounds = [
+  const wrongSoundsOptions = [
     { key: "off", label: "없음" },
     { key: "au_damage.mp3", label: "데미지" },
     { key: "au_tong.mp3", label: "통" },
   ];
 
-  const backgroundMusicList = [
+  const backgroundMusicOptions = [
     { key: "off", label: "없음" },
     { key: "au_rain.mp3", label: "빗소리" },
     { key: "au_jazz.mp3", label: "재즈" },
     { key: "au_lastboss.mp3", label: "마지막" },
     { key: "au_dream.mp3", label: "망각" },
     { key: "au_doubt.mp3", label: "여유만만" },
+  ];
+
+  const typingStyleOptions = [
+    { key: "basic", label: "기본" },
+    { key: "overlapping", label: "덮어쓰기" },
   ];
 
   // 소리 관련
@@ -117,6 +125,15 @@ function Settings() {
     setBackgroundUrl(tempBackgroundUrl);
   };
 
+  // 타이핑 관련
+  const handleTypingMenuClick = () => {
+    setTypingIsOpen(!typingIsOpen);
+  };
+
+  const handleTypingStyleClick = (typingStyle) => {
+    setTypingStyle(typingStyle);
+  };
+
   return (
     <div className="setting-menu-wrap">
       <div className="setting-menu" onClick={handleSoundMenuClick}>
@@ -128,7 +145,6 @@ function Settings() {
           <strong>Sound</strong>
         </h1>
       </div>
-
       <div className={`menu-content ${soundIsOpen ? "open" : ""}`}>
         <div className="section">
           <IconLabel
@@ -165,7 +181,7 @@ function Settings() {
             description="키 입력 시, 재생될 짧은 소리를 선택하세요."
           />
           <Buttons
-            options={typingSounds}
+            options={typingSoundsOptions}
             isFlag={typingSound}
             callback={handleTypingSoundButtonClick}
           />
@@ -178,7 +194,7 @@ function Settings() {
             description="잘못된 키 입력 시, 재생될 짧은 소리를 선택하세요."
           />
           <Buttons
-            options={wrongSounds}
+            options={wrongSoundsOptions}
             isFlag={wrongSound}
             callback={handleWrongSoundButtonClick}
           />
@@ -220,7 +236,7 @@ function Settings() {
           />
 
           <Buttons
-            options={backgroundMusicList}
+            options={backgroundMusicOptions}
             isFlag={backgroundMusic}
             callback={handleBackgroundMusicButtonClick}
           />
@@ -240,7 +256,7 @@ function Settings() {
         <div className="section">
           <IconLabel
             icon={FaVolumeUp}
-            labelText="테마"
+            labelText="색상"
             description="타자연습 사이트의 색상을 변경합니다."
           />
 
@@ -298,6 +314,30 @@ function Settings() {
               }}
             />
           </div>
+        </div>
+      </div>
+
+      <div className="setting-menu" onClick={handleTypingMenuClick}>
+        <FaAngleRight
+          className={`setting-arrow ${typingIsOpen ? "rotate" : ""}`}
+          size={28}
+        />
+        <h1 className="test">
+          <strong>Typing Style</strong>
+        </h1>
+      </div>
+      <div className={`menu-content ${typingIsOpen ? "open" : ""}`}>
+        <div className="section">
+          <IconLabel
+            icon={FaVolumeUp}
+            labelText="커스텀 타자화면"
+            description="타자연습 시, 사용할 타자화면을 변경합니다."
+          />
+          <Buttons
+            options={typingStyleOptions}
+            isFlag={typingStyle}
+            callback={handleTypingStyleClick}
+          />
         </div>
       </div>
     </div>

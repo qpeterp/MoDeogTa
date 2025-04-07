@@ -87,7 +87,7 @@ body {
   font-weight: bold; /* 글자 볼드 */
 }
 
-.stroke-box {
+.typing-style {
   width: 80vw;
   height: auto;
   background-color: transparent;
@@ -98,10 +98,9 @@ body {
   padding: 40px;
   box-sizing: border-box;
   overflow: visible;
-  margin-bottom: 24px;
 
   .typing-text {
-    width: calc(100% - 80px); /* 80px은 좌우 padding 값(40px * 2)을 빼는 값 */
+    width: calc(100% - 80px);
     height: auto;
     background-color: transparent;
     border: none;
@@ -114,25 +113,42 @@ body {
     box-sizing: border-box;
     overflow: visible;
     position: absolute;
-    margin-top: 24px;
     z-index: 1;
-    line-height: 2.7;
   }
 
   .hint-text {
     width: 100%;
     text-align: start;
-    color: $modeogta-gray;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     position: relative;
     z-index: 0;
-    line-height: 2.7;
     font-family: Arial, sans-serif;
     font-size: 20px;
     color: $modeogta-gray;
     font-weight: bold;
+  }
+
+  &.basic {
+    margin-bottom: 24px;
+
+    .typing-text {
+      margin-top: 24px;
+      line-height: 2.7;
+    }
+
+    .hint-text {
+      line-height: 2.7;
+    }
+  }
+
+  &.overlapping {
+    margin-bottom: 12px;
+
+    .typing-text {
+      margin-top: 0;
+    }
   }
 }
 
