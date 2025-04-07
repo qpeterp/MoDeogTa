@@ -7,6 +7,8 @@ export function ThemeProvider({ children }) {
   const [backgroundUrl, setBackgroundUrl] = useState("");
   const [alpha, setAlpha] = useState(0.5);
 
+  const [typingStyle, setTypingStyle] = useState("basic");
+
   useEffect(() => {
     const root = document.documentElement;
 
@@ -45,6 +47,9 @@ export function ThemeProvider({ children }) {
 
         alpha,
         setAlpha,
+
+        typingStyle,
+        setTypingStyle,
       }}
     >
       {children}

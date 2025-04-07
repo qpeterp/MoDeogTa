@@ -11,6 +11,7 @@ import ResultDialog from "./components/ResultDialog";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 import { useSound } from "./contexts/SoundContext";
+import { useTheme } from "./contexts/ThemeContext";
 
 function TypingInput({ selectedText, typingType }) {
   const [codeToType, setCodeToType] = useState(
@@ -41,6 +42,7 @@ function TypingInput({ selectedText, typingType }) {
     wrongSound,
     backgroundMusic,
   } = useSound();
+  const { typingStyle } = useTheme();
 
   const handleInputChange = (e) => {
     if (e.nativeEvent.inputType === "deleteContentBackward") {
@@ -298,18 +300,22 @@ function TypingInput({ selectedText, typingType }) {
         handleWrongSound(); // 처음 잘못된 입력에서만 소리 재생
       }
 
+      const errorColor = "red"; // 또는 원하는 강조 색상
+
+      const style =
+        isWrong && typingStyle === "basic"
+          ? { color: errorColor }
+          : isWrong && typingStyle === "overlapping"
+          ? { backgroundColor: errorColor }
+          : {};
+
       return (
-        <span
-          key={index}
-          style={{
-            color: isWrong ? "red" : "",
-          }}
-        >
+        <span key={index} style={style}>
           {char}
         </span>
       );
     });
-  }, [codeToType, handleWrongSound, userInput, wrongInput]); // 빈 배열을 두면 최초 렌더링 시만 실행됩니다.
+  }, [codeToType, handleWrongSound, userInput, wrongInput, typingStyle]); // 빈 배열을 두면 최초 렌더링 시만 실행됩니다.
 
   // ================================================================================
   // ================================================================================
@@ -332,7 +338,7 @@ function TypingInput({ selectedText, typingType }) {
         <p className="text status">경과시간 : {currentTime}초</p>
         <p className="text status">현재타수 : {speed}타</p>
       </div>
-      <div className="stroke-box">
+      <div className={`typing-style ${typingStyle}`}>
         <p className="hint-text">{renderCodeMemo}</p>
         <textarea
           ref={textareaRef} // ref를 제대로 연결
